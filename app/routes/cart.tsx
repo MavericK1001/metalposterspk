@@ -12,52 +12,82 @@ import { createContext } from "~/lib/hydrogen.server";
 export async function loader({ request }: LoaderFunctionArgs) {
   const { cart } = createContext(request);
   const cartData = await cart.get();
-  const headers = cart.setCartId(cartData?.id ?? '');
+  const headers = cart.setCartId(cartData?.id ?? "");
   return data({ cart: cartData }, { headers });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const { cart } = createContext(request);
-  const formData = await request.formData();
-  const intent = formData.get("intent") as string;
+  try {
+    const { cart } = createContext(request);
+    const formData = await request.formData();
+    const intent = formData.get("intent") as string;
 
-  let result;
+    let result: any;
 
-  if (intent === "add-to-cart") {
-    // Support both "merchandiseId" and "variantId" field names
-    const merchandiseId = (formData.get("merchandiseId") || formData.get("variantId")) as string;
-    const quantity = Number(formData.get("quantity") || 1);
-    if (!merchandiseId) {
-      return data({ error: "Missing variant ID" }, { status: 400 });
-    }
-    result = await cart.addLines([{ merchandiseId, quantity }]);
-  } else if (intent === "update-quantity") {
-    const lineId = formData.get("lineId") as string;
-    const quantity = Number(formData.get("quantity"));
-    if (quantity <= 0) {
+    if (intent === "add-to-cart") {
+      const merchandiseId = (formData.get("merchandiseId") ||
+        formData.get("variantId")) as string;
+      const quantity = Number(formData.get("quantity") || 1);
+      if (!merchandiseId) {
+        return data({ error: "Missing variant ID" }, { status: 400 });
+      }
+      result = await cart.addLines([{ merchandiseId, quantity }]);
+    } else if (intent === "update-quantity") {
+      const lineId = formData.get("lineId") as string;
+      const quantity = Number(formData.get("quantity"));
+      if (quantity <= 0) {
+        result = await cart.removeLines([lineId]);
+      } else {
+        result = await cart.updateLines([{ id: lineId, quantity }]);
+      }
+    } else if (intent === "remove-item") {
+      const lineId = formData.get("lineId") as string;
       result = await cart.removeLines([lineId]);
+    } else if (intent === "apply-discount") {
+      const discountCode = formData.get("discountCode") as string;
+      if (discountCode) {
+        result = await cart.updateDiscountCodes([discountCode]);
+      } else {
+        result = await cart.updateDiscountCodes([]);
+      }
     } else {
-      result = await cart.updateLines([{ id: lineId, quantity }]);
+      return data({ error: "Invalid intent" }, { status: 400 });
     }
-  } else if (intent === "remove-item") {
-    const lineId = formData.get("lineId") as string;
-    result = await cart.removeLines([lineId]);
-  } else if (intent === "apply-discount") {
-    const discountCode = formData.get("discountCode") as string;
-    if (discountCode) {
-      result = await cart.updateDiscountCodes([discountCode]);
-    } else {
-      result = await cart.updateDiscountCodes([]);
+
+    // Check for errors in the cart response
+    if (result?.errors?.length) {
+      console.error("Cart errors:", JSON.stringify(result.errors));
+      return data(
+        {
+          error: result.errors[0]?.message || "Cart operation failed",
+          errors: result.errors,
+        },
+        { status: 422 },
+      );
     }
-  } else {
-    return data({ error: "Invalid intent" }, { status: 400 });
+
+    if (result?.userErrors?.length) {
+      console.error("Cart userErrors:", JSON.stringify(result.userErrors));
+      return data(
+        {
+          error: result.userErrors[0]?.message || "Cart operation failed",
+          userErrors: result.userErrors,
+        },
+        { status: 422 },
+      );
+    }
+
+    const cartId = result?.cart?.id;
+    const headers = cartId ? cart.setCartId(cartId) : new Headers();
+
+    return data(result, { headers });
+  } catch (err: any) {
+    console.error("Cart action error:", err?.message || err);
+    return data(
+      { error: err?.message || "Unexpected cart error" },
+      { status: 500 },
+    );
   }
-
-  // Forward Set-Cookie headers from Hydrogen cart handler
-  // This is critical for cart ID persistence across requests
-  const headers = cart.setCartId(result.cart.id);
-
-  return data(result, { headers });
 }
 
 export default function CartPage() {
@@ -213,7 +243,13 @@ export default function CartPage() {
               >
                 SUBTOTAL
               </span>
-              <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 18, fontWeight: 700 }}>
+              <span
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: 18,
+                  fontWeight: 700,
+                }}
+              >
                 {formatMoney(subtotal)}
               </span>
             </div>
