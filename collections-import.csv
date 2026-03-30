@@ -1,0 +1,286 @@
+Handle,Title,Body (HTML),Sort Order,Must Match,Rule: Column,Rule: Relation,Rule: Condition,Published,Image Src
+abstract-art,Abstract Art,"<p>Abstract Art combines emotion and modern styling creating a one of a kind feel for any environment. The abstract art pieces you select for your living room, bedroom, or your office will offer a stimulating creative sensation, one that no other art form will achieve.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Our collection includes a diverse range of designs. From the bold and colorful pieces that are bursting with energy to simple art that has soft textures and calming colors. The artworks add value to the conversation and are designed for modern interiors. You will find metal prints and large show stopper artworks that fit your budget and taste.</p>
+<p>Abstract art is one of the very few art forms that are suitable for any type of room. You don't have to stick to any particular theme, or color for your space. Abstract art integrates with the decor you have, and adds another layer of depth and visual intrigue to the overall ambiance. An artwork above a sofa, or a gallery wall in your corridor can really transform your home.</p>
+<p>Selecting an artwork involves more than just the aesthetic aspect of the pieces. What's more important is the emotional aspects the artwork evokes. We have a diverse collection of artwork for you to choose from.</p>
+<p>Our artwork features a variety of shapes, movements, and combinations of color, so you can choose the one that matches your personality/artistic identity. We have everything from abstract artworks to pieces that feature gentle pastel colors.</p>
+<p>The shopping experience is also awesome. You can filter the artwork by size, colors, and different styles to find what best fits your wall.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Abstract Art,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/Abstract.png?v=1772901444
+animal-metal-poster,Animal Metal Poster,"<p>The Animal Metal Poster collection brings the wild beauty and majestic spirit of the animal kingdom through its artwork which creates nature-inspired spaces that display its breathtaking designs. Our animal metal poster show beautiful artwork which reveals wild animals and domestic pets and rare animals from different parts of the world because they display the natural beauty and unique traits of animals.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Our collection presents a diverse range of designs that every animal lover will appreciate. The collection features pieces which present fierce lions and elegant wolves and graceful birds and mysterious ocean creatures and their unique characteristics. The artwork uses bright colors and complex patterns and powerful visual structures to display each animal on your wall. The space offers both high-quality metal prints and large display items which produce an impressive visual effect throughout the entire room.</p>
+<p>Animal metal poster serve as the ideal wall decoration solution for all different types of environments. The decorative elements enhance your home when you use them to design your living room and bedroom and kid's room and office and hallway. The design elements create a perfect aesthetic for any environment. A single poster of your favorite animal above your sofa creates a stunning focal point, or a gallery wall featuring different species transforms your space into a personal wildlife gallery. The right piece selection enables you to connect with animals which matter most to you.</p>
+<p>Our collection includes artwork that represents your personal taste which showcases your passion for powerful predators, gentle farm animals, and colorful tropical birds, and underwater marine life. The wall poster designs in our range are especially popular among nature enthusiasts who want their home to reflect their love for nature.</p>
+<p>You can explore our entire collection of animal metal poster which will enable you to decorate your walls with natural beauty. Walltistic provides free shipping for all orders which customers can start exploring immediately.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Animal Metal Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/4_45f3f913-e9ee-4b37-bcac-35d0cfefb013.png?v=1772921504
+anime-posters,Anime Posters,"<p>The Anime Posters collection provides an authentic representation of Japanese animation through its animated wall art which creates an atmosphere that shows your dedication to anime culture. Our anime posters display striking artwork which depicts legendary characters and essential moments and beautiful visual designs to bring you to the different worlds of your favorite anime shows.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Our collection presents a diverse range of designs that every anime fan will appreciate. The collection features artworks which showcase classic anime from its golden era and contemporary popular titles while depicting the emotional and artistic aspects that define anime. The collection includes premium metal prints and large statement pieces which display intricate details and vibrant hues to create character depictions that appear real on your wall.</p>
+<p>Anime posters serve as ideal decorative elements which suit all different kinds of spaces. These items bring instant vitality and distinctive character to any space, whether you are designing a bedroom, gaming room, living room, office, or personal creative area. The design works with your space even when you do not have a specific interior theme. A desk area transforms with a single character poster while different anime series posters create an otaku sanctuary through a gallery wall display.</p>
+<p>Selecting the perfect artwork requires you to establish an emotional bond with characters and narratives which hold significance for you. Our collection provides artwork that suits your anime preferences and personal style because you enjoy action-filled adventures, stories.</p>
+<p>Our collection includes anime posters which are created using high-quality materials and archival-grade inks that maintain color brightness throughout multiple years. The modern metal finish provides a sophisticated appearance which matches all types of room decor.</p>
+<p>You can explore our entire collection of anime posters to create a space that displays your favorite artworks. Walltistic provides free shipping for all orders which you can start exploring at this moment.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Anime Posters,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/4_36f838fd-7941-47d9-a61b-788ff1ec4250.png?v=1772914690
+armed-aesthetics,Armed Aesthetics,"<p>Armed Aesthetics presents a strong collection which unites guns design elements with artistic creativity to produce wall art which enhances any environment. The store offers armed guns artwork which combines three elements of strength through discipline and visual creativity to create decor that appeals to people who prefer formidable and powerful decorations.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>The collection presents multiple design options which showcase tactical gear and military images and weaponry and combat-themed artworks as their main sources of inspiration. The artwork develops two opposing elements which produce an exceptional artistic result through its combined strength and delicate design. Your living room and bedroom and gaming setup and office area will be enhanced by the installation of large metal prints and statement pieces which establish a dominant atmosphere.</p>
+<p>Armed aesthetics artwork appeals to a wide audience. The collection provides military enthusiasts and tactical culture fans and people who appreciate strong visual design with multiple options. The artwork does not require any specific interior theme to make an impact. The wall has one body which creates room atmosphere while generating immediate discussion.</p>
+<p>Selecting the perfect artwork from this collection enables you to find pieces which express your mind state and personal identity. Our designs range from detailed realistic compositions to abstract interpretations of military themes. The collection offers pieces which demonstrate sharp lines and dark tones and metallic textures and strong visual contrasts to produce an impressive visual experience.</p>
+<p>Our collection prints all products with first-rate materials and archival-grade inks which preserve their vibrant colors for many years. The armed aesthetics style shows through its entire collection because every item displays extreme attention to detail.</p>
+<p>The complete armed aesthetics collection features artwork that enhances wall strength and character. Walltistic offers free shipping on every order, explore the collection now.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Armed Aesthetics,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/Capture.png?v=1772910900
+bikes-posters,Bikes Poster,"<p>The collection of Bikes Poster displays the authentic strength and velocity and aesthetic appeal of motorcycles through breathtaking artistic creations which turn your walls into a tribute to motorcycle riding. The bikes posters showcase impressive designs which show famous motorcycles and fast racing moments and stylish custom designs that embody the essence of motorcycle riding.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Our collection presents a diverse range of designs that every motorcycle enthusiast will love. The collection contains items that display classic vintage motorcycles from the motorcycling golden age and modern superbikes which currently dominate racing competitions. The posters combine vibrant colors with precise visual elements and active design patterns which showcase engine sounds and fast motion on your wall. The collection includes high-quality metal prints and oversized artwork which creates an impressive visual impact for any space.</p>
+<p>Bikes Poster serve as the ideal decorative solution for every kind of environment. The decorative pieces create an adventurous and free-spirited atmosphere for your garage space or man cave space or bedroom space or living room space or office space. The interior design elements will attract attention because of their unique design characteristics which do not require specific design themes. You can use a single poster of your dream bike which hangs above your desk to create an instant focal point or you can transform your space into a biker's den by displaying different motorcycles on a gallery wall.</p>
+<p>The artwork selection process requires you to choose pieces which correspond with your motorcycle enthusiasm. Our collection offers designs for all riding styles and personal preferences which include sport bikes and cruisers and dirt bikes and café racers. The cool posters in our range are especially popular among riders and enthusiasts who want their walls to reflect their lifestyle.</p>
+<p>Every Bikes Poster in our collection is produced using premium materials and archival-grade inks which ensure vibrant and long-lasting colors. The sleek metal finish adds a modern edge that complements any interior design style.</p>
+<p>The complete bikes poster collection allows you to explore your passion for motorcycles through artistic expression. Walltistic offers free shipping on every order, start exploring now.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Bikes Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/4_8ed89151-3688-4b72-b666-b1281df58095.png?v=1772915914
+car-posters,Car Posters,"<p>The Car Posters collection delivers the racing speed and the luxurious atmosphere and the attractive qualities of cars directly to your wall space which displays your enthusiasm for automobiles. The car posters display beautiful artwork which shows powerful supercars and historic vintage cars and racing vehicles that demonstrate the passion and sophistication of automobile traditions.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>The collection contains various design options which car enthusiasts will find appealing. From sleek modern supercars that represent the pinnacle of engineering to timeless classic cars that defined an era of automotive excellence, each piece is crafted to deliver a powerful visual experience. The artwork uses bright colors together with clear details and active angles to display every design element of the most famous vehicles in history. The room features high-quality metal prints and oversized decorative pieces which create an authentic street racing atmosphere.</p>
+<p>Car posters function as perfect wall decorations for all types of environments. These decorative pieces create a space that combines fast energy with elegant design which you can use to decorate your garage or man cave or bedroom or living room or office space. The items will create an eye-catching effect which works well with any interior design style. Your desk space becomes the central point of attention with a single poster showing your dream car while a gallery wall with various famous vehicles turns your area into an ultimate car museum.</p>
+<p>Your passion for cars connects with your choice of suitable automotive artwork. The collection contains artwork which suits your personal style and automotive preferences whether you prefer sports cars or muscle cars or vintage cars or Formula One racing. The collection offers various items which appeal to different types of automotive enthusiasts from well-known automotive companies to famous racing vehicles.</p>
+<p>You can browse our entire collection of car posters which enables you to display your passion for cars on your walls. Walltistic provides free shipping for all orders which you can start discovering at this moment.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Car Posters,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/4_1d623aeb-4d6a-4d7d-958f-f1169ac91447.png?v=1772917864
+custom-metal-poster,Custom Metal Poster,,best-selling,any,tag,equals,Custom Metal Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/TheDarkKnightComic.png?v=1742238588
+famous-personalities,Famous Personalities Poster,"<p>The Famous Personalities Poster collection honors historical figures who transformed cultural and global developments which exist in our current world. Our collection of famous personalities posters showcases exceptional artistic representations of historic musical and athletic and scientific and political and entertainment personalities who bring inspiration and character to any wall space.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>The collection presents various design options which pay tribute to the most brilliant thinkers and most significant historical figures throughout history. The collection includes powerful portraits of world leaders and revolutionary thinkers alongside stylish artwork which showcases music legends and sports heroes to display the essence of greatness. The collection includes premium metal prints and large statement pieces which create a dramatic impact in any space.</p>
+<p>Famous Personalities Poster looks exceptionally well throughout all types of environments. These pieces enhance your space by bringing both visual interest and substantial significance to the area because they work well with various living room and office and study and bedroom and creative workspace designs. The artwork itself possesses a strong presence which makes it unnecessary for you to find matching interior design elements. A single portrait above your desk can serve as daily motivation, or a gallery wall of your favorite icons can create an inspiring atmosphere throughout your space.</p>
+<p>The process of selecting the appropriate artwork requires you to discover a figure whose values and ambitions match your own. The collection provides access to various artworks which showcase different personalities from various historical periods and professional domains. You will find artworks that match your personal inspiration whether you admire scientists who transformed the world or athletes who achieved new records or artists who redefined cultural boundaries.</p>
+<p>All prints in our Famous Personalities Poster collection use premium materials which include archival-grade inks to produce colors that maintain their brightness and durability throughout time. The metal finish of each piece creates a modern appearance which improves the visual appeal of the artwork.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Famous Personalities Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/1_ade2d611-07c7-4c32-86a7-d42a4a5c1390.png?v=1772912480
+gaming-poster,Gaming Poster,"<p>The Gaming Poster collection provides an ideal opportunity to display your gaming passion through artwork which creates your perfect gaming environment. Our gaming posters display both famous characters and historic game moments with artistic creations that show the excitement of video game entertainment.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>The collection contains various design options which appeal to different types of gamers. The artwork features two styles which display gaming culture through retro pixel art from classic arcade games and modern pieces which show open-world gameplay and esports competition. The collection includes high-quality metal prints which produce exceptional visual clarity and bright colors that create a complete viewing experience for any space.</p>
+<p>Gaming poster looks brilliantly in every type of space. Our artwork creates a distinct character for your space which works in dedicated gaming rooms and your bedroom and office upgrades and man cave creation. The artwork will enhance your space regardless of your existing design style. A single poster behind your gaming setup creates an instant focal point, or a gallery wall of your favorite titles can turn an entire room into a visual celebration of your gaming journey.</p>
+<p>The process of choosing the perfect item enables you to show your personal gaming style. Our collection includes designs which match your preferences whether you enjoy RPGs, first-person shooters, or racing simulators and strategy games. The artwork ranges from dark and intense compositions to vibrant and playful illustrations which ensure there is something for every gamer.</p>
+<p>Every gaming poster in our collection is produced using premium materials and archival-grade inks which guarantee colors that remain vibrant and sharp for years. The sleek metal finish creates a contemporary appearance which perfectly matches every gaming setup.</p>
+<p>Explore our complete gaming poster collection and bring your passion for gaming to life on your walls. Walltistic provides free shipping for all purchases which customers can begin to explore at this moment.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Gaming Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/4_e042c3b2-1091-4763-8654-eee263d21944.png?v=1772912957
+islamic-posters,Islamic Posters,"<p>The Islamic Posters collection displays Islamic artwork which brings both aesthetic value and religious devotion into your home through its beautiful wall decorations, which create a tranquil yet uplifting ambiance for any room. Our Islamic posters present exquisite designs which combine traditional Islamic patterns with sacred verses and artistic elements to create visual art pieces which provide aesthetic pleasure and spiritual enrichment.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Our collection contains various artistic designs which showcase the diverse heritage of Islamic artistic traditions. Each artistic piece includes complex geometric designs and delicate floral patterns together with important Quranic texts and spiritual elements, which artists create through their complete dedication to their craft.</p>
+<p>The Islamic calligraphy wall art in our collection showcases the timeless beauty of handwritten script through stunning compositions that transform sacred words into visual masterpieces. The collection includes high-quality metal prints and oversized artwork which create a peaceful space that promotes religious dedication throughout every area of your home.</p>
+<p>Islamic posters serve as perfect decorative elements which complement all different types of spaces. The pieces create a peaceful yet significant atmosphere in living rooms, bedrooms, prayer rooms, offices, and study areas. The items will visibly enhance your space regardless of which interior design style you choose.</p>
+<p>The space above your prayer area will become a beautiful focal point through one selected item, or you can use multiple design elements to create a gallery wall which fills your home with sacred reminders. The Arabic calligraphy wall art in our collection is especially popular among those who appreciate the elegance and depth of traditional Arabic script.</p>
+<p>Our collection contains Islamic posters which use high-quality materials and archival-grade inks to produce colors that maintain their brightness for extended periods. The modern aesthetic of the metal finish combines with traditional and modern design elements to create a harmonious look.</p>
+<p>You can explore our entire collection of Islamic posters to find artwork which will bring you both religious inspiration and aesthetic beauty. Walltistic provides free shipping for all purchases so you can begin your shopping experience.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Islamic Posters,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/4_628abe6c-dba4-4ecf-962e-28f15258c1a2.png?v=1772917114
+kids-metal-poster,Kids Metal Poster,"<p>The Kids Metal Poster collection shows fun and color and imaginative artwork that creates an inspirational space for children to explore their creativity. The our kids metal poster showcase bright characters and fun design elements which make it simple to decorate a child's room.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>The collection we offer contains multiple design options which children find highly appealing. Every piece of our collection includes adorable animal illustrations and superhero themes and space adventures and fantasy worlds which helps children develop creative skills. The cartoon posters in our collection bring beloved animated characters and fun illustrations to life on premium metal prints that look stunning on any wall.</p>
+<p>Kids metal poster serve as the ideal decorative solution for bedrooms and playrooms and nurseries and study rooms. The artwork enhances the space with distinctiveness and energetic ambiance while maintaining room balance. Each artwork functions as an independent decorative element which can be used to create a delightful gallery wall display. A single poster above a bed or desk transforms the entire room into a magical space which your child will adore.</p>
+<p>The process of selecting artwork for your child's room should provide enjoyment to both parents and children. The collection lets you view various design elements and thematic content which matches your child's unique interests and personality. Your little one can find their ideal piece here whether they love dinosaurs or unicorns or cars or cartoon posters of their favorite animated characters.</p>
+<p>Our collection of kids metal poster consists of products that use premium materials and archival-grade inks. The durable metal finish of these prints ensures they last long and require minimal upkeep which makes them ideal for children's bedrooms.</p>
+<p>You can access our entire collection of metal posters for kids because we want you to find artwork that brings happiness and creative energy to your child's room. Walltistic provides free shipping for all purchases which customers can begin to explore immediately.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Kids Metal Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/1.webp?v=1772911399
+metal-posters,Metal Posters,"<p>Our metal posters are the best way to show art on your walls. Our metal posters display high-quality designs through premium metal surfaces which produce bright colors and detailed sharpness that modern viewers must experience because traditional paper prints cannot show these features.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>The collection includes different designs which match different preferences and character traits. The collection features wall art which includes abstract designs and natural-themed pieces and designs based on video games and movies and motivational quotes and elements from popular culture. Each design uses its special metallic finish to create artwork which exhibits its complete light effect that attracts attention from all viewing positions. The collection includes different size options and design choices which meet the needs of all spaces and financial limits.</p>
+<p>Metal posters serve as the ideal decorative choice for all types of environments. These elements bring an upgraded professional appearance to all spaces which include living rooms and bedrooms and offices and gaming setups and hallways and man caves. The designs work with any interior style because of their flexible aesthetic. The single metal poster which you place above your sofa creates a beautiful focal point which transforms your space into a personal art gallery through a display of multiple different designs.</p>
+<p>The superior quality and durability of metal posters make them the best choice for wall decoration because they exceed all other options. Metal posters provide better value than paper or canvas prints because they protect against both fading and moisture and physical damage which makes them an ideal choice for permanent display in homes and offices. The materials create lightweight structures which remain strong enough for easy installation and upkeep.</p>
+<p>You can explore our entire metal posters collection to find artwork that enhances your walls with elegant artistic designs. Walltistic provides free shipping for all orders which allows customers to begin their shopping experience at this moment.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Metal Posters,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/Untitled_design_6.png?v=1772382746
+motivational-metal-poster,Motivational Metal Poster,"<p>The collection of motivational metal poster provides impactful text elements together with visually appealing designs which enhance your walls to become your daily strength source. Our motivational metal poster display strong text elements together with essential quotes and visually appealing designs to motivate you throughout the day to achieve your goals.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>The collection offers multiple design options which cater to various mental states and personal aspirations. The collection includes various elements which display powerful quotes from famous leaders and business leaders while showcasing the artistic discipline of hard work and self-confidence. The artwork uses distinctive typography and vibrant colors together with energetic design elements to achieve optimal word visibility and comprehension. The collection includes high-quality metal prints and oversized decorative items which create visual impact and establish an atmosphere of achievement for any space.</p>
+<p>The collection of motivational metal poster functions as an ideal decorative solution for all types of environments. The pieces create a positive atmosphere which serves as a motivational force to energize your home office or bedroom and gym or inspiring workspace. The items operate effectively without requiring you to establish a specific interior design style. A desk poster will maintain your focus on work while a wall of quotes will create an energetic environment that drives you to accomplish your goals throughout your entire space.</p>
+<p>Selecting the most suitable piece requires you to search for words which match your personal development path. Our collection motivational metal Poster of provides business builders and fitness enthusiasts and students and daily inspiration seekers with designs that match their current mental state and drive their motivation.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Motivational Metal Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/1_3a254d61-e083-4c74-8db3-2ef438536006.png?v=1772716802
+movie-posters,Movie Posters,"<p>Movie posters bring the enchantment of movies directly into your home, which transforms every space into a tribute to your most-loved movies. The movie poster collection from our store enables you to display your film enthusiasm through various styles, which include classic Hollywood, contemporary blockbusters and independent films.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Our curated selection features a wide variety of designs. The collection includes vintage cinema artwork which represents the classic Hollywood period and contemporary designs which draw inspiration from current popular films. Each poster is crafted to make a visual impact and ignite discussions among cinema enthusiasts. The collection includes metal prints and large display items which match all preferences and financial constraints.</p>
+<p>Movie posters serve as an adaptable form of wall decoration because they can suit various home environments. The artwork harmonizes with all areas of a home including living spaces and sleeping quarters and dedicated home movie rooms and professional work environments. The artwork works with any interior design because it can blend with any decorating style. Your room will experience a total transformation through a single poster which you place above your couch or through a complete gallery wall of your selected films.</p>
+<p>People need to go beyond personal interests when selecting the right poster for their space. People need to discover visual art which represents their individuality while establishing the required ambiance for their space. Our collection contains all movie categories from action and sci-fi to drama and comedy which provides multiple options for every movie enthusiast.</p>
+<p>Our movie posters use vibrant colors and distinctive text elements and inventive visual arrangements to represent the fundamental characteristics of every movie. The collection includes both minimalist designs and intricate illustrated works which allow you to choose items that fit your individual fashion preferences.</p>
+<p>The shopping process provides a straightforward and pleasant experience. The system allows you to search through various genres and sizes and colors and styles, which helps you identify the ideal wall decoration for your space. The company creates all prints using premium materials and archival-grade inks which produce long-lasting vibrant colors. Explore our complete collection of movie posters which we have available for viewing.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Movie Posters,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/cinema06_12.jpg?v=1772910314
+multi-panel-panorams,Multi Panel & Panorams,,best-selling,any,tag,equals,Multi Panel & Panorams,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/Split.jpg?v=1745748462
+sports-poster,Sports Poster,"<p>The Sports Poster collection uses beautiful artwork to create wall displays that showcase the excitement and dedication and vitality of sports. Our sports poster feature dynamic designs of legendary athletes, iconic moments, and powerful compositions that inspire you to push beyond your limits every single day.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Our collection includes a diverse range of designs that celebrate multiple sports and their greatest moments. The collection includes action scenes that show match-winning goals and championship victories and elegant portraits of sports legends, which create strong visual effects to viewers. The collection of football posters displays artistic designs that show the beauty of the sport through artwork which depicts the emotional intensity of football matches. You will find premium metal prints and large statement pieces that bring the atmosphere of the stadium straight to your room.</p>
+<p>Every space benefits from sports poster which function as perfect decorative elements. These pieces create a space which generates energy and motivation through their presence. The pieces operate effectively without requiring specific interior design styles. Your workspace receives daily inspiration from a single poster of your favorite athlete which you place above your desk or you create your personal hall of fame through a gallery wall that displays sporting legends.</p>
+<p>The sports you love and the athletes who inspire you guide your selection process for the perfect piece. The collection includes artwork which matches your sporting identity whether you prefer football or cricket or basketball or boxing or motorsports. The football posters in our range are particularly popular among fans who want to celebrate the world's most beloved game through art.</p>
+<p>The Walltistic produces sports posters which use high-quality materials and archival inks to create colors that remain bright for extended periods. The sleek metal finish creates a contemporary design element which matches all types of indoor decoration solutions.</p>
+<p>The complete sports poster collection lets you discover all available posters which will bring competitive energy to your wall space. Walltistic offers free shipping on every order, start exploring now.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Sports Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/1_2d4d6a20-e813-401a-af6f-fafd850a853a.png?v=1772915808
+superheroes-poster,Superheroes Poster,"<p>The Superheroes Poster collection delivers both power and excitement through its collection of superhero artwork which transforms your walls into a space that displays strength and courage and adventurous spirit. Our superhero posters display amazing pictures of well-known characters which motivate children and adults to discover their superhero qualities throughout their daily activities.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Our collection offers multiple design options which showcase the best superheroes who appeared in comic books and animated series and blockbuster films. The artwork presents two different styles which include traditional vintage-style designs that celebrate the comic book golden age and contemporary designs that showcase the most popular superheroes through their powerful visual elements. The room contains premium metal prints and large statement pieces which create an atmosphere of heroic energy and dramatic presence.</p>
+<p>Superheroes Poster looks perfect in every type of space. The pieces create instant visual appeal for people who design children's bedrooms and teenage gaming rooms and living rooms and personal offices. The pieces will display their full value without needing any particular interior design style. Your desk area becomes a space for instant inspiration through a single poster which displays your favorite hero.</p>
+<p>Your space transforms into a personal hero headquarters when you create a wall display with multiple characters from your favorite hero stories. The process of selecting the correct piece involves finding a character whose qualities you want to emulate. Our collection includes artwork which represents legendary characters through their warrior strength and inventor intelligence and hero speed to match your personal connections with these characters.</p>
+<p>Every superheroes poster in our collection is crafted using premium materials and archival-grade inks which ensure colors remain vibrant and bold for years. The metal finish of each piece provides a contemporary appearance which enhances all types of interior design aesthetics.</p>
+<p>The superheroes poster collection lets you explore all available posters which will help you create a heroic atmosphere in your environment. Walltistic provides free shipping services for all customer purchases which allows customers to begin their shopping experience at this moment.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Superheroes Poster,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/4_0f451016-992a-4f3a-80c5-8dad8336ef9b.png?v=1772913416
+tapestry,Tapestry,,best-selling,any,tag,equals,Tapestry,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/Tapestry_Design_2.png?v=1772382846
+wall-art,Wall Art,"<p>Wall Art serves as the easiest and most effective method to create an interior space that shows your personal style and taste. The appropriate wall art installation has the power to change a room's entire atmosphere by transforming its empty walls into breathtaking display displays. The collection includes diverse designs that meet the different style needs of our customers.</p>
+<details style=""margin-top:5px;display:flex;flex-direction:column;"">
+<summary class=""toggle-btn"" style=""cursor:pointer;list-style:none;order:1;font-size:0;line-height:0;"">toggle</summary>
+<div style=""margin-top:10px;order:2;"">
+<p>Wall art enhances every type of environment. Artwork creates a cohesive design theme throughout your living room and bedroom and kitchen and hallway and workspace. You don't need design expertise to achieve successful results. Your space can achieve elevated status through one art piece above your sofa or through a curated gallery wall that displays art throughout your hallway.</p>
+<p>People choose their artwork based on their personal preferences. The process requires more than just selecting colors that match and themes that match. The most effective art pieces create an emotional connection with viewers while showing their true identity. The collection enables you to investigate various artistic styles and color schemes which will help you discover your artistic identity.</p>
+<p>Our collection includes prints created with top-notch materials and archival-grade inks which produce colors that remain vibrant through time. The high-quality metal finish creates a contemporary appearance which improves the visual appeal of all interior design styles.</p>
+<p>You can explore our entire wall art collection to find artworks that will enhance the visual appeal and lively atmosphere and unique character of your walls. Free shipping applies to all orders at Walltistic which allows customers to start their shopping experience by exploring our products.</p>
+</div>
+</details>
+<style>
+details summary::-webkit-details-marker{display:none;}
+details summary::marker{display:none;}
+details .toggle-btn::after{content:'Read More +';font-size:14px;font-weight:600;color:#007bff;line-height:normal;}
+details[open] .toggle-btn{order:3;margin-top:10px;}
+details[open] .toggle-btn::after{content:'Read Less −';}
+</style>",best-selling,any,tag,equals,Wall Art,true,https://cdn.shopify.com/s/files/1/0605/0840/5835/collections/Untitled.jpg?v=1772911871
