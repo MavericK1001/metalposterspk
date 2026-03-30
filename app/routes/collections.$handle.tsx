@@ -9,6 +9,7 @@ import { Pagination, getPaginationVariables } from "@shopify/hydrogen";
 import { COLLECTION_QUERY } from "~/graphql/ProductQuery";
 import { ProductCard } from "~/components/ProductCard";
 import { getSortValuesFromParam, buildFilters } from "~/lib/utils";
+import { createContext } from "~/lib/hydrogen.server";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [
   {
@@ -18,7 +19,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
   },
 ];
 
-export async function loader({ params, request, context }: LoaderFunctionArgs) {
+export async function loader({ params, request }: LoaderFunctionArgs) {
+  const { storefront } = createContext(request);
   const { handle } = params;
   if (!handle) throw new Response("Not found", { status: 404 });
 
@@ -30,7 +32,7 @@ export async function loader({ params, request, context }: LoaderFunctionArgs) {
 
   const paginationVariables = getPaginationVariables(request, { pageBy: 24 });
 
-  const { collection } = await context.storefront.query(COLLECTION_QUERY, {
+  const { collection } = await storefront.query(COLLECTION_QUERY, {
     variables: {
       handle,
       sortKey,

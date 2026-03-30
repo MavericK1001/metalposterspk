@@ -8,19 +8,20 @@ import {
   HOMEPAGE_PRODUCTS_QUERY,
   HOMEPAGE_FALLBACK_QUERY,
 } from "~/graphql/ProductQuery";
+import { createContext } from "~/lib/hydrogen.server";
 
 export const meta: MetaFunction = () => [
   { title: "MetalPosters — Premium Metal Prints" },
 ];
 
-export async function loader({ context }: LoaderFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { storefront } = createContext(request);
   let products: any[] = [];
 
   try {
-    const { collection } = await context.storefront.query(
-      HOMEPAGE_PRODUCTS_QUERY,
-      { variables: { count: 8 } },
-    );
+    const { collection } = await storefront.query(HOMEPAGE_PRODUCTS_QUERY, {
+      variables: { count: 8 },
+    });
     products = collection?.products?.nodes ?? [];
   } catch {
     // fallback to "all"
@@ -28,10 +29,9 @@ export async function loader({ context }: LoaderFunctionArgs) {
 
   if (products.length === 0) {
     try {
-      const { collection } = await context.storefront.query(
-        HOMEPAGE_FALLBACK_QUERY,
-        { variables: { count: 8 } },
-      );
+      const { collection } = await storefront.query(HOMEPAGE_FALLBACK_QUERY, {
+        variables: { count: 8 },
+      });
       products = collection?.products?.nodes ?? [];
     } catch {
       // no products available

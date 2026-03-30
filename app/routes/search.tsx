@@ -2,10 +2,12 @@ import { useLoaderData, useSearchParams, Form } from "react-router";
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 import { SEARCH_QUERY } from "~/graphql/ProductQuery";
 import { ProductCard } from "~/components/ProductCard";
+import { createContext } from "~/lib/hydrogen.server";
 
 export const meta: MetaFunction = () => [{ title: "Search — MetalPosters" }];
 
-export async function loader({ request, context }: LoaderFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { storefront } = createContext(request);
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
 
@@ -13,7 +15,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     return { query: "", products: [], total: 0 };
   }
 
-  const { search } = await context.storefront.query(SEARCH_QUERY, {
+  const { search } = await storefront.query(SEARCH_QUERY, {
     variables: { query: q, first: 40 },
   });
 

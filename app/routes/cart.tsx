@@ -7,20 +7,23 @@ import { useLoaderData, useFetcher, Link } from "react-router";
 import { Image } from "@shopify/hydrogen";
 import { CART_QUERY } from "~/graphql/CartMutations";
 import { formatMoney } from "~/lib/utils";
+import { createContext } from "~/lib/hydrogen.server";
 
-export async function loader({ context }: LoaderFunctionArgs) {
-  const cart = await context.cart.get();
-  return { cart };
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { cart } = createContext(request);
+  const cartData = await cart.get();
+  return { cart: cartData };
 }
 
-export async function action({ request, context }: ActionFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
+  const { cart } = createContext(request);
   const formData = await request.formData();
   const intent = formData.get("intent") as string;
 
   if (intent === "add-to-cart") {
     const merchandiseId = formData.get("merchandiseId") as string;
     const quantity = Number(formData.get("quantity") || 1);
-    const result = await context.cart.addLines([{ merchandiseId, quantity }]);
+    const result = await cart.addLines([{ merchandiseId, quantity }]);
     return data(result);
   }
 
@@ -28,16 +31,16 @@ export async function action({ request, context }: ActionFunctionArgs) {
     const lineId = formData.get("lineId") as string;
     const quantity = Number(formData.get("quantity"));
     if (quantity <= 0) {
-      const result = await context.cart.removeLines([lineId]);
+      const result = await cart.removeLines([lineId]);
       return data(result);
     }
-    const result = await context.cart.updateLines([{ id: lineId, quantity }]);
+    const result = await cart.updateLines([{ id: lineId, quantity }]);
     return data(result);
   }
 
   if (intent === "remove-item") {
     const lineId = formData.get("lineId") as string;
-    const result = await context.cart.removeLines([lineId]);
+    const result = await cart.removeLines([lineId]);
     return data(result);
   }
 

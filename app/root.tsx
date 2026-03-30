@@ -9,6 +9,7 @@ import {
   type LinksFunction,
 } from "react-router";
 import type { LoaderFunctionArgs } from "react-router";
+import { createContext } from "~/lib/hydrogen.server";
 import { Layout } from "~/components/Layout";
 import stylesheet from "~/styles/app.css?url";
 
@@ -35,9 +36,10 @@ export const meta: MetaFunction = () => [
   },
 ];
 
-export async function loader({ context }: LoaderFunctionArgs) {
-  const cart = await context.cart.get();
-  return { cart };
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { cart } = createContext(request);
+  const cartData = await cart.get();
+  return { cart: cartData };
 }
 
 export function useRootLoaderData() {

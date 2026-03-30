@@ -16,6 +16,7 @@ import {
 } from "~/graphql/ProductQuery";
 import { ProductCard } from "~/components/ProductCard";
 import { formatMoney, discountPercent, SIZE_DIMENSIONS } from "~/lib/utils";
+import { createContext } from "~/lib/hydrogen.server";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const product = data?.product;
@@ -34,7 +35,8 @@ const RELATED_QUERY = `#graphql
   ${PRODUCT_CARD_FRAGMENT}
 `;
 
-export async function loader({ params, request, context }: LoaderFunctionArgs) {
+export async function loader({ params, request }: LoaderFunctionArgs) {
+  const { storefront } = createContext(request);
   const { handle } = params;
   if (!handle) throw new Response("Not found", { status: 404 });
 
@@ -46,14 +48,14 @@ export async function loader({ params, request, context }: LoaderFunctionArgs) {
     }
   });
 
-  const { product } = await context.storefront.query(PRODUCT_DETAIL_QUERY, {
+  const { product } = await storefront.query(PRODUCT_DETAIL_QUERY, {
     variables: { handle, selectedOptions },
   });
 
   if (!product) throw new Response("Not found", { status: 404 });
 
   // Deferred related products
-  const related = context.storefront
+  const related = storefront
     .query(RELATED_QUERY, { variables: { productId: product.id } })
     .then((res: any) => res.productRecommendations ?? [])
     .catch(() => []);
