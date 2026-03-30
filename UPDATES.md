@@ -1,6 +1,6 @@
 # MetalPosters — Development Updates
 
-> Last updated: 30 March 2026
+> Last updated: 31 March 2026
 
 ---
 
@@ -88,6 +88,36 @@
 - All mutations return full cart fragment (lines, costs, discounts, checkout URL)
 - Cart drawer now receives data directly from action response (no race condition)
 - Verified working via `/api/cart-debug` endpoint
+
+---
+
+## 31 March 2026
+
+### 13. Content Pages & Footer Updates
+
+- Updated Footer SUPPORT_LINKS with "How It's Made" link
+- Updated homepage "HOW IT'S MADE" CTA to point to `/pages/how-its-made`
+
+### 14. How It's Made Page
+
+- Created `/pages/how-its-made` — explains the metal poster manufacturing process
+- 6-step walkthrough: Design Prep → Dye-Sublimation → Aluminium Panel → QC → Magnetic Mount → Packaging
+- "Why Metal?" grid with 6 benefit cards (water/UV/scratch resistant, lightweight, vivid, eco-friendly)
+- Shop All CTA at bottom, follows copper/charcoal design system
+
+### 15. Custom Poster Order Page
+
+- Created `/pages/custom-poster` — dedicated ordering flow for custom metal posters
+- Size configurator: A5 (Rs 849) → A1 (Rs 8,250) with live price and discount display
+- Orientation selector: Portrait / Landscape with visual icons
+- **WhatsApp ordering:** green CTA opens WhatsApp (0330-9995508) with pre-filled message containing size, orientation, and price
+- "How It Works" 4-step guide, "What You Get" 6-card grid, image quality tips section
+- Updated Nav, Footer, and homepage CUSTOM tile links from `/collections/custom-metal-poster` to `/pages/custom-poster`
+
+### 16. Privacy Policy Fix
+
+- Fixed 500 error on `/policies/privacy-policy` — intro `<div>` referenced undefined `body` variable
+- Changed to `bodyStyle` to match the existing style constant
 
 ---
 
