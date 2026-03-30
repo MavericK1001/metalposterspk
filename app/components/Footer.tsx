@@ -8,7 +8,7 @@ const FOOTER_LINKS = [
   { label: "Islamic", to: "/collections/islamic-posters" },
   { label: "Motivational", to: "/collections/motivational-metal-poster" },
   { label: "Sports", to: "/collections/sports-poster" },
-  { label: "Custom", to: "/collections/custom-metal-poster" },
+  { label: "Custom", to: "/pages/custom-poster" },
 ];
 
 const SUPPORT_LINKS = [

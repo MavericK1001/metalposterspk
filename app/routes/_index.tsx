@@ -86,7 +86,7 @@ const TILES = [
   {
     step: "04",
     label: "CUSTOM",
-    to: "/collections/custom-metal-poster",
+    to: "/pages/custom-poster",
     bg: "#0A0A0A",
     textColor: "#7A7A7A",
     text: "UPLOAD\nYOUR\nDESIGN",
