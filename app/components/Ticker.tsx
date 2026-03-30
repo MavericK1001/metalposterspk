@@ -13,9 +13,10 @@ function TickerContent() {
         <span key={i} style={{ display: "flex", alignItems: "center", gap: 0 }}>
           <span
             style={{
-              fontFamily: "Anton, sans-serif",
-              fontSize: 13,
-              letterSpacing: 3,
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              fontSize: 12,
+              letterSpacing: 2,
               color: "var(--white)",
               padding: "0 32px",
               whiteSpace: "nowrap",
@@ -34,7 +35,7 @@ export function Ticker() {
   return (
     <div
       style={{
-        background: "var(--red)",
+        background: "var(--copper)",
         height: 36,
         overflow: "hidden",
         display: "flex",

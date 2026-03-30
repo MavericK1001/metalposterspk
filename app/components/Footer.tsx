@@ -14,7 +14,7 @@ export function Footer() {
     <footer
       style={{
         background: "var(--ink)",
-        borderTop: "3px solid var(--red)",
+        borderTop: "3px solid var(--copper)",
         padding: "48px 32px 32px",
       }}
     >
@@ -32,8 +32,9 @@ export function Footer() {
         <div>
           <h3
             style={{
-              fontFamily: "Anton, sans-serif",
-              fontSize: 24,
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: 22,
+              fontWeight: 700,
               color: "var(--white)",
               letterSpacing: 3,
               marginBottom: 16,
@@ -43,8 +44,8 @@ export function Footer() {
           </h3>
           <p
             style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 11,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 13,
               color: "var(--muted)",
               lineHeight: 1.8,
             }}
@@ -58,7 +59,7 @@ export function Footer() {
         <div>
           <h4
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 10,
               letterSpacing: 2,
               textTransform: "uppercase",
@@ -74,9 +75,9 @@ export function Footer() {
                 key={link.to}
                 to={link.to}
                 style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: 11,
-                  color: "var(--mid)",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 12,
+                  color: "var(--steel)",
                   textDecoration: "none",
                   letterSpacing: 1,
                 }}
@@ -91,7 +92,7 @@ export function Footer() {
         <div>
           <h4
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 10,
               letterSpacing: 2,
               textTransform: "uppercase",
@@ -106,9 +107,9 @@ export function Footer() {
               <span
                 key={text}
                 style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: 11,
-                  color: "var(--mid)",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 12,
+                  color: "var(--steel)",
                   letterSpacing: 1,
                 }}
               >
@@ -135,9 +136,9 @@ export function Footer() {
       >
         <span
           style={{
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 10,
-            color: "#444",
+            color: "#555",
             letterSpacing: 1,
           }}
         >
@@ -145,9 +146,9 @@ export function Footer() {
         </span>
         <span
           style={{
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 10,
-            color: "#444",
+            color: "#555",
             letterSpacing: 1,
           }}
         >

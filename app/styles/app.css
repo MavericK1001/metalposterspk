@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg: #F5F0E8;
-  --ink: #111111;
-  --red: #D63B2F;
-  --cream: #EDE8DC;
-  --mid: #C8C2B4;
-  --muted: #7A7570;
+  --bg: #1E1E1E;
+  --ink: #1E1E1E;
+  --card: #2B2B2B;
+  --steel: #D9D9D9;
+  --mid: #D9D9D9;
+  --muted: #7A7A7A;
+  --copper: #B87333;
+  --terracotta: #E3735E;
+  --red: #B87333;
+  --cream: #2B2B2B;
   --white: #FFFFFF;
 }
 
@@ -19,9 +23,30 @@
 }
 
 body {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
   background: var(--bg);
-  color: var(--ink);
+  color: var(--steel);
+}
+
+/* Button hover: Copper → Terracotta */
+button, a {
+  transition: background 0.18s, color 0.18s, border-color 0.18s, opacity 0.18s;
+}
+
+.btn-copper {
+  background: var(--copper);
+  color: white;
+}
+.btn-copper:hover {
+  background: var(--terracotta);
+}
+
+.btn-disabled {
+  background: var(--card);
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* Metal shine overlay — apply to any poster image container */

@@ -39,13 +39,14 @@ export function CartDrawer() {
             justifyContent: "space-between",
             alignItems: "center",
             padding: 20,
-            borderBottom: "2px solid var(--ink)",
+            borderBottom: "2px solid var(--card)",
           }}
         >
           <span
             style={{
-              fontFamily: "Anton, sans-serif",
-              fontSize: 24,
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: 22,
+              fontWeight: 700,
               letterSpacing: 2,
             }}
           >
@@ -55,7 +56,7 @@ export function CartDrawer() {
             type="button"
             onClick={() => setOpen(false)}
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 18,
               background: "none",
               border: "none",
@@ -97,7 +98,7 @@ export function CartDrawer() {
             >
               <span
                 style={{
-                  fontFamily: "'Space Mono', monospace",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 11,
                   letterSpacing: 1,
                   textTransform: "uppercase",
@@ -108,8 +109,9 @@ export function CartDrawer() {
               </span>
               <span
                 style={{
-                  fontFamily: "Anton, sans-serif",
+                  fontFamily: "'Montserrat', sans-serif",
                   fontSize: 22,
+                  fontWeight: 700,
                 }}
               >
                 {formatMoney(cart.cost.subtotalAmount)}
@@ -125,11 +127,12 @@ export function CartDrawer() {
               href={cart.checkoutUrl}
               style={{
                 display: "block",
-                background: "var(--red)",
+                background: "var(--copper)",
                 color: "white",
                 padding: 16,
-                fontFamily: "Anton, sans-serif",
+                fontFamily: "'Montserrat', sans-serif",
                 fontSize: 14,
+                fontWeight: 700,
                 letterSpacing: 2,
                 textTransform: "uppercase",
                 textAlign: "center",
@@ -148,7 +151,7 @@ export function CartDrawer() {
                 width: "100%",
                 background: "none",
                 border: "none",
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 10,
                 color: "var(--muted)",
                 textAlign: "center",
@@ -179,8 +182,9 @@ function EmptyCart({ onClose }: { onClose: () => void }) {
     >
       <span
         style={{
-          fontFamily: "Anton, sans-serif",
-          fontSize: 20,
+          fontFamily: "'Montserrat', sans-serif",
+          fontSize: 18,
+          fontWeight: 700,
           letterSpacing: 2,
         }}
       >
@@ -190,11 +194,11 @@ function EmptyCart({ onClose }: { onClose: () => void }) {
         to="/collections/all"
         onClick={onClose}
         style={{
-          background: "var(--red)",
+          background: "var(--copper)",
           color: "white",
           padding: "12px 28px",
-          fontFamily: "'Space Mono', monospace",
-          fontSize: 10,
+          fontFamily: "'Inter', sans-serif",
+          fontSize: 11,
           letterSpacing: 2,
           textTransform: "uppercase",
           textDecoration: "none",
@@ -235,8 +239,9 @@ function CartLine({ line }: { line: any }) {
       >
         <span
           style={{
-            fontFamily: "Anton, sans-serif",
-            fontSize: 16,
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: 15,
+            fontWeight: 700,
           }}
         >
           {product.title}
@@ -244,7 +249,7 @@ function CartLine({ line }: { line: any }) {
         {options && (
           <span
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 10,
               letterSpacing: 1,
               color: "var(--muted)",
@@ -255,8 +260,9 @@ function CartLine({ line }: { line: any }) {
         )}
         <span
           style={{
-            fontFamily: "Anton, sans-serif",
+            fontFamily: "'Montserrat', sans-serif",
             fontSize: 18,
+            fontWeight: 700,
             marginTop: 4,
           }}
         >
@@ -287,7 +293,7 @@ function CartLine({ line }: { line: any }) {
                 height: 24,
                 border: "1px solid var(--mid)",
                 background: "transparent",
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 12,
                 cursor: "pointer",
               }}
@@ -298,7 +304,7 @@ function CartLine({ line }: { line: any }) {
 
           <span
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 12,
               minWidth: 20,
               textAlign: "center",
@@ -318,7 +324,7 @@ function CartLine({ line }: { line: any }) {
                 height: 24,
                 border: "1px solid var(--mid)",
                 background: "transparent",
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 12,
                 cursor: "pointer",
               }}
@@ -335,9 +341,9 @@ function CartLine({ line }: { line: any }) {
           <button
             type="submit"
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 9,
-              color: "var(--red)",
+              color: "var(--copper)",
               background: "none",
               border: "none",
               cursor: "pointer",
@@ -375,7 +381,7 @@ function DiscountCodeForm({ appliedCodes }: { appliedCodes: { code: string }[] }
             >
               <span
                 style={{
-                  fontFamily: "'Space Mono', monospace",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 10,
                   letterSpacing: 1,
                   color: "var(--ink)",
@@ -389,9 +395,9 @@ function DiscountCodeForm({ appliedCodes }: { appliedCodes: { code: string }[] }
                 <button
                   type="submit"
                   style={{
-                    fontFamily: "'Space Mono', monospace",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: 9,
-                    color: "var(--red)",
+                    color: "var(--copper)",
                     background: "none",
                     border: "none",
                     cursor: "pointer",
@@ -410,7 +416,7 @@ function DiscountCodeForm({ appliedCodes }: { appliedCodes: { code: string }[] }
           type="button"
           onClick={() => setShowInput(true)}
           style={{
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 10,
             letterSpacing: 1,
             color: "var(--muted)",
@@ -438,9 +444,9 @@ function DiscountCodeForm({ appliedCodes }: { appliedCodes: { code: string }[] }
             required
             style={{
               flex: 1,
-              border: "1px solid var(--mid)",
+              border: "1px solid var(--muted)",
               padding: "8px 10px",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 10,
               borderRadius: 0,
               outline: "none",
@@ -453,7 +459,7 @@ function DiscountCodeForm({ appliedCodes }: { appliedCodes: { code: string }[] }
               color: "white",
               border: "none",
               padding: "8px 14px",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 9,
               letterSpacing: 1,
               cursor: "pointer",

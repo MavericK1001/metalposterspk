@@ -29,8 +29,9 @@ export function PosterPreview({
     >
       <span
         style={{
-          fontFamily: "Anton, sans-serif",
+          fontFamily: "'Montserrat', sans-serif",
           fontSize: 28,
+          fontWeight: 700,
           color: "rgba(255,255,255,0.12)",
           letterSpacing: 4,
           textAlign: "center",

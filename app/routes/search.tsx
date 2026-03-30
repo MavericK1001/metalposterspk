@@ -50,7 +50,7 @@ export default function SearchPage() {
               background: "transparent",
               border: "1px solid var(--mid)",
               color: "white",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 13,
               padding: "12px 16px",
               borderRadius: 0,
@@ -60,11 +60,11 @@ export default function SearchPage() {
           <button
             type="submit"
             style={{
-              background: "var(--red)",
+              background: "var(--copper)",
               color: "white",
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 10,
-              letterSpacing: 2,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 11,
+              fontWeight: 600,
               padding: "12px 28px",
               border: "none",
               borderRadius: 0,
@@ -82,7 +82,7 @@ export default function SearchPage() {
         <div style={{ marginBottom: 20 }}>
           <span
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 11,
               color: "var(--muted)",
             }}
@@ -96,8 +96,9 @@ export default function SearchPage() {
         <div style={{ textAlign: "center", padding: "60px 20px" }}>
           <h2
             style={{
-              fontFamily: "Anton, sans-serif",
+              fontFamily: "'Montserrat', sans-serif",
               fontSize: 28,
+              fontWeight: 700,
               letterSpacing: 1,
               marginBottom: 12,
             }}
@@ -106,8 +107,8 @@ export default function SearchPage() {
           </h2>
           <p
             style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 12,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 13,
               color: "var(--muted)",
               marginBottom: 20,
             }}
@@ -128,7 +129,7 @@ export default function SearchPage() {
                 <button
                   type="submit"
                   style={{
-                    fontFamily: "'Space Mono', monospace",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: 10,
                     letterSpacing: 1,
                     padding: "8px 18px",
@@ -150,8 +151,9 @@ export default function SearchPage() {
         <div style={{ textAlign: "center", padding: "60px 20px" }}>
           <h2
             style={{
-              fontFamily: "Anton, sans-serif",
+              fontFamily: "'Montserrat', sans-serif",
               fontSize: 28,
+              fontWeight: 700,
               letterSpacing: 1,
               marginBottom: 12,
             }}
@@ -160,8 +162,8 @@ export default function SearchPage() {
           </h2>
           <p
             style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 12,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 13,
               color: "var(--muted)",
               marginBottom: 20,
             }}
@@ -183,7 +185,7 @@ export default function SearchPage() {
                   <button
                     type="submit"
                     style={{
-                      fontFamily: "'Space Mono', monospace",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: 10,
                       letterSpacing: 1,
                       padding: "8px 18px",

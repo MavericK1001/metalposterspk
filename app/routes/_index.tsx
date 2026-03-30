@@ -47,7 +47,7 @@ const TILES = [
     step: "01",
     label: "MUSIC",
     bg: "#0D0D14",
-    textColor: "#F0C97A",
+    textColor: "#B87333",
     text: "DARK\nSIDE",
     badge: "HOT",
   },
@@ -55,7 +55,7 @@ const TILES = [
     step: "02",
     label: "MOVIES",
     bg: "#14080A",
-    textColor: "#D63B2F",
+    textColor: "#E3735E",
     text: "PULP",
     badge: null,
   },
@@ -71,7 +71,7 @@ const TILES = [
     step: "04",
     label: "CUSTOM",
     bg: "#0A0A0A",
-    textColor: "#444",
+    textColor: "#7A7A7A",
     text: "UPLOAD\nYOUR\nDESIGN",
     badge: "NEW",
     dashed: true,
@@ -88,11 +88,20 @@ const SIZES = [
   { name: "XXL", dims: "80×120cm", w: 60, h: 80 },
 ];
 
+// ── Price Filter Chips ──
+const PRICE_CHIPS = [
+  { label: "All", min: 0, max: Infinity },
+  { label: "₨ 5–6k", min: 5000, max: 6000 },
+  { label: "₨ 6–8k", min: 6000, max: 8000 },
+  { label: "₨ 8k+", min: 8000, max: Infinity },
+];
+
 export default function Homepage() {
   const { products } = useLoaderData<typeof loader>();
   const [activeTab, setActiveTab] = useState("All");
+  const [priceChip, setPriceChip] = useState("All");
 
-  const filtered =
+  let filtered =
     activeTab === "All"
       ? products
       : products.filter(
@@ -102,6 +111,17 @@ export default function Homepage() {
               t.toLowerCase().includes(activeTab.toLowerCase()),
             ),
         );
+
+  // Apply price filter
+  if (priceChip !== "All") {
+    const chip = PRICE_CHIPS.find((c) => c.label === priceChip);
+    if (chip) {
+      filtered = filtered.filter((p: any) => {
+        const amt = parseFloat(p.priceRange.minVariantPrice.amount);
+        return amt >= chip.min && amt <= chip.max;
+      });
+    }
+  }
 
   return (
     <>
@@ -117,12 +137,12 @@ export default function Homepage() {
         {/* Left column */}
         <div
           style={{
-            background: "var(--ink)",
+            background: "var(--bg)",
             padding: "52px 48px",
             display: "flex",
             flexDirection: "column",
             gap: 24,
-            borderRight: "3px solid var(--red)",
+            borderRight: "3px solid var(--copper)",
           }}
         >
           {/* Eyebrow */}
@@ -137,16 +157,17 @@ export default function Homepage() {
               style={{
                 width: 24,
                 height: 2,
-                background: "var(--red)",
+                background: "var(--copper)",
               }}
             />
             <span
               style={{
-                fontFamily: "'Space Mono', monospace",
-                fontSize: 10,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 11,
                 letterSpacing: 3,
                 textTransform: "uppercase",
-                color: "var(--red)",
+                color: "var(--copper)",
+                fontWeight: 600,
               }}
             >
               Premium Aluminium Prints
@@ -157,53 +178,57 @@ export default function Homepage() {
           <h1
             className="hero-h1"
             style={{
-              fontFamily: "Anton, sans-serif",
-              fontSize: 86,
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              fontSize: 72,
               color: "white",
-              lineHeight: 0.88,
-              letterSpacing: 2,
+              lineHeight: 0.92,
+              letterSpacing: -1,
             }}
           >
-            ART THAT
+            Swap Art in
             <em
               style={{
-                color: "var(--red)",
+                color: "var(--copper)",
                 display: "block",
                 fontStyle: "normal",
               }}
             >
-              ENDURES
+              Seconds
             </em>
           </h1>
 
           {/* Subtext */}
           <p
             style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 11,
-              lineHeight: 1.9,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 16,
+              lineHeight: 1.6,
               color: "var(--muted)",
-              maxWidth: 340,
+              maxWidth: 420,
             }}
           >
-            HD prints on brushed aluminium plate. No fading. No warping. No
-            compromise. Ships worldwide in 3–5 days.
+            Premium metal posters from{" "}
+            <strong style={{ color: "var(--copper)" }}>₨ 5,000</strong>.{" "}
+            <span style={{ textDecoration: "line-through", color: "var(--muted)" }}>
+              ₨ 12,000 framed prints
+            </span>{" "}
+            — magnetic mounting, no holes, no hassle.
           </p>
 
           {/* CTAs */}
           <div className="hero-ctas" style={{ display: "flex", gap: 12 }}>
             <Link
               to="/collections/all"
+              className="btn-copper"
               style={{
-                background: "var(--red)",
-                color: "white",
                 padding: "16px 32px",
-                fontFamily: "'Space Mono', monospace",
-                fontSize: 11,
-                letterSpacing: 2,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 13,
+                letterSpacing: 1,
                 textTransform: "uppercase",
                 textDecoration: "none",
-                fontWeight: 700,
+                fontWeight: 600,
                 border: "none",
               }}
             >
@@ -213,14 +238,15 @@ export default function Homepage() {
               to="/collections/all"
               style={{
                 background: "transparent",
-                color: "var(--muted)",
+                color: "var(--steel)",
                 padding: "16px 32px",
-                fontFamily: "'Space Mono', monospace",
-                fontSize: 11,
-                letterSpacing: 2,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 13,
+                letterSpacing: 1,
                 textTransform: "uppercase",
                 textDecoration: "none",
-                border: "1px solid #333",
+                border: "1px solid var(--muted)",
+                fontWeight: 500,
               }}
             >
               HOW IT&apos;S MADE
@@ -271,10 +297,10 @@ export default function Homepage() {
                   {/* Step */}
                   <span
                     style={{
-                      fontFamily: "'Space Mono', monospace",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: 11,
                       letterSpacing: 2,
-                      color: "#333",
+                      color: "#444",
                     }}
                   >
                     {tile.step}
@@ -291,15 +317,16 @@ export default function Homepage() {
                       justifyContent: "center",
                       position: "relative",
                       overflow: "hidden",
-                      border: tile.dashed ? "1px dashed #333" : "none",
+                      border: tile.dashed ? "1px dashed #444" : "none",
                     }}
                   >
                     <span
                       style={{
                         fontFamily: tile.useMono
-                          ? "'Space Mono', monospace"
-                          : "Anton, sans-serif",
-                        fontSize: tile.useMono ? 7 : 12,
+                          ? "'Inter', sans-serif"
+                          : "'Montserrat', sans-serif",
+                        fontSize: tile.useMono ? 8 : 13,
+                        fontWeight: 700,
                         color: tile.textColor,
                         textAlign: "center",
                         lineHeight: 1.1,
@@ -324,11 +351,12 @@ export default function Homepage() {
                   {/* Label */}
                   <span
                     style={{
-                      fontFamily: "'Space Mono', monospace",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: 9,
                       letterSpacing: 2,
                       textTransform: "uppercase",
                       color: "#555",
+                      fontWeight: 600,
                     }}
                   >
                     {tile.label}
@@ -341,13 +369,13 @@ export default function Homepage() {
                         position: "absolute",
                         top: 8,
                         right: 8,
-                        background: "var(--red)",
+                        background: "var(--copper)",
                         color: "white",
                         fontSize: 8,
                         fontWeight: 700,
                         padding: "2px 5px",
                         letterSpacing: 1,
-                        fontFamily: "'Space Mono', monospace",
+                        fontFamily: "'Inter', sans-serif",
                       }}
                     >
                       {tile.badge}
@@ -372,40 +400,42 @@ export default function Homepage() {
             alignItems: "flex-end",
             justifyContent: "space-between",
             marginBottom: 28,
-            borderBottom: "2px solid var(--ink)",
+            borderBottom: "2px solid var(--steel)",
             paddingBottom: 12,
           }}
         >
           <div style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
             <h2
               style={{
-                fontFamily: "Anton, sans-serif",
-                fontSize: 42,
-                letterSpacing: 1,
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 700,
+                fontSize: 36,
+                letterSpacing: -0.5,
+                color: "var(--white)",
               }}
             >
               BESTSELLERS
             </h2>
             <span
               style={{
-                fontFamily: "'Space Mono', monospace",
-                fontSize: 11,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 12,
                 color: "var(--muted)",
               }}
             >
-              // {String(products.length).padStart(2, "0")} products
+              {String(products.length).padStart(2, "0")} products
             </span>
           </div>
           <Link
             to="/collections/all"
             style={{
-              fontSize: 10,
-              letterSpacing: 2,
+              fontSize: 11,
+              letterSpacing: 1,
               textTransform: "uppercase",
-              color: "var(--red)",
-              fontWeight: 700,
+              color: "var(--copper)",
+              fontWeight: 600,
               textDecoration: "none",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
             }}
           >
             VIEW ALL →
@@ -413,6 +443,31 @@ export default function Homepage() {
         </div>
 
         <CategoryTabs activeTab={activeTab} onChange={setActiveTab} />
+
+        {/* Price filter chips */}
+        <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
+          {PRICE_CHIPS.map((chip) => (
+            <button
+              key={chip.label}
+              type="button"
+              onClick={() => setPriceChip(chip.label)}
+              style={{
+                padding: "7px 16px",
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 12,
+                fontWeight: 500,
+                border: `1px solid ${priceChip === chip.label ? "var(--copper)" : "var(--muted)"}`,
+                background: priceChip === chip.label ? "var(--copper)" : "transparent",
+                color: priceChip === chip.label ? "white" : "var(--steel)",
+                cursor: "pointer",
+                borderRadius: 0,
+                letterSpacing: 0.5,
+              }}
+            >
+              {chip.label}
+            </button>
+          ))}
+        </div>
 
         {/* Product grid */}
         <div
@@ -435,18 +490,19 @@ export default function Homepage() {
         style={{
           display: "grid",
           gridTemplateColumns: "1fr auto",
-          background: "var(--ink)",
+          background: "var(--card)",
           margin: "0 32px 48px",
-          border: "3px solid var(--ink)",
+          border: "3px solid var(--card)",
         }}
       >
         {/* Left */}
-        <div className="social-proof-left" style={{ background: "var(--red)", padding: "36px 44px" }}>
+        <div className="social-proof-left" style={{ background: "var(--copper)", padding: "36px 44px" }}>
           <div
             className="social-proof-title"
             style={{
-              fontFamily: "Anton, sans-serif",
-              fontSize: 48,
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              fontSize: 44,
               color: "white",
               lineHeight: 1,
             }}
@@ -456,8 +512,9 @@ export default function Homepage() {
           <div
             className="social-proof-number"
             style={{
-              fontFamily: "Anton, sans-serif",
-              fontSize: 56,
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              fontSize: 52,
               color: "white",
               lineHeight: 1,
             }}
@@ -466,10 +523,10 @@ export default function Homepage() {
           </div>
           <div
             style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 10,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 11,
               color: "rgba(255,255,255,0.7)",
-              letterSpacing: 2,
+              letterSpacing: 1,
               textTransform: "uppercase",
               marginTop: 10,
             }}
@@ -498,26 +555,27 @@ export default function Homepage() {
               className="social-proof-stat"
               style={{
                 textAlign: "center",
-                borderLeft: i > 0 ? "1px solid #333" : "none",
+                borderLeft: i > 0 ? "1px solid #444" : "none",
                 paddingLeft: i > 0 ? 40 : 0,
               }}
             >
               <div
                 className="social-proof-stat-value"
                 style={{
-                  fontFamily: "Anton, sans-serif",
-                  fontSize: 44,
-                  color: "var(--red)",
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 40,
+                  color: "var(--copper)",
                 }}
               >
                 {stat.value}
               </div>
               <div
                 style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: 9,
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 10,
                   color: "var(--muted)",
-                  letterSpacing: 2,
+                  letterSpacing: 1,
                 }}
               >
                 {stat.label}
@@ -527,16 +585,15 @@ export default function Homepage() {
 
           <Link
             to="/collections/all"
+            className="btn-copper"
             style={{
-              background: "var(--red)",
-              color: "white",
               padding: "14px 28px",
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 10,
-              letterSpacing: 2,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 11,
+              letterSpacing: 1,
               textTransform: "uppercase",
               textDecoration: "none",
-              fontWeight: 700,
+              fontWeight: 600,
               whiteSpace: "nowrap",
             }}
           >
@@ -550,9 +607,9 @@ export default function Homepage() {
         className="size-guide"
         style={{
           display: "flex",
-          background: "var(--cream)",
-          borderTop: "1px solid var(--mid)",
-          borderBottom: "1px solid var(--mid)",
+          background: "var(--card)",
+          borderTop: "1px solid #444",
+          borderBottom: "1px solid #444",
         }}
       >
         {SIZES.map((size, i) => (
@@ -567,7 +624,7 @@ export default function Homepage() {
               gap: 12,
               padding: "18px 24px",
               borderRight:
-                i < SIZES.length - 1 ? "1px solid var(--mid)" : "none",
+                i < SIZES.length - 1 ? "1px solid #444" : "none",
             }}
           >
             <div
@@ -575,26 +632,26 @@ export default function Homepage() {
               style={{
                 width: size.w,
                 height: size.h,
-                background: "var(--mid)",
-                border: "1.5px solid #B0AAA0",
+                background: "var(--muted)",
+                border: "1.5px solid #555",
                 flexShrink: 0,
               }}
             />
             <div>
               <div
                 style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: 11,
-                  fontWeight: 700,
-                  color: "var(--ink)",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: "var(--steel)",
                 }}
               >
                 {size.name}
               </div>
               <div
                 style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: 10,
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 11,
                   color: "var(--muted)",
                 }}
               >

@@ -25,7 +25,7 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap",
   },
   { rel: "stylesheet", href: stylesheet },
 ];
@@ -103,35 +103,36 @@ export function ErrorBoundary() {
             alignItems: "center",
             justifyContent: "center",
             minHeight: "100vh",
-            fontFamily: "'Space Mono', monospace",
-            background: "#F5F0E8",
+            fontFamily: "'Inter', sans-serif",
+            background: "#1E1E1E",
           }}
         >
           <h1
             style={{
-              fontFamily: "Anton, sans-serif",
+              fontFamily: "'Montserrat', sans-serif",
               fontSize: 48,
+              fontWeight: 700,
               letterSpacing: 2,
             }}
           >
             {status}
           </h1>
-          <p style={{ color: "#7A7570", marginTop: 12, maxWidth: 500, textAlign: 'center', padding: '0 20px' }}>
+          <p style={{ color: "#7A7A7A", marginTop: 12, maxWidth: 500, textAlign: 'center', padding: '0 20px' }}>
             {message}
           </p>
           <a
             href="/"
             style={{
               marginTop: 24,
-              background: "#D63B2F",
+              background: "var(--copper, #B87333)",
               color: "#fff",
               padding: "12px 28px",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 11,
+              fontWeight: 600,
               letterSpacing: 2,
               textTransform: "uppercase" as const,
               textDecoration: "none",
-              fontWeight: 700,
             }}
           >
             GO HOME

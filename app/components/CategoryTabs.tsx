@@ -33,17 +33,18 @@ export function CategoryTabs({
             type="button"
             onClick={() => onChange(tab)}
             style={{
-              border: `1px solid ${isActive ? "var(--ink)" : "var(--mid)"}`,
+              border: `1px solid ${isActive ? "var(--copper)" : "var(--muted)"}`,
               padding: "6px 14px",
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 9,
-              letterSpacing: 2,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 10,
+              letterSpacing: 1,
               textTransform: "uppercase",
               cursor: "pointer",
-              color: isActive ? "white" : "var(--muted)",
-              background: isActive ? "var(--ink)" : "transparent",
+              color: isActive ? "white" : "var(--steel)",
+              background: isActive ? "var(--copper)" : "transparent",
               borderRadius: 0,
               transition: "all 0.12s",
+              fontWeight: 500,
             }}
           >
             {tab}

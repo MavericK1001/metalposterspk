@@ -75,8 +75,9 @@ export default function CartPage() {
       >
         <h1
           style={{
-            fontFamily: "Anton, sans-serif",
-            fontSize: 42,
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: 36,
+            fontWeight: 700,
             letterSpacing: 2,
             marginBottom: 12,
           }}
@@ -85,20 +86,20 @@ export default function CartPage() {
         </h1>
         <p
           style={{
-            fontFamily: "'Space Mono', monospace",
-            fontSize: 12,
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 13,
             color: "var(--muted)",
             marginBottom: 28,
           }}
         >
-          // nothing here yet — go find something you love
+          Nothing here yet — go find something you love
         </p>
         <Link
           to="/"
           style={{
-            fontFamily: "'Space Mono', monospace",
-            fontSize: 10,
-            letterSpacing: 2,
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 11,
+            fontWeight: 600,
             background: "var(--ink)",
             color: "white",
             padding: "12px 32px",
@@ -119,8 +120,9 @@ export default function CartPage() {
     <div style={{ maxWidth: 900, margin: "0 auto", padding: "40px 20px" }}>
       <h1
         style={{
-          fontFamily: "Anton, sans-serif",
-          fontSize: 36,
+          fontFamily: "'Montserrat', sans-serif",
+          fontSize: 32,
+          fontWeight: 700,
           letterSpacing: 2,
           borderBottom: "3px solid var(--ink)",
           paddingBottom: 12,
@@ -146,7 +148,7 @@ export default function CartPage() {
         <span />
         <span
           style={{
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 9,
             letterSpacing: 2,
             color: "var(--muted)",
@@ -156,7 +158,7 @@ export default function CartPage() {
         </span>
         <span
           style={{
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 9,
             letterSpacing: 2,
             color: "var(--muted)",
@@ -166,7 +168,7 @@ export default function CartPage() {
         </span>
         <span
           style={{
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 9,
             letterSpacing: 2,
             color: "var(--muted)",
@@ -204,21 +206,21 @@ export default function CartPage() {
             >
               <span
                 style={{
-                  fontFamily: "'Space Mono', monospace",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 11,
                   color: "var(--muted)",
                 }}
               >
                 SUBTOTAL
               </span>
-              <span style={{ fontFamily: "Anton, sans-serif", fontSize: 18 }}>
+              <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 18, fontWeight: 700 }}>
                 {formatMoney(subtotal)}
               </span>
             </div>
           )}
           <p
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 10,
               color: "var(--muted)",
               marginBottom: 16,
@@ -233,10 +235,11 @@ export default function CartPage() {
               style={{
                 display: "block",
                 textAlign: "center",
-                background: "var(--red)",
+                background: "var(--copper)",
                 color: "white",
-                fontFamily: "'Space Mono', monospace",
-                fontSize: 11,
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 12,
+                fontWeight: 700,
                 letterSpacing: 2,
                 padding: "14px 0",
                 textDecoration: "none",
@@ -253,7 +256,7 @@ export default function CartPage() {
             style={{
               display: "block",
               textAlign: "center",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 10,
               letterSpacing: 1,
               color: "var(--muted)",
@@ -318,8 +321,9 @@ function CartLineItem({ line }: { line: any }) {
         <Link
           to={`/products/${product?.handle}`}
           style={{
-            fontFamily: "Anton, sans-serif",
-            fontSize: 16,
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: 15,
+            fontWeight: 700,
             color: "var(--ink)",
             textDecoration: "none",
             display: "block",
@@ -331,7 +335,7 @@ function CartLineItem({ line }: { line: any }) {
         {merchandise?.title !== "Default Title" && (
           <span
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 10,
               color: "var(--muted)",
             }}
@@ -354,7 +358,7 @@ function CartLineItem({ line }: { line: any }) {
               height: 32,
               border: "1px solid var(--mid)",
               background: "transparent",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 14,
               cursor: "pointer",
               borderRadius: 0,
@@ -373,7 +377,7 @@ function CartLineItem({ line }: { line: any }) {
             justifyContent: "center",
             borderTop: "1px solid var(--mid)",
             borderBottom: "1px solid var(--mid)",
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 12,
           }}
         >
@@ -391,7 +395,7 @@ function CartLineItem({ line }: { line: any }) {
               height: 32,
               border: "1px solid var(--mid)",
               background: "transparent",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 14,
               cursor: "pointer",
               borderRadius: 0,
@@ -405,8 +409,9 @@ function CartLineItem({ line }: { line: any }) {
       {/* Price */}
       <span
         style={{
-          fontFamily: "Anton, sans-serif",
+          fontFamily: "'Montserrat', sans-serif",
           fontSize: 16,
+          fontWeight: 700,
           textAlign: "right",
         }}
       >
@@ -422,9 +427,9 @@ function CartLineItem({ line }: { line: any }) {
           style={{
             background: "none",
             border: "none",
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 10,
-            color: "var(--red)",
+            color: "var(--copper)",
             cursor: "pointer",
             letterSpacing: 1,
           }}

@@ -20,14 +20,17 @@ interface ProductCardProduct {
     width?: number;
     height?: number;
   };
-  variants: { nodes: { id: string }[] };
+  images?: {
+    nodes: { url: string; altText?: string; width?: number; height?: number }[];
+  };
+  variants: { nodes: { id: string; availableForSale?: boolean; quantityAvailable?: number | null }[] };
 }
 
 const BADGE_TAGS: Record<string, { label: string; bg: string }> = {
-  hot: { label: "HOT", bg: "var(--red)" },
-  new: { label: "NEW", bg: "var(--ink)" },
-  sale: { label: "SALE", bg: "var(--red)" },
-  custom: { label: "CUSTOM", bg: "var(--ink)" },
+  hot: { label: "HOT", bg: "var(--copper)" },
+  new: { label: "NEW", bg: "var(--card)" },
+  sale: { label: "SALE", bg: "var(--terracotta)" },
+  custom: { label: "CUSTOM", bg: "var(--card)" },
 };
 
 const SIZES = ["S", "M", "L", "XL"];
@@ -35,6 +38,7 @@ const SIZES = ["S", "M", "L", "XL"];
 export function ProductCard({ product }: { product: ProductCardProduct }) {
   const fetcher = useFetcher();
   const [added, setAdded] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const badge = product.tags
     .map((t) => t.toLowerCase())
@@ -52,10 +56,17 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
     ) ||
     "";
 
+  const variant = product.variants.nodes[0];
+  const qty = variant?.quantityAvailable;
+  const lowStock = qty !== null && qty !== undefined && qty > 0 && qty <= 10;
+
+  // Get second image for hover flip
+  const secondImage = product.images?.nodes?.[1];
+
   function handleQuickAdd(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    const variantId = product.variants.nodes[0]?.id;
+    const variantId = variant?.id;
     if (!variantId) return;
 
     fetcher.submit(
@@ -70,9 +81,11 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
     <Link
       to={`/products/${product.handle}`}
       className="product-card"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        background: "var(--cream)",
-        border: "1px solid var(--mid)",
+        background: "var(--card)",
+        border: "1px solid #3a3a3a",
         cursor: "pointer",
         position: "relative",
         overflow: "hidden",
@@ -86,12 +99,32 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
         style={{ aspectRatio: "3/4", position: "relative", overflow: "hidden" }}
       >
         {product.featuredImage ? (
-          <Image
-            data={product.featuredImage}
-            sizes="(max-width:768px) 100vw, 25vw"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <Image
+              data={product.featuredImage}
+              sizes="(max-width:768px) 100vw, 25vw"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              style={{
+                transition: "opacity 0.3s",
+                opacity: hovered && secondImage ? 0 : 1,
+              }}
+            />
+            {secondImage && (
+              <Image
+                data={secondImage}
+                sizes="(max-width:768px) 100vw, 25vw"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  transition: "opacity 0.3s",
+                  opacity: hovered ? 1 : 0,
+                }}
+              />
+            )}
+          </div>
         ) : (
           <PosterPreview title={product.title} />
         )}
@@ -104,7 +137,7 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
               top: 0,
               left: 0,
               padding: "4px 10px",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 9,
               fontWeight: 700,
               letterSpacing: 1.5,
@@ -114,6 +147,26 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
             }}
           >
             {BADGE_TAGS[badge].label}
+          </span>
+        )}
+
+        {/* Low stock badge */}
+        {lowStock && (
+          <span
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              padding: "4px 10px",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: 1,
+              background: "var(--terracotta)",
+              color: "white",
+            }}
+          >
+            Only {qty} left
           </span>
         )}
 
@@ -127,15 +180,15 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
             bottom: 0,
             left: 0,
             right: 0,
-            background: "var(--ink)",
+            background: "var(--copper)",
             color: "white",
             border: "none",
             padding: 11,
-            fontFamily: "'Space Mono', monospace",
-            fontSize: 9,
-            letterSpacing: 2,
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 10,
+            letterSpacing: 1,
             textTransform: "uppercase",
-            fontWeight: 700,
+            fontWeight: 600,
             cursor: "pointer",
           }}
         >
@@ -147,10 +200,11 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
       <div style={{ padding: "12px 14px 14px" }}>
         <div
           style={{
-            fontFamily: "Anton, sans-serif",
-            fontSize: 17,
-            letterSpacing: 0.5,
-            color: "var(--ink)",
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 700,
+            fontSize: 16,
+            letterSpacing: 0.3,
+            color: "var(--white)",
             marginBottom: 2,
           }}
         >
@@ -160,9 +214,9 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
         {subLabel && (
           <div
             style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 9,
-              letterSpacing: 1.5,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 10,
+              letterSpacing: 1,
               textTransform: "uppercase",
               color: "var(--muted)",
               marginBottom: 8,
@@ -182,8 +236,10 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
           <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
             <span
               style={{
-                fontFamily: "Anton, sans-serif",
-                fontSize: 20,
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 700,
+                fontSize: 18,
+                color: "var(--copper)",
               }}
             >
               {formatMoney(product.priceRange.minVariantPrice)}
@@ -191,8 +247,8 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
             {hasCompare && (
               <span
                 style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: 10,
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 11,
                   color: "var(--muted)",
                   textDecoration: "line-through",
                 }}
@@ -210,14 +266,14 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
                 style={{
                   width: 18,
                   height: 18,
-                  border: "1px solid var(--mid)",
+                  border: "1px solid var(--muted)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   fontSize: 7,
-                  fontWeight: 700,
+                  fontWeight: 600,
                   color: "var(--muted)",
-                  fontFamily: "'Space Mono', monospace",
+                  fontFamily: "'Inter', sans-serif",
                 }}
               >
                 {s}

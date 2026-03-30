@@ -31,7 +31,7 @@ export function Nav() {
         width: "100%",
         height: 56,
         background: "var(--ink)",
-        borderBottom: "3px solid var(--red)",
+        borderBottom: "3px solid var(--copper)",
         display: "flex",
         alignItems: "stretch",
       }}
@@ -53,7 +53,7 @@ export function Nav() {
         to="/"
         className="nav-logo-clip nav-logo"
         style={{
-          background: "var(--red)",
+          background: "var(--copper)",
           display: "flex",
           alignItems: "center",
           paddingLeft: 24,
@@ -63,9 +63,10 @@ export function Nav() {
       >
         <span
           style={{
-            fontFamily: "Anton, sans-serif",
-            fontSize: 20,
-            letterSpacing: 4,
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: 18,
+            fontWeight: 700,
+            letterSpacing: 3,
             color: "var(--white)",
             whiteSpace: "nowrap",
           }}
@@ -86,11 +87,11 @@ export function Nav() {
               display: "flex",
               alignItems: "center",
               padding: "0 16px",
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 10,
-              letterSpacing: 2,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 11,
+              letterSpacing: 1,
               textTransform: "uppercase" as const,
-              color: isActive ? "var(--red)" : "var(--mid)",
+              color: isActive ? "var(--copper)" : "var(--steel)",
               textDecoration: "none",
               borderRight: "1px solid #222",
               background: "transparent",
@@ -100,13 +101,13 @@ export function Nav() {
               const el = e.currentTarget;
               if (!el.classList.contains("active")) {
                 el.style.color = "var(--white)";
-                el.style.background = "#1A1A1A";
+                el.style.background = "#2B2B2B";
               }
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget;
               if (!el.classList.contains("active")) {
-                el.style.color = "var(--mid)";
+                el.style.color = "var(--steel)";
                 el.style.background = "transparent";
               }
             }}
@@ -133,9 +134,9 @@ export function Nav() {
               background: "transparent",
               border: "none",
               outline: "none",
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 11,
-              color: "var(--mid)",
+              color: "var(--steel)",
               width: 160,
             }}
           />
@@ -148,14 +149,14 @@ export function Nav() {
         className="nav-cart-btn"
         onClick={openCart}
         style={{
-          background: "var(--red)",
+          background: "var(--copper)",
           color: "white",
           border: "none",
           padding: "0 24px",
           height: "100%",
-          fontFamily: "'Space Mono', monospace",
+          fontFamily: "'Inter', sans-serif",
           fontSize: 11,
-          fontWeight: 700,
+          fontWeight: 600,
           letterSpacing: 1,
           cursor: "pointer",
           display: "flex",

@@ -114,16 +114,17 @@ export default function CollectionPage() {
         style={{
           position: "sticky",
           top: 56,
-          background: "var(--cream)",
-          borderRight: "1px solid var(--mid)",
+          background: "var(--card)",
+          borderRight: "1px solid #333",
           padding: 28,
           minHeight: "calc(100vh - 56px)",
         }}
       >
         <h1
           style={{
-            fontFamily: "Anton, sans-serif",
-            fontSize: 28,
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: 26,
+            fontWeight: 700,
             letterSpacing: 1,
             marginBottom: 8,
           }}
@@ -134,8 +135,8 @@ export default function CollectionPage() {
         {collection.description && (
           <p
             style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: 11,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 12,
               color: "var(--muted)",
               lineHeight: 1.6,
               marginBottom: 24,
@@ -173,7 +174,7 @@ export default function CollectionPage() {
                 borderRadius: 0,
                 padding: "6px 8px",
                 width: 70,
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 11,
               }}
             />
@@ -188,7 +189,7 @@ export default function CollectionPage() {
                 borderRadius: 0,
                 padding: "6px 8px",
                 width: 70,
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 11,
               }}
             />
@@ -198,7 +199,7 @@ export default function CollectionPage() {
                 background: "var(--ink)",
                 color: "white",
                 padding: "6px 14px",
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 9,
                 letterSpacing: 1,
                 border: "none",
@@ -220,7 +221,7 @@ export default function CollectionPage() {
                 display: "flex",
                 alignItems: "center",
                 gap: 8,
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 11,
                 cursor: "pointer",
                 marginBottom: 6,
@@ -231,7 +232,7 @@ export default function CollectionPage() {
                 name="size-filter"
                 checked={currentSize === s}
                 onChange={() => updateParam("size", currentSize === s ? "" : s)}
-                style={{ accentColor: "var(--red)" }}
+                style={{ accentColor: "var(--copper)" }}
               />
               {s}
             </label>
@@ -247,7 +248,7 @@ export default function CollectionPage() {
                 display: "flex",
                 alignItems: "center",
                 gap: 8,
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 11,
                 cursor: "pointer",
                 marginBottom: 6,
@@ -260,7 +261,7 @@ export default function CollectionPage() {
                 onChange={() =>
                   updateParam("finish", currentFinish === f ? "" : f)
                 }
-                style={{ accentColor: "var(--red)" }}
+                style={{ accentColor: "var(--copper)" }}
               />
               {f}
             </label>
@@ -276,7 +277,7 @@ export default function CollectionPage() {
                 display: "flex",
                 alignItems: "center",
                 gap: 8,
-                fontFamily: "'Space Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 11,
                 cursor: "pointer",
                 marginBottom: 6,
@@ -289,7 +290,7 @@ export default function CollectionPage() {
                 onChange={() =>
                   updateParam("category", currentCategory === c ? "" : c)
                 }
-                style={{ accentColor: "var(--red)" }}
+                style={{ accentColor: "var(--copper)" }}
               />
               {c}
             </label>
@@ -300,9 +301,9 @@ export default function CollectionPage() {
           type="button"
           onClick={clearFilters}
           style={{
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 9,
-            color: "var(--red)",
+            color: "var(--copper)",
             letterSpacing: 1,
             textTransform: "uppercase",
             cursor: "pointer",
@@ -331,7 +332,7 @@ export default function CollectionPage() {
         >
           <span
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 11,
               color: "var(--muted)",
             }}
@@ -346,7 +347,7 @@ export default function CollectionPage() {
               background: "transparent",
               border: "1px solid var(--mid)",
               borderRadius: 0,
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 11,
               padding: "6px 12px",
               color: "var(--ink)",
@@ -368,7 +369,7 @@ export default function CollectionPage() {
               <PreviousLink>
                 <span
                   style={{
-                    fontFamily: "'Space Mono', monospace",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: 10,
                     letterSpacing: 2,
                     textTransform: "uppercase",
@@ -401,7 +402,7 @@ export default function CollectionPage() {
                 <NextLink>
                   <span
                     style={{
-                      fontFamily: "'Space Mono', monospace",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: 10,
                       letterSpacing: 2,
                       textTransform: "uppercase",
@@ -435,7 +436,7 @@ function FilterGroup({
     <div style={{ marginBottom: 20 }}>
       <h3
         style={{
-          fontFamily: "'Space Mono', monospace",
+          fontFamily: "'Inter', sans-serif",
           fontSize: 10,
           letterSpacing: 2,
           textTransform: "uppercase",

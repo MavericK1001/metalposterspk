@@ -17,8 +17,16 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
       width
       height
     }
+    images(first: 2) {
+      nodes {
+        url
+        altText
+        width
+        height
+      }
+    }
     variants(first: 1) {
-      nodes { id }
+      nodes { id availableForSale quantityAvailable }
     }
   }
 `;
@@ -34,14 +42,14 @@ export const PRODUCT_DETAIL_QUERY = `#graphql
       }
       options { name values }
       selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions) {
-        id availableForSale
+        id availableForSale quantityAvailable
         price { amount currencyCode }
         compareAtPrice { amount currencyCode }
         selectedOptions { name value }
       }
       variants(first: 250) {
         nodes {
-          id availableForSale
+          id availableForSale quantityAvailable
           price { amount currencyCode }
           selectedOptions { name value }
         }
