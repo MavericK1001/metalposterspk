@@ -13,7 +13,7 @@ import {
   type LinksFunction,
 } from "react-router";
 import type { LoaderFunctionArgs } from "react-router";
-import { createContext } from "~/lib/hydrogen.server";
+import { getCart, setCartIdHeader } from "~/lib/cart.server";
 import { Layout } from "~/components/Layout";
 import stylesheet from "~/styles/app.css?url";
 
@@ -42,9 +42,8 @@ export const meta: MetaFunction = () => [
 
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
-    const { cart } = createContext(request);
-    const cartData = await cart.get();
-    const headers = cart.setCartId(cartData?.id ?? "");
+    const cartData = await getCart(request);
+    const headers = cartData?.id ? setCartIdHeader(cartData.id) : new Headers();
     return data({ cart: cartData }, { headers });
   } catch (e: any) {
     console.error("Root loader error:", e.message);

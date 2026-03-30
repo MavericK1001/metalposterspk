@@ -5,24 +5,28 @@ import {
 } from "react-router";
 import { useLoaderData, useFetcher, Link } from "react-router";
 import { Image } from "@shopify/hydrogen";
-import { CART_QUERY } from "~/graphql/CartMutations";
 import { formatMoney } from "~/lib/utils";
-import { createContext } from "~/lib/hydrogen.server";
+import {
+  getCart,
+  addToCart,
+  updateCartLines,
+  removeCartLines,
+  updateDiscountCodes,
+  setCartIdHeader,
+} from "~/lib/cart.server";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const { cart } = createContext(request);
-  const cartData = await cart.get();
-  const headers = cart.setCartId(cartData?.id ?? "");
+  const cartData = await getCart(request);
+  const headers = cartData?.id ? setCartIdHeader(cartData.id) : new Headers();
   return data({ cart: cartData }, { headers });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
   try {
-    const { cart } = createContext(request);
     const formData = await request.formData();
     const intent = formData.get("intent") as string;
 
-    let result: any;
+    let result: { cart: any; userErrors: any[] };
 
     if (intent === "add-to-cart") {
       const merchandiseId = (formData.get("merchandiseId") ||
@@ -31,42 +35,30 @@ export async function action({ request }: ActionFunctionArgs) {
       if (!merchandiseId) {
         return data({ error: "Missing variant ID" }, { status: 400 });
       }
-      result = await cart.addLines([{ merchandiseId, quantity }]);
+      result = await addToCart(request, [{ merchandiseId, quantity }]);
     } else if (intent === "update-quantity") {
       const lineId = formData.get("lineId") as string;
       const quantity = Number(formData.get("quantity"));
       if (quantity <= 0) {
-        result = await cart.removeLines([lineId]);
+        result = await removeCartLines(request, [lineId]);
       } else {
-        result = await cart.updateLines([{ id: lineId, quantity }]);
+        result = await updateCartLines(request, [{ id: lineId, quantity }]);
       }
     } else if (intent === "remove-item") {
       const lineId = formData.get("lineId") as string;
-      result = await cart.removeLines([lineId]);
+      result = await removeCartLines(request, [lineId]);
     } else if (intent === "apply-discount") {
       const discountCode = formData.get("discountCode") as string;
       if (discountCode) {
-        result = await cart.updateDiscountCodes([discountCode]);
+        result = await updateDiscountCodes(request, [discountCode]);
       } else {
-        result = await cart.updateDiscountCodes([]);
+        result = await updateDiscountCodes(request, []);
       }
     } else {
       return data({ error: "Invalid intent" }, { status: 400 });
     }
 
-    // Check for errors in the cart response
-    if (result?.errors?.length) {
-      console.error("Cart errors:", JSON.stringify(result.errors));
-      return data(
-        {
-          error: result.errors[0]?.message || "Cart operation failed",
-          errors: result.errors,
-        },
-        { status: 422 },
-      );
-    }
-
-    if (result?.userErrors?.length) {
+    if (result.userErrors?.length) {
       console.error("Cart userErrors:", JSON.stringify(result.userErrors));
       return data(
         {
@@ -77,13 +69,11 @@ export async function action({ request }: ActionFunctionArgs) {
       );
     }
 
-    const cartId = result?.cart?.id;
-    const headers = cartId ? cart.setCartId(cartId) : new Headers();
+    const headers = result.cart?.id
+      ? setCartIdHeader(result.cart.id)
+      : new Headers();
 
-    // Re-fetch full cart data so response includes lines, costs, etc.
-    const fullCart = cartId ? await cart.get() : null;
-
-    return data({ cart: fullCart, ...result }, { headers });
+    return data({ cart: result.cart }, { headers });
   } catch (err: any) {
     console.error("Cart action error:", err?.message || err);
     return data(

@@ -1,12 +1,13 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { createContext } from "~/lib/hydrogen.server";
+import { addToCart } from "~/lib/cart.server";
 
 /**
- * Debug endpoint to test cart operations.
+ * Debug endpoint to test direct cart API.
  * GET /api/cart-debug — tests creating a cart and adding a line.
  */
 export async function loader({ request }: LoaderFunctionArgs) {
-  const { storefront, cart } = createContext(request);
+  const { storefront } = createContext(request);
   const results: Record<string, any> = {};
 
   // 1. Get first available variant
@@ -14,7 +15,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     const { products } = await storefront.query(
       `#graphql
       query FirstVariant {
-        products(first: 1) {
+        products(first: 1, query: "available_for_sale:true") {
           nodes {
             title
             handle
@@ -44,60 +45,25 @@ export async function loader({ request }: LoaderFunctionArgs) {
     results.product = { error: e.message };
   }
 
-  // 2. Test cart.get()
-  try {
-    const existingCart = await cart.get();
-    results.existingCart = existingCart
-      ? { id: existingCart.id, totalQuantity: existingCart.totalQuantity }
-      : null;
-  } catch (e: any) {
-    results.existingCart = { error: e.message };
-  }
-
-  // 3. Test cart.addLines() with the first variant
+  // 2. Test direct addToCart (bypasses Hydrogen cart handler)
   if (results.product?.variantId) {
     try {
-      const addResult = await cart.addLines([
+      const addResult = await addToCart(request, [
         { merchandiseId: results.product.variantId, quantity: 1 },
       ]);
-      results.addResult = {
-        cart: addResult?.cart
+      results.directCartAdd = {
+        cart: addResult.cart
           ? {
               id: addResult.cart.id,
               totalQuantity: addResult.cart.totalQuantity,
               checkoutUrl: addResult.cart.checkoutUrl,
+              lineCount: addResult.cart.lines?.nodes?.length ?? 0,
             }
           : null,
-        errors: addResult?.errors || [],
-        userErrors: addResult?.userErrors || [],
-        rawKeys: Object.keys(addResult || {}),
+        userErrors: addResult.userErrors,
       };
     } catch (e: any) {
-      results.addResult = {
-        error: e.message,
-        stack: e.stack?.split("\n").slice(0, 5),
-      };
-    }
-  }
-
-  // 4. After adding, re-fetch cart
-  if (results.addResult?.cart?.id) {
-    try {
-      const updatedCart = await cart.get();
-      results.updatedCart = updatedCart
-        ? {
-            id: updatedCart.id,
-            totalQuantity: updatedCart.totalQuantity,
-            lineCount: updatedCart.lines?.nodes?.length ?? 0,
-            lines: updatedCart.lines?.nodes?.map((l: any) => ({
-              id: l.id,
-              quantity: l.quantity,
-              merchandise: l.merchandise?.product?.title,
-            })),
-          }
-        : null;
-    } catch (e: any) {
-      results.updatedCart = { error: e.message };
+      results.directCartAdd = { error: e.message };
     }
   }
 
