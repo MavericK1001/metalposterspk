@@ -7,6 +7,7 @@ import {
   useRouteLoaderData,
   useRouteError,
   isRouteErrorResponse,
+  data,
   type MetaFunction,
   type LinksFunction,
 } from "react-router";
@@ -42,10 +43,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const { cart } = createContext(request);
     const cartData = await cart.get();
-    return { cart: cartData };
+    const headers = cart.setCartId(cartData?.id ?? '');
+    return data({ cart: cartData }, { headers });
   } catch (e: any) {
     console.error('Root loader error:', e.message);
-    // Don't crash the whole app if cart fails
     return { cart: null };
   }
 }

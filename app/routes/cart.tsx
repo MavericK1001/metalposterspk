@@ -12,7 +12,8 @@ import { createContext } from "~/lib/hydrogen.server";
 export async function loader({ request }: LoaderFunctionArgs) {
   const { cart } = createContext(request);
   const cartData = await cart.get();
-  return { cart: cartData };
+  const headers = cart.setCartId(cartData?.id ?? '');
+  return data({ cart: cartData }, { headers });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -20,31 +21,43 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const intent = formData.get("intent") as string;
 
-  if (intent === "add-to-cart") {
-    const merchandiseId = formData.get("merchandiseId") as string;
-    const quantity = Number(formData.get("quantity") || 1);
-    const result = await cart.addLines([{ merchandiseId, quantity }]);
-    return data(result);
-  }
+  let result;
 
-  if (intent === "update-quantity") {
+  if (intent === "add-to-cart") {
+    // Support both "merchandiseId" and "variantId" field names
+    const merchandiseId = (formData.get("merchandiseId") || formData.get("variantId")) as string;
+    const quantity = Number(formData.get("quantity") || 1);
+    if (!merchandiseId) {
+      return data({ error: "Missing variant ID" }, { status: 400 });
+    }
+    result = await cart.addLines([{ merchandiseId, quantity }]);
+  } else if (intent === "update-quantity") {
     const lineId = formData.get("lineId") as string;
     const quantity = Number(formData.get("quantity"));
     if (quantity <= 0) {
-      const result = await cart.removeLines([lineId]);
-      return data(result);
+      result = await cart.removeLines([lineId]);
+    } else {
+      result = await cart.updateLines([{ id: lineId, quantity }]);
     }
-    const result = await cart.updateLines([{ id: lineId, quantity }]);
-    return data(result);
-  }
-
-  if (intent === "remove-item") {
+  } else if (intent === "remove-item") {
     const lineId = formData.get("lineId") as string;
-    const result = await cart.removeLines([lineId]);
-    return data(result);
+    result = await cart.removeLines([lineId]);
+  } else if (intent === "apply-discount") {
+    const discountCode = formData.get("discountCode") as string;
+    if (discountCode) {
+      result = await cart.updateDiscountCodes([discountCode]);
+    } else {
+      result = await cart.updateDiscountCodes([]);
+    }
+  } else {
+    return data({ error: "Invalid intent" }, { status: 400 });
   }
 
-  return data({ error: "Invalid intent" }, { status: 400 });
+  // Forward Set-Cookie headers from Hydrogen cart handler
+  // This is critical for cart ID persistence across requests
+  const headers = cart.setCartId(result.cart.id);
+
+  return data(result, { headers });
 }
 
 export default function CartPage() {

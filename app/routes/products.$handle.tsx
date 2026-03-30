@@ -1,4 +1,4 @@
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import {
   useLoaderData,
   Link,
@@ -111,6 +111,15 @@ export default function ProductPage() {
       "",
   );
   const [addError, setAddError] = useState(false);
+  const [isBuyNow, setIsBuyNow] = useState(false);
+
+  // After Buy Now adds to cart, redirect to checkout
+  useEffect(() => {
+    if (isBuyNow && fetcher.state === "idle" && fetcher.data?.cart?.checkoutUrl) {
+      setIsBuyNow(false);
+      window.location.href = fetcher.data.cart.checkoutUrl;
+    }
+  }, [isBuyNow, fetcher.state, fetcher.data]);
 
   // Find matching variant
   const selectedVariant =
@@ -153,6 +162,11 @@ export default function ProductPage() {
       setTimeout(() => setAddError(false), 2000);
       return;
     }
+    if (!selectedVariant?.availableForSale) {
+      setAddError(true);
+      setTimeout(() => setAddError(false), 2000);
+      return;
+    }
     fetcher.submit(
       { intent: "add-to-cart", variantId: selectedVariant.id, quantity: "1" },
       { method: "post", action: "/cart" },
@@ -161,7 +175,16 @@ export default function ProductPage() {
   }
 
   function handleBuyNow() {
-    handleAddToCart();
+    if (!selectedVariant?.id || !selectedVariant?.availableForSale) {
+      setAddError(true);
+      setTimeout(() => setAddError(false), 2000);
+      return;
+    }
+    setIsBuyNow(true);
+    fetcher.submit(
+      { intent: "add-to-cart", variantId: selectedVariant.id, quantity: "1" },
+      { method: "post", action: "/cart" },
+    );
   }
 
   // JSON-LD
@@ -509,9 +532,10 @@ export default function ProductPage() {
           <button
             type="button"
             onClick={handleAddToCart}
+            disabled={!selectedVariant?.availableForSale || fetcher.state !== "idle"}
             style={{
               width: "100%",
-              background: "var(--ink)",
+              background: selectedVariant?.availableForSale ? "var(--ink)" : "var(--mid)",
               color: "white",
               border: addError ? "2px solid var(--red)" : "none",
               padding: 18,
@@ -519,11 +543,12 @@ export default function ProductPage() {
               fontSize: 14,
               letterSpacing: 2,
               textTransform: "uppercase",
-              cursor: "pointer",
+              cursor: selectedVariant?.availableForSale ? "pointer" : "not-allowed",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               gap: 10,
+              opacity: fetcher.state !== "idle" ? 0.7 : 1,
             }}
           >
             <svg
@@ -538,16 +563,21 @@ export default function ProductPage() {
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 01-8 0" />
             </svg>
-            ADD TO CART
+            {!selectedVariant?.availableForSale
+              ? "SOLD OUT"
+              : fetcher.state !== "idle" && !isBuyNow
+                ? "ADDING..."
+                : "ADD TO CART"}
           </button>
 
           {/* Buy Now */}
           <button
             type="button"
             onClick={handleBuyNow}
+            disabled={!selectedVariant?.availableForSale || fetcher.state !== "idle"}
             style={{
               width: "100%",
-              background: "var(--red)",
+              background: selectedVariant?.availableForSale ? "var(--red)" : "var(--muted)",
               color: "white",
               border: "none",
               padding: 16,
@@ -555,10 +585,11 @@ export default function ProductPage() {
               fontSize: 14,
               letterSpacing: 2,
               textTransform: "uppercase",
-              cursor: "pointer",
+              cursor: selectedVariant?.availableForSale ? "pointer" : "not-allowed",
+              opacity: fetcher.state !== "idle" ? 0.7 : 1,
             }}
           >
-            BUY NOW
+            {isBuyNow && fetcher.state !== "idle" ? "REDIRECTING..." : "BUY NOW"}
           </button>
 
           {/* Perks */}

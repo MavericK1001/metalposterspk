@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFetcher, Link } from "react-router";
+import { useFetcher, Link, Form } from "react-router";
 import { formatMoney } from "~/lib/utils";
 
 export function CartDrawer() {
@@ -115,6 +115,11 @@ export function CartDrawer() {
                 {formatMoney(cart.cost.subtotalAmount)}
               </span>
             </div>
+
+            {/* Discount code */}
+            <DiscountCodeForm
+              appliedCodes={cart.discountCodes?.filter((d: any) => d.applicable) ?? []}
+            />
 
             <a
               href={cart.checkoutUrl}
@@ -344,6 +349,121 @@ function CartLine({ line }: { line: any }) {
           </button>
         </fetcher.Form>
       </div>
+    </div>
+  );
+}
+
+function DiscountCodeForm({ appliedCodes }: { appliedCodes: { code: string }[] }) {
+  const fetcher = useFetcher();
+  const [showInput, setShowInput] = useState(false);
+
+  return (
+    <div style={{ marginBottom: 12 }}>
+      {appliedCodes.length > 0 && (
+        <div style={{ marginBottom: 8 }}>
+          {appliedCodes.map((dc) => (
+            <div
+              key={dc.code}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                background: "var(--cream)",
+                padding: "6px 10px",
+                marginBottom: 4,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Space Mono', monospace",
+                  fontSize: 10,
+                  letterSpacing: 1,
+                  color: "var(--ink)",
+                }}
+              >
+                ✓ {dc.code}
+              </span>
+              <fetcher.Form method="post" action="/cart">
+                <input type="hidden" name="intent" value="apply-discount" />
+                <input type="hidden" name="discountCode" value="" />
+                <button
+                  type="submit"
+                  style={{
+                    fontFamily: "'Space Mono', monospace",
+                    fontSize: 9,
+                    color: "var(--red)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  REMOVE
+                </button>
+              </fetcher.Form>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {!showInput ? (
+        <button
+          type="button"
+          onClick={() => setShowInput(true)}
+          style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: 10,
+            letterSpacing: 1,
+            color: "var(--muted)",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+            textDecoration: "underline",
+          }}
+        >
+          Have a discount code?
+        </button>
+      ) : (
+        <fetcher.Form
+          method="post"
+          action="/cart"
+          style={{ display: "flex", gap: 0 }}
+          onSubmit={() => setShowInput(false)}
+        >
+          <input type="hidden" name="intent" value="apply-discount" />
+          <input
+            name="discountCode"
+            type="text"
+            placeholder="Enter code"
+            required
+            style={{
+              flex: 1,
+              border: "1px solid var(--mid)",
+              padding: "8px 10px",
+              fontFamily: "'Space Mono', monospace",
+              fontSize: 10,
+              borderRadius: 0,
+              outline: "none",
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              background: "var(--ink)",
+              color: "white",
+              border: "none",
+              padding: "8px 14px",
+              fontFamily: "'Space Mono', monospace",
+              fontSize: 9,
+              letterSpacing: 1,
+              cursor: "pointer",
+              borderRadius: 0,
+            }}
+          >
+            {fetcher.state !== "idle" ? "..." : "APPLY"}
+          </button>
+        </fetcher.Form>
+      )}
     </div>
   );
 }
