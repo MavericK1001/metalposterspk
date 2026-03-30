@@ -495,42 +495,32 @@ export default function Homepage() {
           ].map((stat, i) => (
             <div
               key={stat.label}
+              className="social-proof-stat"
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 40,
+                textAlign: "center",
+                borderLeft: i > 0 ? "1px solid #333" : "none",
+                paddingLeft: i > 0 ? 40 : 0,
               }}
             >
-              {i > 0 && (
-                <div
-                  style={{
-                    width: 1,
-                    height: 48,
-                    background: "#333",
-                  }}
-                />
-              )}
-              <div style={{ textAlign: "center" }}>
-                <div
-                  className="social-proof-stat-value"
-                  style={{
-                    fontFamily: "Anton, sans-serif",
-                    fontSize: 44,
-                    color: "var(--red)",
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: 9,
-                    color: "var(--muted)",
-                    letterSpacing: 2,
-                  }}
-                >
-                  {stat.label}
-                </div>
+              <div
+                className="social-proof-stat-value"
+                style={{
+                  fontFamily: "Anton, sans-serif",
+                  fontSize: 44,
+                  color: "var(--red)",
+                }}
+              >
+                {stat.value}
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Space Mono', monospace",
+                  fontSize: 9,
+                  color: "var(--muted)",
+                  letterSpacing: 2,
+                }}
+              >
+                {stat.label}
               </div>
             </div>
           ))}
