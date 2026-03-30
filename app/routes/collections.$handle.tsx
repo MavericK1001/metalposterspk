@@ -6,7 +6,7 @@ import {
 } from "react-router";
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 import { Pagination, getPaginationVariables } from "@shopify/hydrogen";
-import { COLLECTION_QUERY } from "~/graphql/ProductQuery";
+import { COLLECTION_QUERY, ALL_PRODUCTS_QUERY } from "~/graphql/ProductQuery";
 import { ProductCard } from "~/components/ProductCard";
 import { getSortValuesFromParam, buildFilters } from "~/lib/utils";
 import { createContext } from "~/lib/hydrogen.server";
@@ -19,6 +19,18 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
   },
 ];
 
+// Map collection sort keys → root products sort keys
+function toProductSortKey(collectionSortKey: string): string {
+  switch (collectionSortKey) {
+    case "CREATED":
+      return "CREATED_AT";
+    case "MANUAL":
+      return "RELEVANCE";
+    default:
+      return collectionSortKey; // PRICE, BEST_SELLING, etc. are the same
+  }
+}
+
 export async function loader({ params, request }: LoaderFunctionArgs) {
   const { storefront } = createContext(request);
   const { handle } = params;
@@ -29,10 +41,56 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     url.searchParams.get("sort"),
   );
   const filters = buildFilters(url.searchParams);
-
   const paginationVariables = getPaginationVariables(request, { pageBy: 24 });
 
   try {
+    // For "all", try the collection first, then fall back to products root query
+    if (handle === "all") {
+      // Try the built-in "all" collection first
+      try {
+        const { collection } = await storefront.query(COLLECTION_QUERY, {
+          variables: {
+            handle: "all",
+            sortKey,
+            reverse,
+            filters: filters.length > 0 ? filters : undefined,
+            ...paginationVariables,
+          },
+        });
+        if (collection) return { collection };
+      } catch {
+        // Fall through to products query
+      }
+
+      // Fallback: query all products directly
+      const { products } = await storefront.query(ALL_PRODUCTS_QUERY, {
+        variables: {
+          sortKey: toProductSortKey(sortKey),
+          reverse,
+          ...paginationVariables,
+        },
+      });
+
+      return {
+        collection: {
+          id: "all",
+          title: "All Products",
+          description: "Browse our complete collection of metal posters.",
+          handle: "all",
+          products: products ?? {
+            nodes: [],
+            pageInfo: {
+              hasNextPage: false,
+              endCursor: null,
+              hasPreviousPage: false,
+              startCursor: null,
+            },
+          },
+        },
+      };
+    }
+
+    // Normal collection query
     const { collection } = await storefront.query(COLLECTION_QUERY, {
       variables: {
         handle,

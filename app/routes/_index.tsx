@@ -7,6 +7,7 @@ import { CategoryTabs } from "~/components/CategoryTabs";
 import {
   HOMEPAGE_PRODUCTS_QUERY,
   HOMEPAGE_FALLBACK_QUERY,
+  ALL_PRODUCTS_QUERY,
 } from "~/graphql/ProductQuery";
 import { createContext } from "~/lib/hydrogen.server";
 
@@ -33,6 +34,18 @@ export async function loader({ request }: LoaderFunctionArgs) {
         variables: { count: 8 },
       });
       products = collection?.products?.nodes ?? [];
+    } catch {
+      // no collection available
+    }
+  }
+
+  // Final fallback: query products directly (works even without collections)
+  if (products.length === 0) {
+    try {
+      const result = await storefront.query(ALL_PRODUCTS_QUERY, {
+        variables: { first: 8, sortKey: "BEST_SELLING", reverse: false },
+      });
+      products = result?.products?.nodes ?? [];
     } catch {
       // no products available
     }
@@ -210,7 +223,9 @@ export default function Homepage() {
           >
             Premium metal posters from{" "}
             <strong style={{ color: "var(--copper)" }}>₨ 5,000</strong>.{" "}
-            <span style={{ textDecoration: "line-through", color: "var(--muted)" }}>
+            <span
+              style={{ textDecoration: "line-through", color: "var(--muted)" }}
+            >
               ₨ 12,000 framed prints
             </span>{" "}
             — magnetic mounting, no holes, no hassle.
@@ -445,7 +460,14 @@ export default function Homepage() {
         <CategoryTabs activeTab={activeTab} onChange={setActiveTab} />
 
         {/* Price filter chips */}
-        <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 8,
+            marginBottom: 20,
+            flexWrap: "wrap",
+          }}
+        >
           {PRICE_CHIPS.map((chip) => (
             <button
               key={chip.label}
@@ -457,7 +479,8 @@ export default function Homepage() {
                 fontSize: 12,
                 fontWeight: 500,
                 border: `1px solid ${priceChip === chip.label ? "var(--copper)" : "var(--muted)"}`,
-                background: priceChip === chip.label ? "var(--copper)" : "transparent",
+                background:
+                  priceChip === chip.label ? "var(--copper)" : "transparent",
                 color: priceChip === chip.label ? "white" : "var(--steel)",
                 cursor: "pointer",
                 borderRadius: 0,
@@ -496,7 +519,10 @@ export default function Homepage() {
         }}
       >
         {/* Left */}
-        <div className="social-proof-left" style={{ background: "var(--copper)", padding: "36px 44px" }}>
+        <div
+          className="social-proof-left"
+          style={{ background: "var(--copper)", padding: "36px 44px" }}
+        >
           <div
             className="social-proof-title"
             style={{
@@ -623,8 +649,7 @@ export default function Homepage() {
               justifyContent: "center",
               gap: 12,
               padding: "18px 24px",
-              borderRight:
-                i < SIZES.length - 1 ? "1px solid #444" : "none",
+              borderRight: i < SIZES.length - 1 ? "1px solid #444" : "none",
             }}
           >
             <div

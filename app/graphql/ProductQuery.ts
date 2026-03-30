@@ -110,6 +110,21 @@ export const COLLECTION_QUERY = `#graphql
   ${PRODUCT_CARD_FRAGMENT}
 `;
 
+export const ALL_PRODUCTS_QUERY = `#graphql
+  query AllProducts(
+    $first: Int
+    $after: String
+    $sortKey: ProductSortKeys
+    $reverse: Boolean
+  ) {
+    products(first: $first, after: $after, sortKey: $sortKey, reverse: $reverse) {
+      nodes { ...ProductCard }
+      pageInfo { hasNextPage endCursor hasPreviousPage startCursor }
+    }
+  }
+  ${PRODUCT_CARD_FRAGMENT}
+`;
+
 export const RELATED_PRODUCTS_QUERY = `#graphql
   query RelatedProducts($productId: ID!, $count: Int!) {
     productRecommendations(productId: $productId) {
