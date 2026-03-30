@@ -5,6 +5,8 @@ import {
   Scripts,
   ScrollRestoration,
   useRouteLoaderData,
+  useRouteError,
+  isRouteErrorResponse,
   type MetaFunction,
   type LinksFunction,
 } from "react-router";
@@ -37,9 +39,15 @@ export const meta: MetaFunction = () => [
 ];
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const { cart } = createContext(request);
-  const cartData = await cart.get();
-  return { cart: cartData };
+  try {
+    const { cart } = createContext(request);
+    const cartData = await cart.get();
+    return { cart: cartData };
+  } catch (e: any) {
+    console.error('Root loader error:', e.message);
+    // Don't crash the whole app if cart fails
+    return { cart: null };
+  }
 }
 
 export function useRootLoaderData() {
@@ -67,6 +75,17 @@ export default function App() {
 }
 
 export function ErrorBoundary() {
+  const error = useRouteError();
+  let status = 500;
+  let message = 'Something went wrong.';
+
+  if (isRouteErrorResponse(error)) {
+    status = error.status;
+    message = typeof error.data === 'string' ? error.data : error.statusText;
+  } else if (error instanceof Error) {
+    message = error.message;
+  }
+
   return (
     <html lang="en">
       <head>
@@ -94,10 +113,10 @@ export function ErrorBoundary() {
               letterSpacing: 2,
             }}
           >
-            OOPS
+            {status}
           </h1>
-          <p style={{ color: "#7A7570", marginTop: 12 }}>
-            Something went wrong.
+          <p style={{ color: "#7A7570", marginTop: 12, maxWidth: 500, textAlign: 'center', padding: '0 20px' }}>
+            {message}
           </p>
           <a
             href="/"

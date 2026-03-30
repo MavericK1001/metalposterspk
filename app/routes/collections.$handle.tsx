@@ -32,18 +32,27 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 
   const paginationVariables = getPaginationVariables(request, { pageBy: 24 });
 
-  const { collection } = await storefront.query(COLLECTION_QUERY, {
-    variables: {
-      handle,
-      sortKey,
-      reverse,
-      filters: filters.length > 0 ? filters : undefined,
-      ...paginationVariables,
-    },
-  });
+  try {
+    const { collection } = await storefront.query(COLLECTION_QUERY, {
+      variables: {
+        handle,
+        sortKey,
+        reverse,
+        filters: filters.length > 0 ? filters : undefined,
+        ...paginationVariables,
+      },
+    });
 
-  if (!collection) throw new Response("Not found", { status: 404 });
-  return { collection };
+    if (!collection) throw new Response("Not found", { status: 404 });
+    return { collection };
+  } catch (e: any) {
+    if (e instanceof Response) throw e;
+    console.error("Collection loader error:", e.message);
+    throw new Response(
+      `Storefront API error: ${e.message}`,
+      { status: 502 },
+    );
+  }
 }
 
 const SORT_OPTIONS = [

@@ -48,19 +48,28 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     }
   });
 
-  const { product } = await storefront.query(PRODUCT_DETAIL_QUERY, {
-    variables: { handle, selectedOptions },
-  });
+  try {
+    const { product } = await storefront.query(PRODUCT_DETAIL_QUERY, {
+      variables: { handle, selectedOptions },
+    });
 
-  if (!product) throw new Response("Not found", { status: 404 });
+    if (!product) throw new Response("Not found", { status: 404 });
 
-  // Deferred related products
-  const related = storefront
-    .query(RELATED_QUERY, { variables: { productId: product.id } })
-    .then((res: any) => res.productRecommendations ?? [])
-    .catch(() => []);
+    // Deferred related products
+    const related = storefront
+      .query(RELATED_QUERY, { variables: { productId: product.id } })
+      .then((res: any) => res.productRecommendations ?? [])
+      .catch(() => []);
 
-  return data({ product, related });
+    return data({ product, related });
+  } catch (e: any) {
+    if (e instanceof Response) throw e;
+    console.error("Product loader error:", e.message);
+    throw new Response(
+      `Storefront API error: ${e.message}`,
+      { status: 502 },
+    );
+  }
 }
 
 // Finish swatch config
