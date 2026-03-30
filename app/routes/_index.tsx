@@ -254,7 +254,7 @@ export default function Homepage() {
               SHOP ALL →
             </Link>
             <Link
-              to="/collections/all"
+              to="/pages/how-its-made"
               style={{
                 background: "transparent",
                 color: "var(--steel)",

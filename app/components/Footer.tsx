@@ -14,6 +14,7 @@ const FOOTER_LINKS = [
 const SUPPORT_LINKS = [
   { label: "Shipping Policy", to: "/policies/shipping-policy" },
   { label: "Refund Policy", to: "/policies/refund-policy" },
+  { label: "How It's Made", to: "/pages/how-its-made" },
   { label: "FAQ", to: "/pages/faq" },
   { label: "Contact Us", to: "/pages/contact" },
   { label: "About Us", to: "/pages/about" },
