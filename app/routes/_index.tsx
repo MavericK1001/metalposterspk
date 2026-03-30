@@ -19,31 +19,33 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const { storefront } = createContext(request);
   let products: any[] = [];
 
+  // Load from "all" collection first for category diversity
   try {
-    const { collection } = await storefront.query(HOMEPAGE_PRODUCTS_QUERY, {
-      variables: { count: 8 },
+    const { collection } = await storefront.query(HOMEPAGE_FALLBACK_QUERY, {
+      variables: { count: 48 },
     });
     products = collection?.products?.nodes ?? [];
   } catch {
-    // fallback to "all"
+    // no "all" collection
   }
 
+  // Try bestsellers if "all" didn't work
   if (products.length === 0) {
     try {
-      const { collection } = await storefront.query(HOMEPAGE_FALLBACK_QUERY, {
-        variables: { count: 8 },
+      const { collection } = await storefront.query(HOMEPAGE_PRODUCTS_QUERY, {
+        variables: { count: 48 },
       });
       products = collection?.products?.nodes ?? [];
     } catch {
-      // no collection available
+      // fallback
     }
   }
 
-  // Final fallback: query products directly (works even without collections)
+  // Final fallback: query products directly
   if (products.length === 0) {
     try {
       const result = await storefront.query(ALL_PRODUCTS_QUERY, {
-        variables: { first: 8, sortKey: "BEST_SELLING", reverse: false },
+        variables: { first: 48, sortKey: "BEST_SELLING", reverse: false },
       });
       products = result?.products?.nodes ?? [];
     } catch {
