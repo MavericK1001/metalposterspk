@@ -1,10 +1,13 @@
 const TABS = [
   "All",
-  "Music",
-  "Movies & TV",
+  "Anime",
+  "Cars",
+  "Islamic",
+  "Motivational",
   "Sports",
-  "Nature",
-  "Architecture",
+  "Gaming",
+  "Superheroes",
+  "Movies",
   "Abstract",
   "Custom",
 ];

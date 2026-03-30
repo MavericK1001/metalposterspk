@@ -4,12 +4,12 @@ import { useRootLoaderData } from "~/root";
 
 const NAV_LINKS = [
   { label: "All", to: "/collections/all" },
-  { label: "Music", to: "/collections/music" },
-  { label: "Movies", to: "/collections/movies" },
-  { label: "Sports", to: "/collections/sports" },
-  { label: "Nature", to: "/collections/nature" },
-  { label: "Custom", to: "/collections/custom" },
-  { label: "Sale", to: "/collections/sale" },
+  { label: "Anime", to: "/collections/anime-posters" },
+  { label: "Cars", to: "/collections/car-posters" },
+  { label: "Islamic", to: "/collections/islamic-posters" },
+  { label: "Motivational", to: "/collections/motivational-metal-poster" },
+  { label: "Sports", to: "/collections/sports-poster" },
+  { label: "Custom", to: "/collections/custom-metal-poster" },
 ];
 
 export function Nav() {

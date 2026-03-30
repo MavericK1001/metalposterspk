@@ -121,12 +121,19 @@ const SORT_OPTIONS = [
 const SIZE_FILTERS = ["Small", "Medium", "Large", "XL", "XXL"];
 const FINISH_FILTERS = ["Brushed", "Gloss", "Gold"];
 const CATEGORY_FILTERS = [
-  "Music",
-  "Movies",
+  "Anime",
+  "Cars",
+  "Islamic",
+  "Motivational",
   "Sports",
-  "Nature",
-  "Architecture",
+  "Gaming",
+  "Superheroes",
+  "Movies",
   "Abstract",
+  "Famous Personalities",
+  "Bikes",
+  "Animal",
+  "Kids",
 ];
 
 export default function CollectionPage() {

@@ -2,11 +2,26 @@ import { Link } from "react-router";
 
 const FOOTER_LINKS = [
   { label: "Shop All", to: "/collections/all" },
-  { label: "Music", to: "/collections/music" },
-  { label: "Movies", to: "/collections/movies" },
-  { label: "Sports", to: "/collections/sports" },
-  { label: "Nature", to: "/collections/nature" },
-  { label: "Custom", to: "/collections/custom" },
+  { label: "Metal Posters", to: "/collections/metal-posters" },
+  { label: "Anime", to: "/collections/anime-posters" },
+  { label: "Cars", to: "/collections/car-posters" },
+  { label: "Islamic", to: "/collections/islamic-posters" },
+  { label: "Motivational", to: "/collections/motivational-metal-poster" },
+  { label: "Sports", to: "/collections/sports-poster" },
+  { label: "Custom", to: "/collections/custom-metal-poster" },
+];
+
+const SUPPORT_LINKS = [
+  { label: "Shipping Policy", to: "/policies/shipping-policy" },
+  { label: "Refund Policy", to: "/policies/refund-policy" },
+  { label: "FAQ", to: "/pages/faq" },
+  { label: "Contact Us", to: "/pages/contact" },
+  { label: "About Us", to: "/pages/about" },
+];
+
+const POLICY_LINKS = [
+  { label: "Terms of Service", to: "/policies/terms-of-service" },
+  { label: "Privacy Policy", to: "/policies/privacy-policy" },
 ];
 
 export function Footer() {
@@ -103,18 +118,20 @@ export function Footer() {
             SUPPORT
           </h4>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {["Shipping Info", "Returns", "FAQ", "Contact Us"].map((text) => (
-              <span
-                key={text}
+            {SUPPORT_LINKS.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
                 style={{
                   fontFamily: "'Inter', sans-serif",
                   fontSize: 12,
                   color: "var(--steel)",
+                  textDecoration: "none",
                   letterSpacing: 1,
                 }}
               >
-                {text}
-              </span>
+                {link.label}
+              </Link>
             ))}
           </div>
         </div>
@@ -132,6 +149,8 @@ export function Footer() {
           alignItems: "center",
           maxWidth: 1200,
           margin: "40px auto 0",
+          flexWrap: "wrap",
+          gap: 12,
         }}
       >
         <span
@@ -144,6 +163,23 @@ export function Footer() {
         >
           © {new Date().getFullYear()} METALPOSTERS. ALL RIGHTS RESERVED.
         </span>
+        <div style={{ display: "flex", gap: 16 }}>
+          {POLICY_LINKS.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 10,
+                color: "#555",
+                letterSpacing: 1,
+                textDecoration: "none",
+              }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
         <span
           style={{
             fontFamily: "'Inter', sans-serif",

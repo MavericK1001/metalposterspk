@@ -58,31 +58,35 @@ export async function loader({ request }: LoaderFunctionArgs) {
 const TILES = [
   {
     step: "01",
-    label: "MUSIC",
+    label: "ANIME",
+    to: "/collections/anime-posters",
     bg: "#0D0D14",
-    textColor: "#B87333",
-    text: "DARK\nSIDE",
+    textColor: "#E3735E",
+    text: "ANIME\nART",
     badge: "HOT",
   },
   {
     step: "02",
-    label: "MOVIES",
+    label: "CARS",
+    to: "/collections/car-posters",
     bg: "#14080A",
-    textColor: "#E3735E",
-    text: "PULP",
+    textColor: "#B87333",
+    text: "SUPER\nCARS",
     badge: null,
   },
   {
     step: "03",
-    label: "SPORTS",
+    label: "ISLAMIC",
+    to: "/collections/islamic-posters",
     bg: "#08101A",
     textColor: "#5EA8F0",
-    text: "BULLS\n96",
+    text: "ISLAMIC\nART",
     badge: null,
   },
   {
     step: "04",
     label: "CUSTOM",
+    to: "/collections/custom-metal-poster",
     bg: "#0A0A0A",
     textColor: "#7A7A7A",
     text: "UPLOAD\nYOUR\nDESIGN",
@@ -288,8 +292,9 @@ export default function Homepage() {
               }}
             >
               {row.map((tile) => (
-                <div
+                <Link
                   key={tile.step}
+                  to={tile.to}
                   style={{
                     background: "#141414",
                     display: "flex",
@@ -301,6 +306,7 @@ export default function Homepage() {
                     padding: 20,
                     transition: "background 0.15s",
                     cursor: "pointer",
+                    textDecoration: "none",
                   }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.background = "#1C1C1C")
@@ -396,7 +402,7 @@ export default function Homepage() {
                       {tile.badge}
                     </span>
                   )}
-                </div>
+                </Link>
               ))}
             </div>
           ))}
