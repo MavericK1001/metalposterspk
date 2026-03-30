@@ -204,8 +204,7 @@ export default function CustomPosterPage() {
                 cursor: "pointer",
                 background: orientation === o ? "#2a1a0a" : "transparent",
                 borderRadius: 0,
-                color:
-                  orientation === o ? "var(--copper)" : "var(--steel)",
+                color: orientation === o ? "var(--copper)" : "var(--steel)",
                 display: "flex",
                 alignItems: "center",
                 gap: 8,
@@ -343,11 +342,31 @@ export default function CustomPosterPage() {
         }}
       >
         {[
-          { icon: "🖼️", label: "HD Dye-Sublimation", detail: "Vivid, permanent colours" },
-          { icon: "🪶", label: "1mm Brushed Aluminium", detail: "Lightweight, premium finish" },
-          { icon: "🧲", label: "Magnetic Mount Kit", detail: "No nails, no wall damage" },
-          { icon: "📦", label: "Reinforced Packaging", detail: "Arrives in perfect condition" },
-          { icon: "🎨", label: "Free Mockup Preview", detail: "See before we print" },
+          {
+            icon: "🖼️",
+            label: "HD Dye-Sublimation",
+            detail: "Vivid, permanent colours",
+          },
+          {
+            icon: "🪶",
+            label: "1mm Brushed Aluminium",
+            detail: "Lightweight, premium finish",
+          },
+          {
+            icon: "🧲",
+            label: "Magnetic Mount Kit",
+            detail: "No nails, no wall damage",
+          },
+          {
+            icon: "📦",
+            label: "Reinforced Packaging",
+            detail: "Arrives in perfect condition",
+          },
+          {
+            icon: "🎨",
+            label: "Free Mockup Preview",
+            detail: "See before we print",
+          },
           { icon: "🚚", label: "3–5 Day Delivery", detail: "Across Pakistan" },
         ].map((item) => (
           <div

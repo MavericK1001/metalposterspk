@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
       <h1 style={heading}>Privacy Policy</h1>
       <p style={updated}>Last updated: February 11, 2026</p>
 
-      <div style={body}>
+      <div style={bodyStyle}>
         <p>
           This Privacy Policy describes how Metal Posters (the "Site", "we",
           "us", or "our") collects, uses, and discloses your personal
