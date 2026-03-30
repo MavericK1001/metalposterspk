@@ -441,8 +441,9 @@ export default function Homepage() {
         }}
       >
         {/* Left */}
-        <div style={{ background: "var(--red)", padding: "36px 44px" }}>
+        <div className="social-proof-left" style={{ background: "var(--red)", padding: "36px 44px" }}>
           <div
+            className="social-proof-title"
             style={{
               fontFamily: "Anton, sans-serif",
               fontSize: 48,
@@ -453,6 +454,7 @@ export default function Homepage() {
             TRUSTED BY
           </div>
           <div
+            className="social-proof-number"
             style={{
               fontFamily: "Anton, sans-serif",
               fontSize: 56,
@@ -478,6 +480,7 @@ export default function Homepage() {
 
         {/* Right */}
         <div
+          className="social-proof-right"
           style={{
             padding: "36px 44px",
             display: "flex",
@@ -509,6 +512,7 @@ export default function Homepage() {
               )}
               <div style={{ textAlign: "center" }}>
                 <div
+                  className="social-proof-stat-value"
                   style={{
                     fontFamily: "Anton, sans-serif",
                     fontSize: 44,
@@ -564,6 +568,7 @@ export default function Homepage() {
         {SIZES.map((size, i) => (
           <div
             key={size.name}
+            className="size-guide-item"
             style={{
               flex: 1,
               display: "flex",
@@ -576,6 +581,7 @@ export default function Homepage() {
             }}
           >
             <div
+              className="size-guide-swatch"
               style={{
                 width: size.w,
                 height: size.h,

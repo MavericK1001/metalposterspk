@@ -176,9 +176,25 @@ body {
     margin: 0 16px 32px !important;
   }
 
-  /* Size guide: scroll horizontally */
+  .social-proof-right {
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    padding: 24px 28px !important;
+    justify-content: center;
+  }
+
+  .social-proof-stat-value {
+    font-size: 32px !important;
+  }
+
+  /* Size guide: wrap into grid */
   .size-guide {
-    overflow-x: auto !important;
+    flex-wrap: wrap !important;
+  }
+
+  .size-guide-item {
+    flex: 1 1 30% !important;
+    min-width: 150px;
   }
 
   /* Collection page: full width */
@@ -300,15 +316,45 @@ body {
     margin: 0 16px 24px !important;
   }
 
-  /* Size guide: horizontal scroll */
-  .size-guide {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
+  .social-proof-left {
+    padding: 24px 20px !important;
+    text-align: center;
   }
 
-  .size-guide > div {
-    min-width: 120px;
+  .social-proof-title {
+    font-size: 32px !important;
+  }
+
+  .social-proof-number {
+    font-size: 40px !important;
+  }
+
+  .social-proof-right {
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+    padding: 20px 16px !important;
+    justify-content: center;
+  }
+
+  .social-proof-stat-value {
+    font-size: 28px !important;
+  }
+
+  /* Size guide: wrap into rows */
+  .size-guide {
+    flex-wrap: wrap !important;
+  }
+
+  .size-guide-item {
+    flex: 1 1 45% !important;
+    min-width: 140px;
+    justify-content: flex-start !important;
     padding: 14px 16px !important;
+  }
+
+  .size-guide-swatch {
+    transform: scale(0.75);
+    transform-origin: center;
   }
 
   /* Collection sidebar */
@@ -370,5 +416,31 @@ body {
 
   .social-proof {
     margin: 0 8px 16px !important;
+  }
+
+  .social-proof-left {
+    padding: 20px 16px !important;
+  }
+
+  .social-proof-title {
+    font-size: 26px !important;
+  }
+
+  .social-proof-number {
+    font-size: 34px !important;
+  }
+
+  .social-proof-right {
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+  }
+
+  .social-proof-stat-value {
+    font-size: 24px !important;
+  }
+
+  .size-guide-item {
+    flex: 1 1 100% !important;
   }
 }
