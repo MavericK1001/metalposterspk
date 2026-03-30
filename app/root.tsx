@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Links,
   Meta,
@@ -43,10 +44,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const { cart } = createContext(request);
     const cartData = await cart.get();
-    const headers = cart.setCartId(cartData?.id ?? '');
+    const headers = cart.setCartId(cartData?.id ?? "");
     return data({ cart: cartData }, { headers });
   } catch (e: any) {
-    console.error('Root loader error:', e.message);
+    console.error("Root loader error:", e.message);
     return { cart: null };
   }
 }
@@ -56,6 +57,14 @@ export function useRootLoaderData() {
 }
 
 export default function App() {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    // Small delay so the animation is visible
+    const t = setTimeout(() => setLoaded(true), 600);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -65,6 +74,51 @@ export default function App() {
         <Links />
       </head>
       <body>
+        {/* Preloader */}
+        <div
+          className="preloader"
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#1E1E1E",
+            transition: "opacity 0.5s ease, visibility 0.5s ease",
+            opacity: loaded ? 0 : 1,
+            visibility: loaded ? "hidden" : "visible",
+            pointerEvents: loaded ? "none" : "auto",
+          }}
+        >
+          {/* Copper bar animation */}
+          <div
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: 28,
+              fontWeight: 700,
+              letterSpacing: 6,
+              color: "#B87333",
+              textTransform: "uppercase",
+              marginBottom: 32,
+            }}
+          >
+            METAL<span style={{ color: "#D9D9D9" }}>POSTERS</span>
+          </div>
+          <div
+            style={{
+              width: 120,
+              height: 2,
+              background: "#2B2B2B",
+              overflow: "hidden",
+              borderRadius: 1,
+            }}
+          >
+            <div className="preloader-bar" />
+          </div>
+        </div>
+
         <Layout>
           <Outlet />
         </Layout>
@@ -117,7 +171,15 @@ export function ErrorBoundary() {
           >
             {status}
           </h1>
-          <p style={{ color: "#7A7A7A", marginTop: 12, maxWidth: 500, textAlign: 'center', padding: '0 20px' }}>
+          <p
+            style={{
+              color: "#7A7A7A",
+              marginTop: 12,
+              maxWidth: 500,
+              textAlign: "center",
+              padding: "0 20px",
+            }}
+          >
             {message}
           </p>
           <a

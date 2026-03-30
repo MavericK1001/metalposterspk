@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Preloader ── */
+@keyframes preloader-slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.preloader-bar {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #B87333, transparent);
+  animation: preloader-slide 0.8s ease-in-out infinite;
+}
+
 :root {
   --bg: #1E1E1E;
   --ink: #1E1E1E;
