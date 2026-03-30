@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./app/*"]
+    },
+    "types": ["vite/client", "@shopify/remix-oxygen", "@shopify/oxygen-workers-types"]
+  },
+  "include": ["app/**/*.ts", "app/**/*.tsx", "server.ts", "vite.config.ts", "tailwind.config.ts", "react-router.config.ts"],
+  "exclude": ["node_modules", "build"]
+}
