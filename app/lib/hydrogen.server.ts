@@ -6,12 +6,29 @@ import {
 } from '@shopify/hydrogen';
 
 export function createContext(request: Request) {
+  const storeDomain = process.env.PUBLIC_STORE_DOMAIN;
+  const storefrontToken = process.env.PUBLIC_STOREFRONT_API_TOKEN;
+
+  if (!storeDomain || !storefrontToken) {
+    throw new Error(
+      `Missing Storefront API env vars. ` +
+      `PUBLIC_STORE_DOMAIN=${storeDomain ? 'set' : 'MISSING'}, ` +
+      `PUBLIC_STOREFRONT_API_TOKEN=${storefrontToken ? 'set' : 'MISSING'}. ` +
+      `Set these in your Vercel project settings and redeploy.`
+    );
+  }
+
+  // Ensure domain has https:// prefix
+  const fullDomain = storeDomain.startsWith('http')
+    ? storeDomain
+    : `https://${storeDomain}`;
+
   const env = {
-    PUBLIC_STORE_DOMAIN: process.env.PUBLIC_STORE_DOMAIN!,
-    PUBLIC_STOREFRONT_API_TOKEN: process.env.PUBLIC_STOREFRONT_API_TOKEN!,
+    PUBLIC_STORE_DOMAIN: fullDomain,
+    PUBLIC_STOREFRONT_API_TOKEN: storefrontToken,
     PUBLIC_STOREFRONT_API_VERSION:
       process.env.PUBLIC_STOREFRONT_API_VERSION || '2025-01',
-    SESSION_SECRET: process.env.SESSION_SECRET!,
+    SESSION_SECRET: process.env.SESSION_SECRET || '',
   };
 
   const {storefront} = createStorefrontClient({
