@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useFetcher } from "react-router";
 import { Image } from "@shopify/hydrogen";
 import { PosterPreview } from "./PosterPreview";
@@ -23,7 +23,13 @@ interface ProductCardProduct {
   images?: {
     nodes: { url: string; altText?: string; width?: number; height?: number }[];
   };
-  variants: { nodes: { id: string; availableForSale?: boolean; quantityAvailable?: number | null }[] };
+  variants: {
+    nodes: {
+      id: string;
+      availableForSale?: boolean;
+      quantityAvailable?: number | null;
+    }[];
+  };
 }
 
 const BADGE_TAGS: Record<string, { label: string; bg: string }> = {
@@ -62,6 +68,15 @@ export function ProductCard({ product }: { product: ProductCardProduct }) {
 
   // Get second image for hover flip
   const secondImage = product.images?.nodes?.[1];
+
+  // Open cart drawer when quick-add completes
+  useEffect(() => {
+    if (fetcher.state === "idle" && fetcher.data?.cart) {
+      window.dispatchEvent(
+        new CustomEvent("open-cart", { detail: { cart: fetcher.data.cart } }),
+      );
+    }
+  }, [fetcher.state, fetcher.data]);
 
   function handleQuickAdd(e: React.MouseEvent) {
     e.preventDefault();

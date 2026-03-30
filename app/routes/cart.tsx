@@ -80,7 +80,10 @@ export async function action({ request }: ActionFunctionArgs) {
     const cartId = result?.cart?.id;
     const headers = cartId ? cart.setCartId(cartId) : new Headers();
 
-    return data(result, { headers });
+    // Re-fetch full cart data so response includes lines, costs, etc.
+    const fullCart = cartId ? await cart.get() : null;
+
+    return data({ cart: fullCart, ...result }, { headers });
   } catch (err: any) {
     console.error("Cart action error:", err?.message || err);
     return data(

@@ -4,6 +4,7 @@ import { formatMoney } from "~/lib/utils";
 
 export function CartDrawer() {
   const [open, setOpen] = useState(false);
+  const [cartData, setCartData] = useState<any>(null);
   const fetcher = useFetcher();
 
   // Fetch cart data when drawer opens
@@ -13,16 +14,27 @@ export function CartDrawer() {
     }
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Listen for open-cart custom event
+  // Update local cart state from fetcher
   useEffect(() => {
-    function handleOpen() {
+    if (fetcher.data?.cart) {
+      setCartData(fetcher.data.cart);
+    }
+  }, [fetcher.data]);
+
+  // Listen for open-cart custom event (with optional cart data)
+  useEffect(() => {
+    function handleOpen(e: Event) {
+      const detail = (e as CustomEvent).detail;
+      if (detail?.cart) {
+        setCartData(detail.cart);
+      }
       setOpen(true);
     }
     window.addEventListener("open-cart", handleOpen);
     return () => window.removeEventListener("open-cart", handleOpen);
   }, []);
 
-  const cart = fetcher.data?.cart;
+  const cart = cartData;
   const lines = cart?.lines?.nodes ?? [];
 
   return (
@@ -120,7 +132,9 @@ export function CartDrawer() {
 
             {/* Discount code */}
             <DiscountCodeForm
-              appliedCodes={cart.discountCodes?.filter((d: any) => d.applicable) ?? []}
+              appliedCodes={
+                cart.discountCodes?.filter((d: any) => d.applicable) ?? []
+              }
             />
 
             <a
@@ -359,7 +373,11 @@ function CartLine({ line }: { line: any }) {
   );
 }
 
-function DiscountCodeForm({ appliedCodes }: { appliedCodes: { code: string }[] }) {
+function DiscountCodeForm({
+  appliedCodes,
+}: {
+  appliedCodes: { code: string }[];
+}) {
   const fetcher = useFetcher();
   const [showInput, setShowInput] = useState(false);
 

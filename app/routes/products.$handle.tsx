@@ -118,6 +118,15 @@ export default function ProductPage() {
     }
   }, [isBuyNow, fetcher.state, fetcher.data]);
 
+  // Open cart drawer after add-to-cart completes (non-buy-now)
+  useEffect(() => {
+    if (!isBuyNow && fetcher.state === "idle" && fetcher.data?.cart) {
+      window.dispatchEvent(
+        new CustomEvent("open-cart", { detail: { cart: fetcher.data.cart } }),
+      );
+    }
+  }, [fetcher.state, fetcher.data]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const selectedVariant =
     allVariants.find((v: any) => {
       const opts = v.selectedOptions.reduce(
@@ -169,7 +178,6 @@ export default function ProductPage() {
       { intent: "add-to-cart", variantId: selectedVariant.id, quantity: "1" },
       { method: "post", action: "/cart" },
     );
-    setTimeout(() => window.dispatchEvent(new CustomEvent("open-cart")), 300);
   }
 
   function handleBuyNow() {
@@ -299,9 +307,7 @@ export default function ProductPage() {
                     width: 52,
                     height: 66,
                     border: `2px solid ${
-                      i === selectedImageIdx
-                        ? "var(--copper)"
-                        : "transparent"
+                      i === selectedImageIdx ? "var(--copper)" : "transparent"
                     }`,
                     padding: 0,
                     background: "#0D0D14",
@@ -363,9 +369,7 @@ export default function ProductPage() {
 
           {/* Rating */}
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ color: "var(--copper)", fontSize: 16 }}>
-              ★★★★★
-            </span>
+            <span style={{ color: "var(--copper)", fontSize: 16 }}>★★★★★</span>
             <span
               style={{
                 fontFamily: "'Inter', sans-serif",
@@ -482,9 +486,7 @@ export default function ProductPage() {
                     onClick={() => setSelectedSize(size)}
                     style={{
                       border: `1.5px solid ${
-                        selectedSize === size
-                          ? "var(--copper)"
-                          : "var(--muted)"
+                        selectedSize === size ? "var(--copper)" : "var(--muted)"
                       }`,
                       padding: "8px 14px",
                       fontFamily: "'Inter', sans-serif",
@@ -568,8 +570,7 @@ export default function ProductPage() {
                       style={{
                         width: 12,
                         height: 12,
-                        background:
-                          FINISH_SWATCHES[finish] ?? "var(--muted)",
+                        background: FINISH_SWATCHES[finish] ?? "var(--muted)",
                         borderRadius: 0,
                       }}
                     />
