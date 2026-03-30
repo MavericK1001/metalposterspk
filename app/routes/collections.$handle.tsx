@@ -48,10 +48,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   } catch (e: any) {
     if (e instanceof Response) throw e;
     console.error("Collection loader error:", e.message);
-    throw new Response(
-      `Storefront API error: ${e.message}`,
-      { status: 502 },
-    );
+    throw new Response(`Storefront API error: ${e.message}`, { status: 502 });
   }
 }
 

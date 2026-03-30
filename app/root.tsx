@@ -78,11 +78,11 @@ export default function App() {
 export function ErrorBoundary() {
   const error = useRouteError();
   let status = 500;
-  let message = 'Something went wrong.';
+  let message = "Something went wrong.";
 
   if (isRouteErrorResponse(error)) {
     status = error.status;
-    message = typeof error.data === 'string' ? error.data : error.statusText;
+    message = typeof error.data === "string" ? error.data : error.statusText;
   } else if (error instanceof Error) {
     message = error.message;
   }

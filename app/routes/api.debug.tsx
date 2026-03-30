@@ -27,8 +27,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     apiTest = { error: e.message };
   }
 
-  return new Response(
-    JSON.stringify({ env, apiTest }, null, 2),
-    { headers: { "Content-Type": "application/json" } },
-  );
+  return new Response(JSON.stringify({ env, apiTest }, null, 2), {
+    headers: { "Content-Type": "application/json" },
+  });
 }
