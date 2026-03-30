@@ -51,6 +51,32 @@
 - Copper shimmer bar animation on dark background
 - Smooth fade-out transition (600ms delay → 0.5s fade) on app hydration
 
+### 9. Product CSV with Categories & Inventory
+- Created `scripts/scrape-with-categories.mjs` — scrapes walltistic.com products + collections
+- Maps 454 products to 17 category collections via `/collections/{handle}/products.json`
+- Adds collection names as product tags for automated collection matching
+- Sets `Variant Inventory Tracker = shopify`, `Variant Inventory Qty = 100` for all variants
+- Output: `products-import.csv` (1.89 MB, 5846+ rows) and `collections-import.csv` (reference)
+
+### 10. Automated Shopify Collections via Admin API
+- Created `scripts/create-collections.mjs` — creates smart collections via Shopify Admin API
+- 17 automated collections created with tag-matching rules (e.g., tag "Anime Posters" → Anime Posters collection)
+- Skips already-existing collections, rate-limited for Basic plan
+
+### 11. Product Tag Sync
+- Created `scripts/update-product-tags.mjs` — updates existing Shopify products with collection tags
+- Fetches walltistic.com collection→product mappings, merges tags on each Shopify product
+- All 454 products updated with correct category tags for smart collection auto-population
+
+### 12. Cart Fix — Direct Storefront API
+- **Root cause:** Hydrogen's `createCartHandler` fails silently on Vercel (returns empty errors, null cart)
+- **Solution:** Replaced with direct Storefront API GraphQL mutations in `app/lib/cart.server.ts`
+- Implements `cartCreate`, `cartLinesAdd`, `cartLinesUpdate`, `cartLinesRemove`, `cartDiscountCodesUpdate`
+- Custom cookie-based cart ID persistence (14-day expiry, HttpOnly, SameSite=Lax)
+- All mutations return full cart fragment (lines, costs, discounts, checkout URL)
+- Cart drawer now receives data directly from action response (no race condition)
+- Verified working via `/api/cart-debug` endpoint
+
 ---
 
 *This file is updated with each development session. Use it for client reporting.*
