@@ -100,6 +100,7 @@ export default function CollectionPage() {
 
   return (
     <div
+      className="collection-layout"
       style={{
         display: "grid",
         gridTemplateColumns: "220px 1fr",
@@ -109,6 +110,7 @@ export default function CollectionPage() {
     >
       {/* ─── SIDEBAR ─── */}
       <aside
+        className="collection-sidebar"
         style={{
           position: "sticky",
           top: 56,
@@ -383,6 +385,7 @@ export default function CollectionPage() {
               </PreviousLink>
 
               <div
+                className="product-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(4, 1fr)",

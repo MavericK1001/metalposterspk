@@ -227,6 +227,7 @@ export default function ProductPage() {
 
       {/* Two column grid */}
       <div
+        className="product-detail-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "55% 1fr",
@@ -248,7 +249,7 @@ export default function ProductPage() {
         >
           {/* Main image */}
           <div
-            className="poster-shine"
+            className="poster-shine product-main-image"
             style={{
               width: 240,
               height: 300,
@@ -639,6 +640,7 @@ export default function ProductPage() {
                   YOU MIGHT ALSO LIKE
                 </h2>
                 <div
+                  className="product-grid"
                   style={{
                     display: "grid",
                     gridTemplateColumns: "repeat(4, 1fr)",

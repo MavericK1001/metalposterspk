@@ -119,6 +119,7 @@ export default function CartPage() {
 
       {/* Header row */}
       <div
+        className="cart-header-row"
         style={{
           display: "grid",
           gridTemplateColumns: "80px 1fr 120px 100px 80px",
@@ -266,6 +267,7 @@ function CartLineItem({ line }: { line: any }) {
 
   return (
     <div
+      className="cart-line-item"
       style={{
         display: "grid",
         gridTemplateColumns: "80px 1fr 120px 100px 80px",

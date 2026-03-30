@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, NavLink, Form } from "react-router";
 import { useRootLoaderData } from "~/root";
 
@@ -14,6 +15,7 @@ const NAV_LINKS = [
 export function Nav() {
   const data = useRootLoaderData();
   const cartCount = data?.cart?.totalQuantity ?? 0;
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   function openCart() {
     window.dispatchEvent(new CustomEvent("open-cart"));
@@ -21,6 +23,7 @@ export function Nav() {
 
   return (
     <nav
+      className="main-nav"
       style={{
         position: "sticky",
         top: 0,
@@ -33,10 +36,22 @@ export function Nav() {
         alignItems: "stretch",
       }}
     >
+      {/* Hamburger (mobile only) */}
+      <button
+        type="button"
+        className="nav-hamburger"
+        onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label="Toggle menu"
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+
       {/* Logo */}
       <Link
         to="/"
-        className="nav-logo-clip"
+        className="nav-logo-clip nav-logo"
         style={{
           background: "var(--red)",
           display: "flex",
@@ -60,17 +75,13 @@ export function Nav() {
       </Link>
 
       {/* Nav links */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "stretch",
-          marginLeft: 16,
-        }}
-      >
+      <div className={`nav-links ${mobileOpen ? "nav-links-open" : ""}`}>
         {NAV_LINKS.map((link) => (
           <NavLink
             key={link.to}
             to={link.to}
+            className="nav-link"
+            onClick={() => setMobileOpen(false)}
             style={({ isActive }) => ({
               display: "flex",
               alignItems: "center",
@@ -109,15 +120,7 @@ export function Nav() {
       <div style={{ flex: 1 }} />
 
       {/* Search */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          borderLeft: "1px solid #333",
-          borderRight: "1px solid #333",
-          padding: "0 16px",
-        }}
-      >
+      <div className="nav-search">
         <Form
           action="/search"
           style={{ display: "flex", alignItems: "center" }}
@@ -142,6 +145,7 @@ export function Nav() {
       {/* Cart button */}
       <button
         type="button"
+        className="nav-cart-btn"
         onClick={openCart}
         style={{
           background: "var(--red)",

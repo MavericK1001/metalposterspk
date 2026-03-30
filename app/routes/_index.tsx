@@ -107,6 +107,7 @@ export default function Homepage() {
     <>
       {/* ─── A. HERO ─── */}
       <section
+        className="hero-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 420px",
@@ -154,6 +155,7 @@ export default function Homepage() {
 
           {/* H1 */}
           <h1
+            className="hero-h1"
             style={{
               fontFamily: "Anton, sans-serif",
               fontSize: 86,
@@ -189,7 +191,7 @@ export default function Homepage() {
           </p>
 
           {/* CTAs */}
-          <div style={{ display: "flex", gap: 12 }}>
+          <div className="hero-ctas" style={{ display: "flex", gap: 12 }}>
             <Link
               to="/collections/all"
               style={{
@@ -362,7 +364,7 @@ export default function Homepage() {
       <Ticker />
 
       {/* ─── C. BESTSELLERS ─── */}
-      <section style={{ padding: "48px 32px" }}>
+      <section className="bestsellers-section" style={{ padding: "48px 32px" }}>
         {/* Section header */}
         <div
           style={{
@@ -414,6 +416,7 @@ export default function Homepage() {
 
         {/* Product grid */}
         <div
+          className="product-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
@@ -428,6 +431,7 @@ export default function Homepage() {
 
       {/* ─── D. SOCIAL PROOF BANNER ─── */}
       <section
+        className="social-proof"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr auto",
@@ -549,6 +553,7 @@ export default function Homepage() {
 
       {/* ─── E. SIZE GUIDE STRIP ─── */}
       <section
+        className="size-guide"
         style={{
           display: "flex",
           background: "var(--cream)",

@@ -204,6 +204,7 @@ export default function SearchPage() {
 
       {products.length > 0 && (
         <div
+          className="product-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",

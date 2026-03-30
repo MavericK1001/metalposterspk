@@ -19,6 +19,7 @@ export function Footer() {
       }}
     >
       <div
+        className="footer-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
@@ -120,6 +121,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div
+        className="footer-bottom"
         style={{
           borderTop: "1px solid #222",
           marginTop: 40,
