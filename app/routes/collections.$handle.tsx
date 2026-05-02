@@ -4,6 +4,7 @@ import {
   useNavigate,
   Link,
 } from "react-router";
+import { useState } from "react";
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 import { Pagination, getPaginationVariables } from "@shopify/hydrogen";
 import { COLLECTION_QUERY, ALL_PRODUCTS_QUERY } from "~/graphql/ProductQuery";
@@ -140,14 +141,12 @@ export default function CollectionPage() {
   const { collection } = useLoaderData<typeof loader>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   function updateParam(key: string, value: string) {
     const params = new URLSearchParams(searchParams);
-    if (value) {
-      params.set(key, value);
-    } else {
-      params.delete(key);
-    }
+    if (value) params.set(key, value);
+    else params.delete(key);
     navigate(`?${params.toString()}`, { preventScrollReset: true });
   }
 
@@ -160,26 +159,22 @@ export default function CollectionPage() {
   const currentFinish = searchParams.get("finish") || "";
   const currentCategory = searchParams.get("category") || "";
 
+  const activeFilterCount = [currentSort, currentSize, currentFinish, currentCategory, searchParams.get("minPrice"), searchParams.get("maxPrice")].filter(Boolean).length;
+
   return (
-    <div
-      className="collection-layout"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "220px 1fr",
-        gap: 0,
-        alignItems: "start",
-      }}
-    >
-      {/* ─── SIDEBAR ─── */}
-      <aside
-        className="collection-sidebar"
+    <div style={{ padding: "28px 32px" }}>
+
+      {/* ─── Top bar: title + filter button + sort ─── */}
+      <div
         style={{
-          position: "sticky",
-          top: 56,
-          background: "var(--card)",
-          borderRight: "1px solid #333",
-          padding: 28,
-          minHeight: "calc(100vh - 56px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: 24,
+          borderBottom: "2px solid var(--ink)",
+          paddingBottom: 16,
+          flexWrap: "wrap",
+          gap: 12,
         }}
       >
         <h1
@@ -188,247 +183,122 @@ export default function CollectionPage() {
             fontSize: 26,
             fontWeight: 700,
             letterSpacing: 1,
-            marginBottom: 8,
+            color: "var(--white)",
+            margin: 0,
           }}
         >
           {collection.title}
         </h1>
 
-        {collection.description && (
-          <p
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          {/* Filters & Sort button */}
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(true)}
             style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              background: "var(--card)",
+              border: "1px solid var(--muted)",
+              color: "var(--white)",
+              padding: "10px 18px",
               fontFamily: "'Inter', sans-serif",
               fontSize: 12,
-              color: "var(--muted)",
-              lineHeight: 1.6,
-              marginBottom: 24,
+              fontWeight: 600,
+              letterSpacing: 1,
+              textTransform: "uppercase",
+              cursor: "pointer",
             }}
           >
-            {collection.description}
-          </p>
-        )}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="8" y1="12" x2="20" y2="12" />
+              <line x1="12" y1="18" x2="20" y2="18" />
+            </svg>
+            Filters &amp; Sort
+            {activeFilterCount > 0 && (
+              <span
+                style={{
+                  background: "var(--copper)",
+                  color: "white",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  borderRadius: "50%",
+                  width: 18,
+                  height: 18,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {activeFilterCount}
+              </span>
+            )}
+          </button>
 
-        {/* Price Range */}
-        <FilterGroup title="Price Range">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const fd = new FormData(e.currentTarget);
-              const min = fd.get("minPrice") as string;
-              const max = fd.get("maxPrice") as string;
-              const params = new URLSearchParams(searchParams);
-              if (min) params.set("minPrice", min);
-              else params.delete("minPrice");
-              if (max) params.set("maxPrice", max);
-              else params.delete("maxPrice");
-              navigate(`?${params.toString()}`, { preventScrollReset: true });
-            }}
-            style={{ display: "flex", gap: 6, alignItems: "center" }}
-          >
-            <input
-              name="minPrice"
-              type="number"
-              placeholder="Min"
-              defaultValue={searchParams.get("minPrice") || ""}
-              style={{
-                background: "transparent",
-                border: "1px solid var(--mid)",
-                borderRadius: 0,
-                padding: "6px 8px",
-                width: 70,
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 11,
-              }}
-            />
-            <input
-              name="maxPrice"
-              type="number"
-              placeholder="Max"
-              defaultValue={searchParams.get("maxPrice") || ""}
-              style={{
-                background: "transparent",
-                border: "1px solid var(--mid)",
-                borderRadius: 0,
-                padding: "6px 8px",
-                width: 70,
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 11,
-              }}
-            />
-            <button
-              type="submit"
-              style={{
-                background: "var(--ink)",
-                color: "white",
-                padding: "6px 14px",
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 9,
-                letterSpacing: 1,
-                border: "none",
-                borderRadius: 0,
-                cursor: "pointer",
-              }}
-            >
-              GO
-            </button>
-          </form>
-        </FilterGroup>
-
-        {/* Size */}
-        <FilterGroup title="Size">
-          {SIZE_FILTERS.map((s) => (
-            <label
-              key={s}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 11,
-                cursor: "pointer",
-                marginBottom: 6,
-              }}
-            >
-              <input
-                type="radio"
-                name="size-filter"
-                checked={currentSize === s}
-                onChange={() => updateParam("size", currentSize === s ? "" : s)}
-                style={{ accentColor: "var(--copper)" }}
-              />
-              {s}
-            </label>
-          ))}
-        </FilterGroup>
-
-        {/* Finish */}
-        <FilterGroup title="Finish">
-          {FINISH_FILTERS.map((f) => (
-            <label
-              key={f}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 11,
-                cursor: "pointer",
-                marginBottom: 6,
-              }}
-            >
-              <input
-                type="radio"
-                name="finish-filter"
-                checked={currentFinish === f}
-                onChange={() =>
-                  updateParam("finish", currentFinish === f ? "" : f)
-                }
-                style={{ accentColor: "var(--copper)" }}
-              />
-              {f}
-            </label>
-          ))}
-        </FilterGroup>
-
-        {/* Category */}
-        <FilterGroup title="Category">
-          {CATEGORY_FILTERS.map((c) => (
-            <label
-              key={c}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 11,
-                cursor: "pointer",
-                marginBottom: 6,
-              }}
-            >
-              <input
-                type="radio"
-                name="category-filter"
-                checked={currentCategory === c}
-                onChange={() =>
-                  updateParam("category", currentCategory === c ? "" : c)
-                }
-                style={{ accentColor: "var(--copper)" }}
-              />
-              {c}
-            </label>
-          ))}
-        </FilterGroup>
-
-        <button
-          type="button"
-          onClick={clearFilters}
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 9,
-            color: "var(--copper)",
-            letterSpacing: 1,
-            textTransform: "uppercase",
-            cursor: "pointer",
-            background: "none",
-            border: "none",
-            padding: 0,
-            marginTop: 16,
-          }}
-        >
-          CLEAR ALL FILTERS
-        </button>
-      </aside>
-
-      {/* ─── MAIN ─── */}
-      <div style={{ padding: "28px 32px" }}>
-        {/* Sort bar */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: 24,
-            borderBottom: "2px solid var(--ink)",
-            paddingBottom: 12,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 11,
-              color: "var(--muted)",
-            }}
-          >
-            // {collection.products.nodes.length} products
-          </span>
-
+          {/* Sort dropdown inline */}
           <select
             value={currentSort}
             onChange={(e) => updateParam("sort", e.target.value)}
             style={{
-              background: "transparent",
-              border: "1px solid var(--mid)",
+              background: "var(--card)",
+              border: "1px solid var(--muted)",
               borderRadius: 0,
               fontFamily: "'Inter', sans-serif",
-              fontSize: 11,
-              padding: "6px 12px",
-              color: "var(--ink)",
+              fontSize: 12,
+              padding: "10px 14px",
+              color: "var(--white)",
               cursor: "pointer",
             }}
           >
             {SORT_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
+              <option key={opt.value} value={opt.value} style={{ background: "var(--card)" }}>
                 {opt.label}
               </option>
             ))}
           </select>
         </div>
+      </div>
 
-        {/* Products grid with pagination */}
-        <Pagination connection={collection.products}>
-          {({ nodes, NextLink, PreviousLink, isLoading }) => (
-            <>
-              <PreviousLink>
+      {/* ─── Products grid ─── */}
+      <Pagination connection={collection.products}>
+        {({ nodes, NextLink, PreviousLink, isLoading }) => (
+          <>
+            <PreviousLink>
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 10,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                  padding: "6px 14px",
+                  border: "1px solid var(--mid)",
+                  color: "var(--muted)",
+                  textDecoration: "none",
+                  display: "inline-block",
+                  marginBottom: 16,
+                }}
+              >
+                ← LOAD PREVIOUS
+              </span>
+            </PreviousLink>
+
+            <div
+              className="product-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: 16,
+              }}
+            >
+              {nodes.map((product: any) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            <div style={{ marginTop: 24, textAlign: "center" }}>
+              <NextLink>
                 <span
                   style={{
                     fontFamily: "'Inter', sans-serif",
@@ -436,52 +306,328 @@ export default function CollectionPage() {
                     letterSpacing: 2,
                     textTransform: "uppercase",
                     padding: "6px 14px",
-                    border: "1px solid var(--mid)",
-                    color: "var(--muted)",
+                    background: "var(--ink)",
+                    color: "white",
                     textDecoration: "none",
                     display: "inline-block",
-                    marginBottom: 16,
                   }}
                 >
-                  ← LOAD PREVIOUS
+                  {isLoading ? "LOADING..." : "LOAD MORE →"}
                 </span>
-              </PreviousLink>
+              </NextLink>
+            </div>
+          </>
+        )}
+      </Pagination>
 
-              <div
-                className="product-grid"
+      {/* ─── Filter Drawer ─── */}
+      {drawerOpen && (
+        <div
+          onClick={() => setDrawerOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 50,
+            background: "rgba(0,0,0,0.6)",
+          }}
+        />
+      )}
+
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          right: 0,
+          height: "100%",
+          width: 320,
+          background: "var(--card)",
+          borderLeft: "1px solid #333",
+          zIndex: 51,
+          transform: drawerOpen ? "translateX(0)" : "translateX(100%)",
+          transition: "transform 0.25s ease",
+          overflowY: "auto",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {/* Drawer header */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "20px 24px",
+            borderBottom: "1px solid #333",
+            position: "sticky",
+            top: 0,
+            background: "var(--card)",
+            zIndex: 1,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: 2,
+              textTransform: "uppercase",
+              color: "var(--white)",
+            }}
+          >
+            Filters &amp; Sort
+          </span>
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(false)}
+            style={{
+              background: "none",
+              border: "none",
+              color: "var(--steel)",
+              fontSize: 22,
+              cursor: "pointer",
+              lineHeight: 1,
+              padding: 4,
+            }}
+          >
+            ×
+          </button>
+        </div>
+
+        {/* Drawer body */}
+        <div style={{ padding: "24px", flex: 1 }}>
+
+          {/* Sort */}
+          <FilterGroup title="Sort By">
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {SORT_OPTIONS.map((opt) => (
+                <label
+                  key={opt.value}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 12,
+                    cursor: "pointer",
+                    color: currentSort === opt.value ? "var(--copper)" : "var(--steel)",
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name="sort-drawer"
+                    checked={currentSort === opt.value}
+                    onChange={() => updateParam("sort", opt.value)}
+                    style={{ accentColor: "var(--copper)" }}
+                  />
+                  {opt.label}
+                </label>
+              ))}
+            </div>
+          </FilterGroup>
+
+          {/* Price Range */}
+          <FilterGroup title="Price Range">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                const min = fd.get("minPrice") as string;
+                const max = fd.get("maxPrice") as string;
+                const params = new URLSearchParams(searchParams);
+                if (min) params.set("minPrice", min);
+                else params.delete("minPrice");
+                if (max) params.set("maxPrice", max);
+                else params.delete("maxPrice");
+                navigate(`?${params.toString()}`, { preventScrollReset: true });
+              }}
+              style={{ display: "flex", gap: 6, alignItems: "center" }}
+            >
+              <input
+                name="minPrice"
+                type="number"
+                placeholder="Min ₨"
+                defaultValue={searchParams.get("minPrice") || ""}
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(4, 1fr)",
-                  gap: 16,
+                  background: "var(--bg)",
+                  border: "1px solid #444",
+                  borderRadius: 0,
+                  padding: "8px 10px",
+                  width: 90,
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 12,
+                  color: "var(--white)",
+                }}
+              />
+              <span style={{ color: "var(--muted)", fontSize: 12 }}>–</span>
+              <input
+                name="maxPrice"
+                type="number"
+                placeholder="Max ₨"
+                defaultValue={searchParams.get("maxPrice") || ""}
+                style={{
+                  background: "var(--bg)",
+                  border: "1px solid #444",
+                  borderRadius: 0,
+                  padding: "8px 10px",
+                  width: 90,
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 12,
+                  color: "var(--white)",
+                }}
+              />
+              <button
+                type="submit"
+                style={{
+                  background: "var(--copper)",
+                  color: "white",
+                  padding: "8px 14px",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: 1,
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
-                {nodes.map((product: any) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
+                GO
+              </button>
+            </form>
+          </FilterGroup>
 
-              <div style={{ marginTop: 24, textAlign: "center" }}>
-                <NextLink>
-                  <span
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 10,
-                      letterSpacing: 2,
-                      textTransform: "uppercase",
-                      padding: "6px 14px",
-                      background: "var(--ink)",
-                      color: "white",
-                      textDecoration: "none",
-                      display: "inline-block",
-                    }}
-                  >
-                    {isLoading ? "LOADING..." : "LOAD MORE →"}
-                  </span>
-                </NextLink>
-              </div>
-            </>
-          )}
-        </Pagination>
+          {/* Category */}
+          <FilterGroup title="Category">
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {CATEGORY_FILTERS.map((c) => (
+                <label
+                  key={c}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 12,
+                    cursor: "pointer",
+                    color: currentCategory === c ? "var(--copper)" : "var(--steel)",
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name="category-filter"
+                    checked={currentCategory === c}
+                    onChange={() =>
+                      updateParam("category", currentCategory === c ? "" : c)
+                    }
+                    style={{ accentColor: "var(--copper)" }}
+                  />
+                  {c}
+                </label>
+              ))}
+            </div>
+          </FilterGroup>
+
+          {/* Size */}
+          <FilterGroup title="Size">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {SIZE_FILTERS.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => updateParam("size", currentSize === s ? "" : s)}
+                  style={{
+                    border: `1px solid ${currentSize === s ? "var(--copper)" : "#444"}`,
+                    padding: "6px 14px",
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    background: currentSize === s ? "#2a1a0a" : "transparent",
+                    color: currentSize === s ? "var(--copper)" : "var(--steel)",
+                    borderRadius: 0,
+                  }}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </FilterGroup>
+
+          {/* Finish */}
+          <FilterGroup title="Finish">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {FINISH_FILTERS.map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() =>
+                    updateParam("finish", currentFinish === f ? "" : f)
+                  }
+                  style={{
+                    border: `1px solid ${currentFinish === f ? "var(--copper)" : "#444"}`,
+                    padding: "6px 14px",
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    background: currentFinish === f ? "#2a1a0a" : "transparent",
+                    color: currentFinish === f ? "var(--copper)" : "var(--steel)",
+                    borderRadius: 0,
+                  }}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+          </FilterGroup>
+        </div>
+
+        {/* Drawer footer */}
+        <div
+          style={{
+            padding: "16px 24px",
+            borderTop: "1px solid #333",
+            display: "flex",
+            gap: 10,
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => { clearFilters(); setDrawerOpen(false); }}
+            style={{
+              flex: 1,
+              background: "none",
+              border: "1px solid var(--muted)",
+              color: "var(--steel)",
+              padding: "12px 0",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: 1,
+              textTransform: "uppercase",
+              cursor: "pointer",
+            }}
+          >
+            Clear All
+          </button>
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(false)}
+            style={{
+              flex: 2,
+              background: "var(--copper)",
+              border: "none",
+              color: "white",
+              padding: "12px 0",
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: 1,
+              textTransform: "uppercase",
+              cursor: "pointer",
+            }}
+          >
+            Apply →
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -495,7 +641,7 @@ function FilterGroup({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ marginBottom: 20 }}>
+    <div style={{ marginBottom: 24 }}>
       <h3
         style={{
           fontFamily: "'Inter', sans-serif",
@@ -503,9 +649,9 @@ function FilterGroup({
           letterSpacing: 2,
           textTransform: "uppercase",
           color: "var(--muted)",
-          borderBottom: "1px solid var(--mid)",
-          paddingBottom: 6,
-          marginBottom: 10,
+          borderBottom: "1px solid #333",
+          paddingBottom: 8,
+          marginBottom: 12,
         }}
       >
         {title}
