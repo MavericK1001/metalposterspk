@@ -104,126 +104,553 @@ export default function Homepage() {
     <>
       {/* ─── A. HERO ─── */}
       <section
-        className="hero-grid"
         style={{
-          minHeight: 400,
+          position: "relative",
+          minHeight: "92vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          overflow: "hidden",
+          background: "#0A0A0C",
         }}
       >
-        {/* Left column */}
+        {/* Noise / grain texture overlay */}
         <div
           style={{
-            background: "var(--bg)",
-            padding: "52px 48px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 24,
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E\")",
+            pointerEvents: "none",
+            zIndex: 0,
           }}
+        />
+
+        {/* Radial copper glow — top left */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-20%",
+            left: "-10%",
+            width: "70vw",
+            height: "70vw",
+            background:
+              "radial-gradient(circle, rgba(184,115,51,0.18) 0%, transparent 65%)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+        {/* Radial glow — bottom right */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-20%",
+            right: "-10%",
+            width: "60vw",
+            height: "60vw",
+            background:
+              "radial-gradient(circle, rgba(227,115,94,0.10) 0%, transparent 65%)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+
+        {/* Diagonal copper accent line */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: "55%",
+            width: 1,
+            height: "100%",
+            background:
+              "linear-gradient(to bottom, transparent, rgba(184,115,51,0.35) 30%, rgba(184,115,51,0.35) 70%, transparent)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+
+        {/* Main content */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 0,
+            alignItems: "center",
+            maxWidth: 1400,
+            margin: "0 auto",
+            width: "100%",
+            padding: "80px 64px",
+          }}
+          className="hero-inner"
         >
-          {/* Eyebrow */}
+          {/* LEFT */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 32,
+            }}
+          >
+            {/* Eyebrow pill */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  border: "1px solid rgba(184,115,51,0.4)",
+                  background: "rgba(184,115,51,0.08)",
+                  padding: "6px 14px",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: 2.5,
+                  textTransform: "uppercase",
+                  color: "#D4924A",
+                }}
+              >
+                <span
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: "#D4924A",
+                    display: "inline-block",
+                  }}
+                />
+                Premium Aluminium Prints · Pakistan
+              </span>
+            </div>
+
+            {/* H1 */}
+            <h1
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(48px, 6vw, 86px)",
+                color: "#FFFFFF",
+                lineHeight: 0.9,
+                letterSpacing: -2,
+                margin: 0,
+              }}
+            >
+              Your Walls.
+              <br />
+              <span
+                style={{
+                  background:
+                    "linear-gradient(135deg, #D4924A 0%, #B87333 40%, #E3735E 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Redefined.
+              </span>
+            </h1>
+
+            {/* Sub copy */}
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 17,
+                lineHeight: 1.7,
+                color: "rgba(217,217,217,0.7)",
+                maxWidth: 480,
+                margin: 0,
+              }}
+            >
+              HD dye-sublimation on{" "}
+              <strong style={{ color: "#D9D9D9", fontWeight: 500 }}>
+                brushed aluminium
+              </strong>
+              . Magnetic mounting — no nails, no damage. Starting from{" "}
+              <strong style={{ color: "#D4924A", fontWeight: 700 }}>
+                ₨ 849
+              </strong>
+              .
+            </p>
+
+            {/* CTA row */}
+            <div
+              style={{
+                display: "flex",
+                gap: 14,
+                flexWrap: "wrap",
+              }}
+            >
+              <Link
+                to="/collections/all"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  background: "linear-gradient(135deg, #D4924A, #B87333)",
+                  color: "white",
+                  padding: "16px 36px",
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: 13,
+                  fontWeight: 700,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  boxShadow: "0 8px 32px rgba(184,115,51,0.35)",
+                }}
+              >
+                Shop All Posters
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                to="/pages/custom-poster"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "transparent",
+                  color: "rgba(217,217,217,0.8)",
+                  padding: "16px 28px",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  letterSpacing: 1.5,
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                }}
+              >
+                Custom Order
+              </Link>
+            </div>
+
+            {/* Social proof row */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 20,
+                paddingTop: 8,
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ color: "#D4924A", fontSize: 14 }}>★★★★★</span>
+                <span
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 12,
+                    color: "rgba(217,217,217,0.5)",
+                  }}
+                >
+                  4.9 · 1,200+ orders
+                </span>
+              </div>
+              <div
+                style={{
+                  width: 1,
+                  height: 16,
+                  background: "rgba(255,255,255,0.1)",
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 11,
+                  color: "rgba(217,217,217,0.4)",
+                  letterSpacing: 1,
+                  textTransform: "uppercase",
+                }}
+              >
+                Free delivery in Lahore
+              </span>
+            </div>
+          </div>
+
+          {/* RIGHT — floating poster stack */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 12,
+              justifyContent: "center",
+              position: "relative",
+              height: 520,
             }}
+            className="hero-poster-stack"
           >
+            {/* Back card */}
             <div
               style={{
-                width: 24,
-                height: 2,
-                background: "var(--copper)",
-              }}
-            />
-            <span
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 11,
-                letterSpacing: 3,
-                textTransform: "uppercase",
-                color: "var(--copper)",
-                fontWeight: 600,
+                position: "absolute",
+                width: 220,
+                height: 280,
+                background: "linear-gradient(135deg, #2a1a0a, #1a1a1a)",
+                border: "1px solid rgba(184,115,51,0.2)",
+                transform: "rotate(-8deg) translate(-60px, 30px)",
+                boxShadow: "0 32px 80px rgba(0,0,0,0.6)",
               }}
             >
-              Premium Aluminium Prints
-            </span>
-          </div>
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 50%)",
+                }}
+              />
+            </div>
 
-          {/* H1 */}
-          <h1
-            className="hero-h1"
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 700,
-              fontSize: 72,
-              color: "white",
-              lineHeight: 0.92,
-              letterSpacing: -1,
-            }}
-          >
-            Swap Art in
-            <em
+            {/* Mid card */}
+            <div
               style={{
-                color: "var(--copper)",
-                display: "block",
-                fontStyle: "normal",
+                position: "absolute",
+                width: 240,
+                height: 300,
+                background: "linear-gradient(135deg, #0d1a2a, #1a1a1a)",
+                border: "1px solid rgba(94,168,240,0.2)",
+                transform: "rotate(4deg) translate(50px, -20px)",
+                boxShadow: "0 32px 80px rgba(0,0,0,0.6)",
               }}
             >
-              Seconds
-            </em>
-          </h1>
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%)",
+                }}
+              />
+            </div>
 
-          {/* Subtext */}
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 16,
-              lineHeight: 1.6,
-              color: "var(--muted)",
-              maxWidth: 420,
-            }}
-          >
-            Premium metal posters from{" "}
-            <strong style={{ color: "var(--copper)" }}>₨ 5,000</strong> —
-            magnetic mounting, no holes, no hassle.
-          </p>
+            {/* Front card — main poster mock */}
+            <div
+              style={{
+                position: "relative",
+                width: 260,
+                height: 340,
+                background: "linear-gradient(160deg, #1a1a1a 0%, #0D0D14 100%)",
+                border: "1px solid rgba(184,115,51,0.4)",
+                boxShadow:
+                  "0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.06)",
+                zIndex: 2,
+              }}
+              className="poster-shine"
+            >
+              {/* Metallic brushed lines */}
+              {Array.from({ length: 18 }).map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    right: 0,
+                    top: `${(i / 18) * 100}%`,
+                    height: 1,
+                    background: "rgba(255,255,255,0.025)",
+                  }}
+                />
+              ))}
 
-          {/* CTAs */}
-          <div className="hero-ctas" style={{ display: "flex", gap: 12 }}>
-            <Link
-              to="/collections/all"
-              className="btn-copper"
+              {/* Poster content mockup */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 20,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 12,
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: 4,
+                    textTransform: "uppercase",
+                    color: "rgba(184,115,51,0.6)",
+                  }}
+                >
+                  Metal Poster
+                </div>
+                <div
+                  style={{
+                    width: 80,
+                    height: 1,
+                    background:
+                      "linear-gradient(to right, transparent, rgba(184,115,51,0.4), transparent)",
+                  }}
+                />
+                <div
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: 32,
+                    fontWeight: 900,
+                    letterSpacing: -1,
+                    color: "rgba(255,255,255,0.9)",
+                    textAlign: "center",
+                    lineHeight: 1,
+                  }}
+                >
+                  YOUR
+                  <br />
+                  <span style={{ color: "#D4924A" }}>ART</span>
+                </div>
+                <div
+                  style={{
+                    width: 80,
+                    height: 1,
+                    background:
+                      "linear-gradient(to right, transparent, rgba(184,115,51,0.4), transparent)",
+                  }}
+                />
+                <div
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 9,
+                    letterSpacing: 2,
+                    color: "rgba(217,217,217,0.3)",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Brushed Aluminium
+                </div>
+              </div>
+            </div>
+
+            {/* Floating stat badge — top right */}
+            <div
               style={{
-                padding: "16px 32px",
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 13,
-                letterSpacing: 1,
-                textTransform: "uppercase",
-                textDecoration: "none",
-                fontWeight: 600,
-                border: "none",
+                position: "absolute",
+                top: 40,
+                right: 20,
+                background: "rgba(20,20,20,0.95)",
+                border: "1px solid rgba(184,115,51,0.3)",
+                backdropFilter: "blur(12px)",
+                padding: "12px 18px",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                zIndex: 3,
               }}
             >
-              SHOP ALL →
-            </Link>
-            <Link
-              to="/pages/how-its-made"
+              <div
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: 22,
+                  fontWeight: 800,
+                  color: "#D4924A",
+                  lineHeight: 1,
+                }}
+              >
+                1mm
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 9,
+                  letterSpacing: 1.5,
+                  color: "rgba(217,217,217,0.4)",
+                  textTransform: "uppercase",
+                  marginTop: 4,
+                }}
+              >
+                Aluminium
+              </div>
+            </div>
+
+            {/* Floating stat badge — bottom left */}
+            <div
               style={{
-                background: "transparent",
-                color: "var(--steel)",
-                padding: "16px 32px",
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 13,
-                letterSpacing: 1,
-                textTransform: "uppercase",
-                textDecoration: "none",
-                border: "1px solid var(--muted)",
-                fontWeight: 500,
+                position: "absolute",
+                bottom: 60,
+                left: 30,
+                background: "rgba(20,20,20,0.95)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                backdropFilter: "blur(12px)",
+                padding: "12px 18px",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                zIndex: 3,
               }}
             >
-              HOW IT&apos;S MADE
-            </Link>
+              <div
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: 22,
+                  fontWeight: 800,
+                  color: "#FFFFFF",
+                  lineHeight: 1,
+                }}
+              >
+                3–5
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 9,
+                  letterSpacing: 1.5,
+                  color: "rgba(217,217,217,0.4)",
+                  textTransform: "uppercase",
+                  marginTop: 4,
+                }}
+              >
+                Day Delivery
+              </div>
+            </div>
+
+            {/* Magnetic badge */}
+            <div
+              style={{
+                position: "absolute",
+                top: 160,
+                right: 0,
+                background: "rgba(184,115,51,0.12)",
+                border: "1px solid rgba(184,115,51,0.3)",
+                padding: "8px 14px",
+                zIndex: 3,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <span style={{ fontSize: 14 }}>🧲</span>
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 10,
+                  fontWeight: 600,
+                  letterSpacing: 1,
+                  color: "#D4924A",
+                  textTransform: "uppercase",
+                }}
+              >
+                Magnetic Mount
+              </span>
+            </div>
           </div>
         </div>
+
+        {/* Bottom border accent */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 1,
+            background:
+              "linear-gradient(to right, transparent, rgba(184,115,51,0.4) 30%, rgba(184,115,51,0.4) 70%, transparent)",
+          }}
+        />
       </section>
 
       {/* ─── B. TICKER ─── */}

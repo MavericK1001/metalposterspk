@@ -159,11 +159,17 @@ export default function CollectionPage() {
   const currentFinish = searchParams.get("finish") || "";
   const currentCategory = searchParams.get("category") || "";
 
-  const activeFilterCount = [currentSort, currentSize, currentFinish, currentCategory, searchParams.get("minPrice"), searchParams.get("maxPrice")].filter(Boolean).length;
+  const activeFilterCount = [
+    currentSort,
+    currentSize,
+    currentFinish,
+    currentCategory,
+    searchParams.get("minPrice"),
+    searchParams.get("maxPrice"),
+  ].filter(Boolean).length;
 
   return (
     <div style={{ padding: "28px 32px" }}>
-
       {/* ─── Top bar: title + filter button + sort ─── */}
       <div
         style={{
@@ -211,7 +217,14 @@ export default function CollectionPage() {
               cursor: "pointer",
             }}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <line x1="4" y1="6" x2="20" y2="6" />
               <line x1="8" y1="12" x2="20" y2="12" />
               <line x1="12" y1="18" x2="20" y2="18" />
@@ -253,7 +266,11 @@ export default function CollectionPage() {
             }}
           >
             {SORT_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value} style={{ background: "var(--card)" }}>
+              <option
+                key={opt.value}
+                value={opt.value}
+                style={{ background: "var(--card)" }}
+              >
                 {opt.label}
               </option>
             ))}
@@ -395,7 +412,6 @@ export default function CollectionPage() {
 
         {/* Drawer body */}
         <div style={{ padding: "24px", flex: 1 }}>
-
           {/* Sort */}
           <FilterGroup title="Sort By">
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -409,7 +425,10 @@ export default function CollectionPage() {
                     fontFamily: "'Inter', sans-serif",
                     fontSize: 12,
                     cursor: "pointer",
-                    color: currentSort === opt.value ? "var(--copper)" : "var(--steel)",
+                    color:
+                      currentSort === opt.value
+                        ? "var(--copper)"
+                        : "var(--steel)",
                   }}
                 >
                   <input
@@ -507,7 +526,8 @@ export default function CollectionPage() {
                     fontFamily: "'Inter', sans-serif",
                     fontSize: 12,
                     cursor: "pointer",
-                    color: currentCategory === c ? "var(--copper)" : "var(--steel)",
+                    color:
+                      currentCategory === c ? "var(--copper)" : "var(--steel)",
                   }}
                 >
                   <input
@@ -532,7 +552,9 @@ export default function CollectionPage() {
                 <button
                   key={s}
                   type="button"
-                  onClick={() => updateParam("size", currentSize === s ? "" : s)}
+                  onClick={() =>
+                    updateParam("size", currentSize === s ? "" : s)
+                  }
                   style={{
                     border: `1px solid ${currentSize === s ? "var(--copper)" : "#444"}`,
                     padding: "6px 14px",
@@ -569,7 +591,8 @@ export default function CollectionPage() {
                     fontWeight: 600,
                     cursor: "pointer",
                     background: currentFinish === f ? "#2a1a0a" : "transparent",
-                    color: currentFinish === f ? "var(--copper)" : "var(--steel)",
+                    color:
+                      currentFinish === f ? "var(--copper)" : "var(--steel)",
                     borderRadius: 0,
                   }}
                 >
@@ -591,7 +614,10 @@ export default function CollectionPage() {
         >
           <button
             type="button"
-            onClick={() => { clearFilters(); setDrawerOpen(false); }}
+            onClick={() => {
+              clearFilters();
+              setDrawerOpen(false);
+            }}
             style={{
               flex: 1,
               background: "none",

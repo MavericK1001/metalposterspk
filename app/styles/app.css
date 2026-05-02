@@ -191,12 +191,28 @@ button, a {
   background: var(--white);
 }
 
+/* ─── HERO POSTER STACK FLOAT ─── */
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.hero-poster-stack > div:last-of-type {
+  animation: hero-float 5s ease-in-out infinite;
+}
+
 /* ─── RESPONSIVE: TABLET (max 1024px) ─── */
 @media (max-width: 1024px) {
   /* Hero */
   .hero-grid {
     grid-template-columns: 1fr !important;
     min-height: auto !important;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr !important;
+    padding: 60px 32px !important;
+  }
+  .hero-poster-stack {
+    display: none !important;
   }
 
   .hero-h1 {
