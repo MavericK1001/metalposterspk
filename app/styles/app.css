@@ -302,15 +302,45 @@ button, a {
 
 /* ─── RESPONSIVE: MOBILE (max 768px) ─── */
 @media (max-width: 768px) {
-  /* Hero height + padding */
+  /* Hero: let height be content-driven on mobile */
   section[style*="92vh"] {
-    min-height: 75vh !important;
+    min-height: auto !important;
+    padding-top: 64px;
+    padding-bottom: 48px;
   }
   .hero-inner {
-    padding: 48px 20px !important;
-    gap: 32px !important;
+    padding: 0 20px !important;
+    gap: 28px !important;
   }
-
+  /* Tighten H1 spacing on small screens */
+  .hero-h1 {
+    font-size: clamp(42px, 11vw, 68px) !important;
+    letter-spacing: -1px !important;
+    line-height: 0.95 !important;
+  }
+  /* Eyebrow: smaller letter spacing so it fits */
+  .hero-eyebrow {
+    letter-spacing: 1px !important;
+    font-size: 10px !important;
+    padding: 5px 10px !important;
+  }
+  /* CTAs: full-width stacked buttons */
+  .hero-ctas {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .hero-ctas a {
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    padding: 15px 20px !important;
+  }
+  /* Social proof row: wrap & tighten */
+  .hero-proof-row {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding-top: 4px !important;
+  }
   /* Hide social proof CTA button on mobile to prevent overflow */
   .social-proof-right a.btn-copper {
     display: none !important;
@@ -360,23 +390,6 @@ button, a {
   /* Cart drawer: full width on mobile */
   .cart-drawer {
     width: 100% !important;
-  }
-
-  /* Hero */
-  .hero-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .hero-h1 {
-    font-size: 44px !important;
-  }
-
-  .hero-ctas {
-    flex-direction: column !important;
-  }
-
-  .hero-ctas a {
-    text-align: center;
   }
 
   /* Bestsellers section */
@@ -497,11 +510,11 @@ button, a {
 /* ─── RESPONSIVE: SMALL MOBILE (max 480px) ─── */
 @media (max-width: 480px) {
   .hero-inner {
-    padding: 36px 16px !important;
+    padding: 0 16px !important;
   }
-
   .hero-h1 {
-    font-size: 36px !important;
+    font-size: clamp(36px, 10vw, 52px) !important;
+    letter-spacing: 0px !important;
   }
 
   /* Product grids: still 2 columns but tighter */

@@ -197,6 +197,7 @@ export default function Homepage() {
             {/* Eyebrow pill */}
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <span
+                className="hero-eyebrow"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -227,6 +228,7 @@ export default function Homepage() {
 
             {/* H1 */}
             <h1
+              className="hero-h1"
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 900,
@@ -276,6 +278,7 @@ export default function Homepage() {
 
             {/* CTA row */}
             <div
+              className="hero-ctas"
               style={{
                 display: "flex",
                 gap: 14,
@@ -336,6 +339,7 @@ export default function Homepage() {
 
             {/* Social proof row */}
             <div
+              className="hero-proof-row"
               style={{
                 display: "flex",
                 alignItems: "center",
