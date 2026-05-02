@@ -302,6 +302,20 @@ button, a {
 
 /* ─── RESPONSIVE: MOBILE (max 768px) ─── */
 @media (max-width: 768px) {
+  /* Hero height + padding */
+  section[style*="92vh"] {
+    min-height: 75vh !important;
+  }
+  .hero-inner {
+    padding: 48px 20px !important;
+    gap: 32px !important;
+  }
+
+  /* Hide social proof CTA button on mobile to prevent overflow */
+  .social-proof-right a.btn-copper {
+    display: none !important;
+  }
+
   /* Nav: hamburger menu */
   .nav-hamburger {
     display: flex;
@@ -482,6 +496,10 @@ button, a {
 
 /* ─── RESPONSIVE: SMALL MOBILE (max 480px) ─── */
 @media (max-width: 480px) {
+  .hero-inner {
+    padding: 36px 16px !important;
+  }
+
   .hero-h1 {
     font-size: 36px !important;
   }

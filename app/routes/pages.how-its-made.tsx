@@ -74,7 +74,11 @@ export default function HowItsMadePage() {
         {/* Why Metal section */}
         <h2 style={sectionTitle}>Why Metal?</h2>
         <div
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: 20,
+          }}
         >
           <Stat
             icon="💧"
