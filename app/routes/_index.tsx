@@ -56,48 +56,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return { products };
 }
 
-// ── Hero Tile Data ──
-const TILES = [
-  {
-    step: "01",
-    label: "ANIME",
-    to: "/collections/anime-posters",
-    bg: "#0D0D14",
-    textColor: "#E3735E",
-    text: "ANIME\nART",
-    badge: "HOT",
-  },
-  {
-    step: "02",
-    label: "CARS",
-    to: "/collections/car-posters",
-    bg: "#14080A",
-    textColor: "#B87333",
-    text: "SUPER\nCARS",
-    badge: null,
-  },
-  {
-    step: "03",
-    label: "ISLAMIC",
-    to: "/collections/islamic-posters",
-    bg: "#08101A",
-    textColor: "#5EA8F0",
-    text: "ISLAMIC\nART",
-    badge: null,
-  },
-  {
-    step: "04",
-    label: "CUSTOM",
-    to: "/pages/custom-poster",
-    bg: "#0A0A0A",
-    textColor: "#7A7A7A",
-    text: "UPLOAD\nYOUR\nDESIGN",
-    badge: "NEW",
-    dashed: true,
-    useMono: true,
-  },
-];
-
 // ── Size Guide Data ──
 const SIZES = [
   { name: "Small", dims: "20×25cm", w: 26, h: 34 },
@@ -148,8 +106,6 @@ export default function Homepage() {
       <section
         className="hero-grid"
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 420px",
           minHeight: 400,
         }}
       >
@@ -161,7 +117,6 @@ export default function Homepage() {
             display: "flex",
             flexDirection: "column",
             gap: 24,
-            borderRight: "3px solid var(--copper)",
           }}
         >
           {/* Eyebrow */}
@@ -228,13 +183,8 @@ export default function Homepage() {
             }}
           >
             Premium metal posters from{" "}
-            <strong style={{ color: "var(--copper)" }}>₨ 5,000</strong>.{" "}
-            <span
-              style={{ textDecoration: "line-through", color: "var(--muted)" }}
-            >
-              ₨ 12,000 framed prints
-            </span>{" "}
-            — magnetic mounting, no holes, no hassle.
+            <strong style={{ color: "var(--copper)" }}>₨ 5,000</strong> —
+            magnetic mounting, no holes, no hassle.
           </p>
 
           {/* CTAs */}
@@ -274,141 +224,6 @@ export default function Homepage() {
             </Link>
           </div>
         </div>
-
-        {/* Right column — 2×2 tiles */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateRows: "1fr 1fr",
-            gap: 3,
-            background: "#0A0A0A",
-          }}
-        >
-          {[TILES.slice(0, 2), TILES.slice(2, 4)].map((row, ri) => (
-            <div
-              key={ri}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 3,
-              }}
-            >
-              {row.map((tile) => (
-                <Link
-                  key={tile.step}
-                  to={tile.to}
-                  style={{
-                    background: "#141414",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 10,
-                    position: "relative",
-                    padding: 20,
-                    transition: "background 0.15s",
-                    cursor: "pointer",
-                    textDecoration: "none",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = "#1C1C1C")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.background = "#141414")
-                  }
-                >
-                  {/* Step */}
-                  <span
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 11,
-                      letterSpacing: 2,
-                      color: "#444",
-                    }}
-                  >
-                    {tile.step}
-                  </span>
-
-                  {/* Mini poster preview */}
-                  <div
-                    style={{
-                      width: 56,
-                      height: 70,
-                      background: tile.bg,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      position: "relative",
-                      overflow: "hidden",
-                      border: tile.dashed ? "1px dashed #444" : "none",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: tile.useMono
-                          ? "'Inter', sans-serif"
-                          : "'Montserrat', sans-serif",
-                        fontSize: tile.useMono ? 8 : 13,
-                        fontWeight: 700,
-                        color: tile.textColor,
-                        textAlign: "center",
-                        lineHeight: 1.1,
-                        whiteSpace: "pre-line",
-                        letterSpacing: tile.useMono ? 1 : 0,
-                      }}
-                    >
-                      {tile.text}
-                    </span>
-                    {/* Shine overlay */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                          "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%)",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  </div>
-
-                  {/* Label */}
-                  <span
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 9,
-                      letterSpacing: 2,
-                      textTransform: "uppercase",
-                      color: "#555",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {tile.label}
-                  </span>
-
-                  {/* Badge */}
-                  {tile.badge && (
-                    <span
-                      style={{
-                        position: "absolute",
-                        top: 8,
-                        right: 8,
-                        background: "var(--copper)",
-                        color: "white",
-                        fontSize: 8,
-                        fontWeight: 700,
-                        padding: "2px 5px",
-                        letterSpacing: 1,
-                        fontFamily: "'Inter', sans-serif",
-                      }}
-                    >
-                      {tile.badge}
-                    </span>
-                  )}
-                </Link>
-              ))}
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* ─── B. TICKER ─── */}
@@ -446,7 +261,7 @@ export default function Homepage() {
                 color: "var(--muted)",
               }}
             >
-              {String(products.length).padStart(2, "0")} products
+              {String(filtered.length).padStart(2, "0")} products
             </span>
           </div>
           <Link
@@ -500,7 +315,7 @@ export default function Homepage() {
           ))}
         </div>
 
-        {/* Product grid */}
+        {/* Product grid — max 4 on homepage */}
         <div
           className="product-grid"
           style={{
@@ -509,10 +324,32 @@ export default function Homepage() {
             gap: 16,
           }}
         >
-          {filtered.map((product: any) => (
+          {filtered.slice(0, 4).map((product: any) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        {filtered.length > 4 && (
+          <div style={{ textAlign: "center", marginTop: 24 }}>
+            <Link
+              to="/collections/all"
+              style={{
+                display: "inline-block",
+                border: "1.5px solid var(--copper)",
+                color: "var(--copper)",
+                padding: "14px 40px",
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 700,
+                fontSize: 13,
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                textDecoration: "none",
+              }}
+            >
+              SEE ALL {filtered.length} PRODUCTS →
+            </Link>
+          </div>
+        )}
       </section>
 
       {/* ─── D. SOCIAL PROOF BANNER ─── */}

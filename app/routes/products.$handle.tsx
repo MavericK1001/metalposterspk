@@ -80,6 +80,7 @@ export default function ProductPage() {
 
   const images = product.images?.nodes ?? [];
   const [selectedImageIdx, setSelectedImageIdx] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const mainImage = images[selectedImageIdx] || images[0];
 
   const allVariants = product.variants?.nodes ?? [];
@@ -277,23 +278,42 @@ export default function ProductPage() {
         >
           <div
             className="poster-shine product-main-image"
+            onClick={() => setLightboxOpen(true)}
+            title="Click to preview"
             style={{
-              width: 240,
-              height: 300,
+              width: 380,
+              height: 480,
               background: "#0D0D14",
               position: "relative",
               boxShadow:
                 "0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)",
+              cursor: "zoom-in",
             }}
           >
             {mainImage && (
               <Image
                 data={mainImage}
-                sizes="240px"
+                sizes="380px"
                 className="w-full h-full object-cover"
                 loading="eager"
               />
             )}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 8,
+                right: 8,
+                background: "rgba(0,0,0,0.6)",
+                padding: "4px 8px",
+                fontSize: 10,
+                color: "var(--muted)",
+                fontFamily: "'Inter', sans-serif",
+                letterSpacing: 1,
+                pointerEvents: "none",
+              }}
+            >
+              🔍 PREVIEW
+            </div>
           </div>
 
           {images.length > 1 && (
@@ -304,8 +324,8 @@ export default function ProductPage() {
                   type="button"
                   onClick={() => setSelectedImageIdx(i)}
                   style={{
-                    width: 52,
-                    height: 66,
+                    width: 64,
+                    height: 80,
                     border: `2px solid ${
                       i === selectedImageIdx ? "var(--copper)" : "transparent"
                     }`,
@@ -317,12 +337,108 @@ export default function ProductPage() {
                 >
                   <Image
                     data={img}
-                    sizes="52px"
+                    sizes="64px"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </button>
               ))}
+            </div>
+          )}
+
+          {/* Lightbox */}
+          {lightboxOpen && mainImage && (
+            <div
+              onClick={() => setLightboxOpen(false)}
+              style={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 999,
+                background: "rgba(0,0,0,0.92)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "zoom-out",
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setLightboxOpen(false)}
+                style={{
+                  position: "absolute",
+                  top: 20,
+                  right: 24,
+                  background: "none",
+                  border: "none",
+                  color: "white",
+                  fontSize: 32,
+                  cursor: "pointer",
+                  lineHeight: 1,
+                }}
+              >
+                ×
+              </button>
+              <div
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  maxWidth: "90vw",
+                  maxHeight: "90vh",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                }}
+              >
+                {images.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSelectedImageIdx((i) =>
+                        i === 0 ? images.length - 1 : i - 1,
+                      )
+                    }
+                    style={{
+                      background: "rgba(255,255,255,0.1)",
+                      border: "none",
+                      color: "white",
+                      fontSize: 24,
+                      padding: "12px 16px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    ‹
+                  </button>
+                )}
+                <img
+                  src={mainImage.url}
+                  alt={mainImage.altText || product.title}
+                  style={{
+                    maxWidth: "80vw",
+                    maxHeight: "85vh",
+                    objectFit: "contain",
+                    display: "block",
+                  }}
+                />
+                {images.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSelectedImageIdx((i) =>
+                        i === images.length - 1 ? 0 : i + 1,
+                      )
+                    }
+                    style={{
+                      background: "rgba(255,255,255,0.1)",
+                      border: "none",
+                      color: "white",
+                      fontSize: 24,
+                      padding: "12px 16px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    ›
+                  </button>
+                )}
+              </div>
             </div>
           )}
         </div>
