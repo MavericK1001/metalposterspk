@@ -73,6 +73,29 @@ const PRICE_CHIPS = [
   { label: "₨ 8k+", min: 8000, max: Infinity },
 ];
 
+const ABOUT_METAL_POSTERS_QNA = [
+  {
+    question: "What are metal posters made of?",
+    answer:
+      "Our posters are made from premium-grade aluminium and printed using HD dye-sublimation. The ink is infused into the surface for a vivid, durable finish that resists fading, warping, and everyday scratches.",
+  },
+  {
+    question: "How do I mount a metal poster?",
+    answer:
+      "Every poster includes a simple magnetic mounting system. Attach the mounting strips to your wall, place the poster, and reposition or swap your artwork whenever you like—without nails or drilled holes.",
+  },
+  {
+    question: "Are metal posters waterproof and fade-resistant?",
+    answer:
+      "Yes. The aluminium surface and dye-sublimation process make our prints water-resistant and highly resistant to fading. They work well in kitchens and humid rooms, though prolonged direct water exposure should be avoided.",
+  },
+  {
+    question: "Can I turn my own photo or artwork into a poster?",
+    answer:
+      "Absolutely. Upload your photo, artwork, or design through our custom poster service. Our team checks the file and prepares it for a sharp, colour-rich print on metal.",
+  },
+];
+
 export default function Homepage() {
   const { products } = useLoaderData<typeof loader>();
   const [activeTab, setActiveTab] = useState("All");
@@ -904,7 +927,34 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ─── E. SIZE GUIDE STRIP ─── */}
+      {/* ─── E. ABOUT METAL POSTERS Q&A ─── */}
+      <section className="homepage-qna" aria-labelledby="about-metal-posters-title">
+        <div className="homepage-qna-intro">
+          <span className="homepage-qna-eyebrow">THE ESSENTIALS</span>
+          <h2 id="about-metal-posters-title">About Metal Posters</h2>
+          <p>
+            Everything you need to know about the material, finish, mounting,
+            and custom artwork.
+          </p>
+          <Link to="/pages/faq" className="homepage-qna-link">
+            VIEW ALL QUESTIONS →
+          </Link>
+        </div>
+
+        <div className="homepage-qna-list">
+          {ABOUT_METAL_POSTERS_QNA.map((item, index) => (
+            <details className="homepage-qna-item" key={item.question} open={index === 0}>
+              <summary>
+                <span>{item.question}</span>
+                <span className="homepage-qna-icon" aria-hidden="true">+</span>
+              </summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── F. SIZE GUIDE STRIP ─── */}
       <section
         className="size-guide"
         style={{

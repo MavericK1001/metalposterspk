@@ -139,6 +139,109 @@ button, a {
   transform: translateX(0);
 }
 
+/* Homepage: About Metal Posters Q&A */
+.homepage-qna {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
+  gap: 72px;
+  padding: 80px 64px;
+  background: #111113;
+  border-top: 1px solid #333;
+}
+
+.homepage-qna-intro {
+  max-width: 420px;
+}
+
+.homepage-qna-eyebrow {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--copper);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+.homepage-qna h2 {
+  margin: 0 0 18px;
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+.homepage-qna-intro p {
+  margin-bottom: 28px;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.homepage-qna-link {
+  color: var(--copper);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+}
+
+.homepage-qna-link:hover {
+  color: var(--terracotta);
+}
+
+.homepage-qna-list {
+  border-top: 1px solid #444;
+}
+
+.homepage-qna-item {
+  border-bottom: 1px solid #444;
+}
+
+.homepage-qna-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 4px;
+  color: var(--white);
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  font-weight: 650;
+  list-style: none;
+}
+
+.homepage-qna-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.homepage-qna-icon {
+  color: var(--copper);
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.homepage-qna-item[open] .homepage-qna-icon {
+  transform: rotate(45deg);
+}
+
+.homepage-qna-item > p {
+  max-width: 720px;
+  padding: 0 48px 24px 4px;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
 /* Size pill active */
 .size-pill-active {
   border-color: var(--ink) !important;
@@ -202,6 +305,11 @@ button, a {
 
 /* ─── RESPONSIVE: TABLET (max 1024px) ─── */
 @media (max-width: 1024px) {
+  .homepage-qna {
+    gap: 40px;
+    padding: 64px 32px;
+  }
+
   /* Hero */
   .hero-grid {
     grid-template-columns: 1fr !important;
@@ -302,6 +410,26 @@ button, a {
 
 /* ─── RESPONSIVE: MOBILE (max 768px) ─── */
 @media (max-width: 768px) {
+  .homepage-qna {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 56px 20px;
+  }
+
+  .homepage-qna-intro {
+    max-width: none;
+  }
+
+  .homepage-qna-item summary {
+    padding: 20px 0;
+    font-size: 15px;
+  }
+
+  .homepage-qna-item > p {
+    padding: 0 32px 20px 0;
+    font-size: 13px;
+  }
+
   /* Hero: let height be content-driven on mobile */
   section[style*="92vh"] {
     min-height: auto !important;
