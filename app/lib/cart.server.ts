@@ -61,6 +61,22 @@ const CART_LINES_ADD = `#graphql
   ${CART_FRAGMENT}
 `;
 
+const CART_BUYER_IDENTITY_UPDATE = `#graphql
+  mutation CartBuyerIdentityUpdate(
+    $cartId: ID!
+    $buyerIdentity: CartBuyerIdentityInput!
+  ) {
+    cartBuyerIdentityUpdate(
+      cartId: $cartId
+      buyerIdentity: $buyerIdentity
+    ) {
+      cart { id }
+      userErrors { field message }
+      warnings { code message target }
+    }
+  }
+`;
+
 const CART_LINES_UPDATE = `#graphql
   mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
@@ -171,11 +187,16 @@ export async function addToCart(
 ) {
   const storefront = getStorefront(request);
   const cartId = getCartId(request);
+  const buyerIdentity = { countryCode: 'PK' };
 
   if (cartId) {
     // Add to the existing cart. A cart ID belongs to a specific Shopify store,
     // so cookies left behind after switching stores must be replaced.
     try {
+      await storefront.mutate(CART_BUYER_IDENTITY_UPDATE, {
+        variables: { cartId, buyerIdentity },
+      });
+
       const { cartLinesAdd } = await storefront.mutate(CART_LINES_ADD, {
         variables: { cartId, lines },
       });
@@ -205,7 +226,7 @@ export async function addToCart(
   // Create a new cart when there is no cookie or when the saved cart belongs
   // to the previous store, has expired, or can no longer be retrieved.
   const { cartCreate } = await storefront.mutate(CART_CREATE, {
-    variables: { input: { lines } },
+    variables: { input: { lines, buyerIdentity } },
   });
   return {
     cart: cartCreate?.cart ?? null,
