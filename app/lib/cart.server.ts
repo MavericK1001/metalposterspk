@@ -174,11 +174,19 @@ export async function addToCart(
       const { cartLinesAdd } = await storefront.mutate(CART_LINES_ADD, {
         variables: { cartId, lines },
       });
+      const userErrors = cartLinesAdd?.userErrors ?? [];
+      const savedCartIsInvalid = userErrors.some(
+        (error: { field?: string[] | null; message?: string }) =>
+          error.field?.includes("cartId") ||
+          /cart.*(?:does not exist|not found|invalid)/i.test(
+            error.message ?? "",
+          ),
+      );
 
-      if (cartLinesAdd?.cart) {
+      if (!savedCartIsInvalid) {
         return {
-          cart: cartLinesAdd.cart,
-          userErrors: cartLinesAdd.userErrors ?? [],
+          cart: cartLinesAdd?.cart ?? null,
+          userErrors,
         };
       }
     } catch {
