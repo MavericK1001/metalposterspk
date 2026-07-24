@@ -10,28 +10,27 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const { storefront } = createContext(request);
   const results: Record<string, any> = {};
 
-  // 1. Get first available variant
+  // 1. Get a known poster variant used by the live storefront
   try {
-    const { products } = await storefront.query(
+    const { product } = await storefront.query(
       `#graphql
-      query FirstVariant {
-        products(first: 1, query: "available_for_sale:true") {
-          nodes {
-            title
-            handle
-            variants(first: 1) {
-              nodes {
-                id
-                title
-                availableForSale
-                price { amount currencyCode }
-              }
+      query DiagnosticVariant {
+        product(handle: "mindset-metal-poster") {
+          title
+          handle
+          variants(first: 1) {
+            nodes {
+              id
+              title
+              availableForSale
+              quantityAvailable
+              requiresComponents
+              price { amount currencyCode }
             }
           }
         }
       }`,
     );
-    const product = products?.nodes?.[0];
     const variant = product?.variants?.nodes?.[0];
     results.product = {
       title: product?.title,
@@ -39,6 +38,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
       variantId: variant?.id,
       variantTitle: variant?.title,
       availableForSale: variant?.availableForSale,
+      quantityAvailable: variant?.quantityAvailable,
+      requiresComponents: variant?.requiresComponents,
       price: variant?.price,
     };
   } catch (e: any) {
