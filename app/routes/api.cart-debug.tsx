@@ -58,9 +58,18 @@ export async function loader({ request }: LoaderFunctionArgs) {
               totalQuantity: addResult.cart.totalQuantity,
               checkoutUrl: addResult.cart.checkoutUrl,
               lineCount: addResult.cart.lines?.nodes?.length ?? 0,
+              lines: addResult.cart.lines?.nodes?.map((line: any) => ({
+                quantity: line.quantity,
+                merchandiseId: line.merchandise?.id,
+                productTitle: line.merchandise?.product?.title,
+                variantTitle: line.merchandise?.title,
+                totalAmount: line.cost?.totalAmount,
+              })),
+              subtotalAmount: addResult.cart.cost?.subtotalAmount,
             }
           : null,
         userErrors: addResult.userErrors,
+        warnings: addResult.warnings,
       };
     } catch (e: any) {
       results.directCartAdd = { error: e.message };

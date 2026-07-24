@@ -44,6 +44,7 @@ const CART_CREATE = `#graphql
     cartCreate(input: $input) {
       cart { ...CartFragment }
       userErrors { field message }
+      warnings { code message target }
     }
   }
   ${CART_FRAGMENT}
@@ -54,6 +55,7 @@ const CART_LINES_ADD = `#graphql
     cartLinesAdd(cartId: $cartId, lines: $lines) {
       cart { ...CartFragment }
       userErrors { field message }
+      warnings { code message target }
     }
   }
   ${CART_FRAGMENT}
@@ -64,6 +66,7 @@ const CART_LINES_UPDATE = `#graphql
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart { ...CartFragment }
       userErrors { field message }
+      warnings { code message target }
     }
   }
   ${CART_FRAGMENT}
@@ -74,6 +77,7 @@ const CART_LINES_REMOVE = `#graphql
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
       cart { ...CartFragment }
       userErrors { field message }
+      warnings { code message target }
     }
   }
   ${CART_FRAGMENT}
@@ -84,6 +88,7 @@ const CART_DISCOUNT_UPDATE = `#graphql
     cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
       cart { ...CartFragment }
       userErrors { field message }
+      warnings { code message target }
     }
   }
   ${CART_FRAGMENT}
@@ -187,6 +192,7 @@ export async function addToCart(
         return {
           cart: cartLinesAdd?.cart ?? null,
           userErrors,
+          warnings: cartLinesAdd?.warnings ?? [],
         };
       }
     } catch {
@@ -204,6 +210,7 @@ export async function addToCart(
   return {
     cart: cartCreate?.cart ?? null,
     userErrors: cartCreate?.userErrors ?? [],
+    warnings: cartCreate?.warnings ?? [],
   };
 }
 
@@ -221,6 +228,7 @@ export async function updateCartLines(
   return {
     cart: cartLinesUpdate?.cart ?? null,
     userErrors: cartLinesUpdate?.userErrors ?? [],
+    warnings: cartLinesUpdate?.warnings ?? [],
   };
 }
 
@@ -235,6 +243,7 @@ export async function removeCartLines(request: Request, lineIds: string[]) {
   return {
     cart: cartLinesRemove?.cart ?? null,
     userErrors: cartLinesRemove?.userErrors ?? [],
+    warnings: cartLinesRemove?.warnings ?? [],
   };
 }
 
@@ -252,5 +261,6 @@ export async function updateDiscountCodes(
   return {
     cart: cartDiscountCodesUpdate?.cart ?? null,
     userErrors: cartDiscountCodesUpdate?.userErrors ?? [],
+    warnings: cartDiscountCodesUpdate?.warnings ?? [],
   };
 }
