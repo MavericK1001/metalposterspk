@@ -168,24 +168,29 @@ export async function addToCart(
   const cartId = getCartId(request);
 
   if (cartId) {
-    // Add to existing cart
+    // Add to the existing cart. A cart ID belongs to a specific Shopify store,
+    // so cookies left behind after switching stores must be replaced.
     const { cartLinesAdd } = await storefront.mutate(CART_LINES_ADD, {
       variables: { cartId, lines },
     });
-    return {
-      cart: cartLinesAdd?.cart ?? null,
-      userErrors: cartLinesAdd?.userErrors ?? [],
-    };
-  } else {
-    // Create new cart with lines
-    const { cartCreate } = await storefront.mutate(CART_CREATE, {
-      variables: { input: { lines } },
-    });
-    return {
-      cart: cartCreate?.cart ?? null,
-      userErrors: cartCreate?.userErrors ?? [],
-    };
+
+    if (cartLinesAdd?.cart) {
+      return {
+        cart: cartLinesAdd.cart,
+        userErrors: cartLinesAdd.userErrors ?? [],
+      };
+    }
   }
+
+  // Create a new cart when there is no cookie or when the saved cart belongs
+  // to the previous store, has expired, or can no longer be retrieved.
+  const { cartCreate } = await storefront.mutate(CART_CREATE, {
+    variables: { input: { lines } },
+  });
+  return {
+    cart: cartCreate?.cart ?? null,
+    userErrors: cartCreate?.userErrors ?? [],
+  };
 }
 
 export async function updateCartLines(
