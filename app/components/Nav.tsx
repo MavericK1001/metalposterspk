@@ -8,7 +8,6 @@ const NAV_LINKS = [
   { label: "Cars", to: "/collections/car-posters" },
   { label: "Islamic", to: "/collections/islamic-posters" },
   { label: "Motivational", to: "/collections/motivational-metal-poster" },
-  { label: "Sports", to: "/collections/sports-poster" },
   { label: "Custom", to: "/pages/custom-poster" },
 ];
 

@@ -4,7 +4,6 @@ const TABS = [
   "Cars",
   "Islamic",
   "Motivational",
-  "Sports",
   "Gaming",
   "Superheroes",
   "Movies",

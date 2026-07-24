@@ -123,7 +123,7 @@ export default function SearchPage() {
               flexWrap: "wrap",
             }}
           >
-            {["Music", "Movies", "Sports", "Nature", "Abstract"].map((sug) => (
+            {["Music", "Movies", "Nature", "Abstract"].map((sug) => (
               <Form key={sug} method="get">
                 <input type="hidden" name="q" value={sug} />
                 <button
@@ -178,7 +178,7 @@ export default function SearchPage() {
               flexWrap: "wrap",
             }}
           >
-            {["Music", "Movies", "Sports", "Nature", "Abstract", "Custom"].map(
+            {["Music", "Movies", "Nature", "Abstract", "Custom"].map(
               (sug) => (
                 <Form key={sug} method="get">
                   <input type="hidden" name="q" value={sug} />

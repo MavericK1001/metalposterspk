@@ -65,14 +65,6 @@ const SIZES = [
   { name: "XXL", dims: "80×120cm", w: 60, h: 80 },
 ];
 
-// ── Price Filter Chips ──
-const PRICE_CHIPS = [
-  { label: "All", min: 0, max: Infinity },
-  { label: "₨ 5–6k", min: 5000, max: 6000 },
-  { label: "₨ 6–8k", min: 6000, max: 8000 },
-  { label: "₨ 8k+", min: 8000, max: Infinity },
-];
-
 const ABOUT_METAL_POSTERS_QNA = [
   {
     question: "What are metal posters made of?",
@@ -99,9 +91,8 @@ const ABOUT_METAL_POSTERS_QNA = [
 export default function Homepage() {
   const { products } = useLoaderData<typeof loader>();
   const [activeTab, setActiveTab] = useState("All");
-  const [priceChip, setPriceChip] = useState("All");
 
-  let filtered =
+  const filtered =
     activeTab === "All"
       ? products
       : products.filter(
@@ -111,17 +102,6 @@ export default function Homepage() {
               t.toLowerCase().includes(activeTab.toLowerCase()),
             ),
         );
-
-  // Apply price filter
-  if (priceChip !== "All") {
-    const chip = PRICE_CHIPS.find((c) => c.label === priceChip);
-    if (chip) {
-      filtered = filtered.filter((p: any) => {
-        const amt = parseFloat(p.priceRange.minVariantPrice.amount);
-        return amt >= chip.min && amt <= chip.max;
-      });
-    }
-  }
 
   return (
     <>
@@ -735,39 +715,6 @@ export default function Homepage() {
         </div>
 
         <CategoryTabs activeTab={activeTab} onChange={setActiveTab} />
-
-        {/* Price filter chips */}
-        <div
-          style={{
-            display: "flex",
-            gap: 8,
-            marginBottom: 20,
-            flexWrap: "wrap",
-          }}
-        >
-          {PRICE_CHIPS.map((chip) => (
-            <button
-              key={chip.label}
-              type="button"
-              onClick={() => setPriceChip(chip.label)}
-              style={{
-                padding: "7px 16px",
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 12,
-                fontWeight: 500,
-                border: `1px solid ${priceChip === chip.label ? "var(--copper)" : "var(--muted)"}`,
-                background:
-                  priceChip === chip.label ? "var(--copper)" : "transparent",
-                color: priceChip === chip.label ? "white" : "var(--steel)",
-                cursor: "pointer",
-                borderRadius: 0,
-                letterSpacing: 0.5,
-              }}
-            >
-              {chip.label}
-            </button>
-          ))}
-        </div>
 
         {/* Product grid — max 4 on homepage */}
         <div

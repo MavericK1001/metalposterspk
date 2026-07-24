@@ -12,6 +12,13 @@ import { ProductCard } from "~/components/ProductCard";
 import { getSortValuesFromParam, buildFilters } from "~/lib/utils";
 import { createContext } from "~/lib/hydrogen.server";
 
+// Keep disabled collections in Shopify so they can be restored without
+// recreating products or collection data.
+const HIDDEN_COLLECTION_HANDLES = new Set(["sports-poster"]);
+const LIMITED_COLLECTION_PRODUCT_COUNTS: Record<string, number> = {
+  "animal-metal-poster": 3,
+};
+
 export const meta: MetaFunction<typeof loader> = ({ data }) => [
   {
     title: data?.collection
@@ -36,13 +43,19 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   const { storefront } = createContext(request);
   const { handle } = params;
   if (!handle) throw new Response("Not found", { status: 404 });
+  if (HIDDEN_COLLECTION_HANDLES.has(handle)) {
+    throw new Response("Not found", { status: 404 });
+  }
 
   const url = new URL(request.url);
   const { sortKey, reverse } = getSortValuesFromParam(
     url.searchParams.get("sort"),
   );
   const filters = buildFilters(url.searchParams);
-  const paginationVariables = getPaginationVariables(request, { pageBy: 24 });
+  const collectionLimit = LIMITED_COLLECTION_PRODUCT_COUNTS[handle];
+  const paginationVariables = collectionLimit
+    ? { first: collectionLimit, after: null }
+    : getPaginationVariables(request, { pageBy: 24 });
 
   try {
     // For "all", try the collection first, then fall back to products root query
@@ -103,6 +116,20 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     });
 
     if (!collection) throw new Response("Not found", { status: 404 });
+
+    if (collectionLimit) {
+      collection.products.nodes = collection.products.nodes.slice(
+        0,
+        collectionLimit,
+      );
+      collection.products.pageInfo = {
+        hasNextPage: false,
+        endCursor: null,
+        hasPreviousPage: false,
+        startCursor: null,
+      };
+    }
+
     return { collection };
   } catch (e: any) {
     if (e instanceof Response) throw e;
@@ -126,7 +153,6 @@ const CATEGORY_FILTERS = [
   "Cars",
   "Islamic",
   "Motivational",
-  "Sports",
   "Gaming",
   "Superheroes",
   "Movies",
